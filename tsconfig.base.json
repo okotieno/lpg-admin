@@ -14,7 +14,11 @@
     "skipLibCheck": true,
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
-    "paths": {}
+    "paths": {
+      "@lpg/header": ["libs/header/src/index.ts"],
+      "@lpg/layout": ["libs/layout/src/index.ts"],
+      "@lpg/sidenav": ["libs/sidenav/src/index.ts"]
+    }
   },
   "exclude": ["node_modules", "tmp"]
 }

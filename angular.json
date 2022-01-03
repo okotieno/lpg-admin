@@ -1,6 +1,117 @@
 {
   "version": 1,
   "projects": {
+    "header": {
+      "projectType": "library",
+      "root": "libs/header",
+      "sourceRoot": "libs/header/src",
+      "prefix": "lpg",
+      "architect": {
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/header"],
+          "options": {
+            "jestConfig": "libs/header/jest.config.js",
+            "passWithNoTests": true
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/header/src/**/*.ts",
+              "libs/header/src/**/*.html"
+            ]
+          }
+        },
+        "storybook": {
+          "builder": "@nrwl/storybook:storybook",
+          "options": {
+            "uiFramework": "@storybook/angular",
+            "port": 4400,
+            "config": {
+              "configFolder": "libs/header/.storybook"
+            }
+          },
+          "configurations": {
+            "ci": {
+              "quiet": true
+            }
+          }
+        },
+        "build-storybook": {
+          "builder": "@nrwl/storybook:build",
+          "outputs": ["{options.outputPath}"],
+          "options": {
+            "uiFramework": "@storybook/angular",
+            "outputPath": "dist/storybook/header",
+            "config": {
+              "configFolder": "libs/header/.storybook"
+            }
+          },
+          "configurations": {
+            "ci": {
+              "quiet": true
+            }
+          }
+        }
+      },
+      "tags": []
+    },
+    "header-e2e": {
+      "root": "apps/header-e2e",
+      "sourceRoot": "apps/header-e2e/src",
+      "projectType": "application",
+      "architect": {
+        "e2e": {
+          "builder": "@nrwl/cypress:cypress",
+          "options": {
+            "cypressConfig": "apps/header-e2e/cypress.json",
+            "devServerTarget": "header:storybook"
+          },
+          "configurations": {
+            "ci": {
+              "devServerTarget": "header:storybook:ci"
+            }
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "outputs": ["{options.outputFile}"],
+          "options": {
+            "lintFilePatterns": ["apps/header-e2e/**/*.{js,ts}"]
+          }
+        }
+      },
+      "tags": [],
+      "implicitDependencies": ["header"]
+    },
+    "layout": {
+      "projectType": "library",
+      "root": "libs/layout",
+      "sourceRoot": "libs/layout/src",
+      "prefix": "lpg",
+      "architect": {
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/layout"],
+          "options": {
+            "jestConfig": "libs/layout/jest.config.js",
+            "passWithNoTests": true
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/layout/src/**/*.ts",
+              "libs/layout/src/**/*.html"
+            ]
+          }
+        }
+      },
+      "tags": []
+    },
     "lpg-admin": {
       "projectType": "application",
       "root": "apps/lpg-admin",
@@ -21,7 +132,10 @@
               "apps/lpg-admin/src/favicon.ico",
               "apps/lpg-admin/src/assets"
             ],
-            "styles": ["apps/lpg-admin/src/styles.scss"],
+            "styles": [
+              "./node_modules/@angular/material/prebuilt-themes/deeppurple-amber.css",
+              "apps/lpg-admin/src/styles.scss"
+            ],
             "scripts": []
           },
           "configurations": {
@@ -122,6 +236,91 @@
       },
       "tags": [],
       "implicitDependencies": ["lpg-admin"]
+    },
+    "sidenav": {
+      "projectType": "library",
+      "root": "libs/sidenav",
+      "sourceRoot": "libs/sidenav/src",
+      "prefix": "lpg",
+      "architect": {
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/sidenav"],
+          "options": {
+            "jestConfig": "libs/sidenav/jest.config.js",
+            "passWithNoTests": true
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/sidenav/src/**/*.ts",
+              "libs/sidenav/src/**/*.html"
+            ]
+          }
+        },
+        "storybook": {
+          "builder": "@nrwl/storybook:storybook",
+          "options": {
+            "uiFramework": "@storybook/angular",
+            "port": 4400,
+            "config": {
+              "configFolder": "libs/sidenav/.storybook"
+            }
+          },
+          "configurations": {
+            "ci": {
+              "quiet": true
+            }
+          }
+        },
+        "build-storybook": {
+          "builder": "@nrwl/storybook:build",
+          "outputs": ["{options.outputPath}"],
+          "options": {
+            "uiFramework": "@storybook/angular",
+            "outputPath": "dist/storybook/sidenav",
+            "config": {
+              "configFolder": "libs/sidenav/.storybook"
+            }
+          },
+          "configurations": {
+            "ci": {
+              "quiet": true
+            }
+          }
+        }
+      },
+      "tags": []
+    },
+    "sidenav-e2e": {
+      "root": "apps/sidenav-e2e",
+      "sourceRoot": "apps/sidenav-e2e/src",
+      "projectType": "application",
+      "architect": {
+        "e2e": {
+          "builder": "@nrwl/cypress:cypress",
+          "options": {
+            "cypressConfig": "apps/sidenav-e2e/cypress.json",
+            "devServerTarget": "sidenav:storybook"
+          },
+          "configurations": {
+            "ci": {
+              "devServerTarget": "sidenav:storybook:ci"
+            }
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "outputs": ["{options.outputFile}"],
+          "options": {
+            "lintFilePatterns": ["apps/sidenav-e2e/**/*.{js,ts}"]
+          }
+        }
+      },
+      "tags": [],
+      "implicitDependencies": ["sidenav"]
     }
   }
 }
