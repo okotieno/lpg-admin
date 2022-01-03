@@ -17,6 +17,7 @@
     "paths": {
       "@lpg/header": ["libs/header/src/index.ts"],
       "@lpg/layout": ["libs/layout/src/index.ts"],
+      "@lpg/login": ["libs/login/src/index.ts"],
       "@lpg/sidenav": ["libs/sidenav/src/index.ts"]
     }
   },
