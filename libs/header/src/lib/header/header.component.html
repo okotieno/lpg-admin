@@ -1,5 +1,6 @@
 <mat-toolbar color="primary">
-  <button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon">
+  <button *ngIf="showHeaderMenuButton$ |async" (click)="toggleMenu()" mat-icon-button class="example-icon"
+          aria-label="Example icon-button with menu icon">
     <mat-icon>menu</mat-icon>
   </button>
   <span>LPG</span>

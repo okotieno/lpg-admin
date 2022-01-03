@@ -1,1 +1,31 @@
-<p>sidenav works!</p>
+<section [class.sidenav]="isOpen$ | async">
+  <div class="toggle">
+    <mat-icon (click)="toggleMenu()">
+      {{ (isOpen$ | async) ? "keyboard_backspace" : "dehaze" }}
+    </mat-icon>
+  </div>
+  <mat-list class="nav" *ngFor="let route of routeLinks">
+    <a
+      mat-list-item
+      routerLinkActive="active-link"
+      class="hover"
+      routerLink="{{ route.link }}"
+    >
+      <mat-icon
+        mat-list-icon
+        [matTooltip]="(isOpen$ | async) === false ? route.name : ''"
+        matTooltipPosition="right"
+      >
+        {{ route.icon }}</mat-icon
+      >
+      <p matLine *ngIf="isOpen$ | async">{{ route.name }}</p>
+    </a>
+  </mat-list>
+  <div *ngIf="(isOpen$ | async) === false" class="toggle" style="position: absolute; bottom: 0">
+    <button mat-icon-button (click)="hideMini()">
+      <mat-icon>
+        keyboard_backspace
+      </mat-icon>
+    </button>
+  </div>
+</section>

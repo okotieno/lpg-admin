@@ -1,16 +1,24 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { LayoutComponent } from './layout/layout.component';
-import { HeaderModule } from "@lpg/header";
-import { SidenavModule } from "@lpg/sidenav";
+import { HeaderModule } from '@lpg/header';
+import { SidenavModule } from '@lpg/sidenav';
+import { StoreModule } from '@ngrx/store';
+import * as fromDrawer from './state/drawer/drawer.reducer';
+import { MatSidenavModule } from "@angular/material/sidenav";
+import { MatButtonModule } from "@angular/material/button";
 
 @NgModule({
-  imports: [CommonModule, HeaderModule, SidenavModule],
-  declarations: [
-    LayoutComponent
+  imports: [
+    CommonModule,
+    HeaderModule,
+    SidenavModule,
+    StoreModule.forFeature(fromDrawer.DRAWER_FEATURE_KEY, fromDrawer.reducer),
+    MatSidenavModule,
+    MatButtonModule
   ],
-  exports: [
-    LayoutComponent
-  ]
+  declarations: [LayoutComponent],
+  exports: [LayoutComponent],
+  providers: []
 })
 export class LayoutModule {}

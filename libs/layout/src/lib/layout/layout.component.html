@@ -1,3 +1,18 @@
-<lpg-header></lpg-header>
-<lpg-sidenav></lpg-sidenav>
-<ng-content></ng-content>
+<mat-sidenav-container autosize>
+  <mat-sidenav
+    *ngIf="drawerMini$ | async"
+    fixedInViewport="true"
+    mode="side"
+    [opened]="(drawerOpen$ | async) === true"
+  >
+    <lpg-sidenav></lpg-sidenav>
+  </mat-sidenav>
+
+  <mat-sidenav-content [class.mat-sidenav-content-mini]="((drawerOpen$ | async) === false && (drawerMini$ | async) === true)">
+    <lpg-header></lpg-header>
+    <div class="content-container">
+      Content Here
+<!--      <router-outlet></router-outlet>-->
+    </div>
+  </mat-sidenav-content>
+</mat-sidenav-container>
