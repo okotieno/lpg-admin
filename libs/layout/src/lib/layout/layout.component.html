@@ -11,7 +11,7 @@
   <mat-sidenav-content [class.mat-sidenav-content-mini]="((drawerOpen$ | async) === false && (drawerMini$ | async) === true)">
     <lpg-header></lpg-header>
     <div class="content-container">
-      Content Here
+      <ng-content></ng-content>
 <!--      <router-outlet></router-outlet>-->
     </div>
   </mat-sidenav-content>

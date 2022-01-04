@@ -1,6 +1,32 @@
 {
   "version": 1,
   "projects": {
+    "add-depot": {
+      "projectType": "library",
+      "root": "libs/add-depot",
+      "sourceRoot": "libs/add-depot/src",
+      "prefix": "lpg",
+      "architect": {
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/add-depot"],
+          "options": {
+            "jestConfig": "libs/add-depot/jest.config.js",
+            "passWithNoTests": true
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/add-depot/src/**/*.ts",
+              "libs/add-depot/src/**/*.html"
+            ]
+          }
+        }
+      },
+      "tags": []
+    },
     "auth-guard": {
       "root": "libs/auth-guard",
       "sourceRoot": "libs/auth-guard/src",
@@ -18,6 +44,55 @@
           "outputs": ["coverage/libs/auth-guard"],
           "options": {
             "jestConfig": "libs/auth-guard/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      },
+      "tags": []
+    },
+    "canister-brands": {
+      "projectType": "library",
+      "root": "libs/canister-brands",
+      "sourceRoot": "libs/canister-brands/src",
+      "prefix": "lpg",
+      "architect": {
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/canister-brands"],
+          "options": {
+            "jestConfig": "libs/canister-brands/jest.config.js",
+            "passWithNoTests": true
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/canister-brands/src/**/*.ts",
+              "libs/canister-brands/src/**/*.html"
+            ]
+          }
+        }
+      },
+      "tags": []
+    },
+    "canister-brands-service": {
+      "root": "libs/canister-brands-service",
+      "sourceRoot": "libs/canister-brands-service/src",
+      "projectType": "library",
+      "architect": {
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "outputs": ["{options.outputFile}"],
+          "options": {
+            "lintFilePatterns": ["libs/canister-brands-service/**/*.ts"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/canister-brands-service"],
+          "options": {
+            "jestConfig": "libs/canister-brands-service/jest.config.js",
             "passWithNoTests": true
           }
         }
@@ -149,6 +224,55 @@
           "outputs": ["coverage/libs/data/data"],
           "options": {
             "jestConfig": "libs/data/data/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      },
+      "tags": []
+    },
+    "depots": {
+      "projectType": "library",
+      "root": "libs/depots",
+      "sourceRoot": "libs/depots/src",
+      "prefix": "lpg",
+      "architect": {
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/depots"],
+          "options": {
+            "jestConfig": "libs/depots/jest.config.js",
+            "passWithNoTests": true
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/depots/src/**/*.ts",
+              "libs/depots/src/**/*.html"
+            ]
+          }
+        }
+      },
+      "tags": []
+    },
+    "depots-service": {
+      "root": "libs/depots-service",
+      "sourceRoot": "libs/depots-service/src",
+      "projectType": "library",
+      "architect": {
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "outputs": ["{options.outputFile}"],
+          "options": {
+            "lintFilePatterns": ["libs/depots-service/**/*.ts"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/depots-service"],
+          "options": {
+            "jestConfig": "libs/depots-service/jest.config.js",
             "passWithNoTests": true
           }
         }
@@ -642,6 +766,32 @@
       },
       "tags": [],
       "implicitDependencies": ["sidenav"]
+    },
+    "stats-card": {
+      "projectType": "library",
+      "root": "libs/stats-card",
+      "sourceRoot": "libs/stats-card/src",
+      "prefix": "lpg",
+      "architect": {
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/stats-card"],
+          "options": {
+            "jestConfig": "libs/stats-card/jest.config.js",
+            "passWithNoTests": true
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/stats-card/src/**/*.ts",
+              "libs/stats-card/src/**/*.html"
+            ]
+          }
+        }
+      },
+      "tags": []
     }
   }
 }

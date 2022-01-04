@@ -18,6 +18,7 @@ mat-grid-tile:first-child:before {
 }
 
 mat-card {
+  min-width: 330px;
   padding: 28px;
   mat-card-title {
     margin-bottom: 28px;

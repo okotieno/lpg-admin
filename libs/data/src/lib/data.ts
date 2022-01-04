@@ -39,3 +39,7 @@ export interface IUser {
   roles?: string[];
   ['access_token']: string;
 }
+
+export interface IDepot {
+  depotName: string;
+}

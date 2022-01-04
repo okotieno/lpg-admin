@@ -12,11 +12,11 @@ export class SidenavComponent {
   }
 
   isOpen$ = this.drawerFacade.open$;
-  isMini$ = this.drawerFacade.mini$;
 
   public routeLinks = [
-    {link: "about", name: "About", icon: "dashboard"},
-    {link: "locations", name: "Locations", icon: "account_balance"},
+    {link: ["/users"], name: "Users Management", icon: "dashboard"},
+    {link: ["/brands"], name: "Canister Brands Management", icon: "account_balance"},
+    {link: ["/depots"], name: "Depots Management", icon: "account_balance"},
   ];
 
 

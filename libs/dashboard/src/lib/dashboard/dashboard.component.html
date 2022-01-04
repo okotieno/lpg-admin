@@ -1,3 +1,28 @@
 <lpg-layout>
-  Amazing Stuff
+
+  <h2>General</h2>
+  <div class="d-flex flex-wrap">
+    <div class="col-lg-3 m-3">
+      <lpg-stats-card [linksTo]="['/depots']" footer="View depots" title="Depot" value="320" icon="maps_home_work_outlined" color="danger"></lpg-stats-card>
+    </div>
+    <div class="col-lg-3 m-3">
+      <lpg-stats-card [linksTo]="['/transporters']" footer="View transporters" title="Transporters" value="443" icon="local_shipping_outlined" color="success"></lpg-stats-card>
+    </div>
+    <div class="col-lg-3 m-3">
+      <lpg-stats-card [linksTo]="['/dealers']" footer="View Dealers" title="Dealers" value="43" icon="attach_money" color="success"></lpg-stats-card>
+    </div>
+  </div>
+
+  <h2>Users</h2>
+  <div class="d-flex flex-wrap">
+    <div class="col-lg-3 m-3">
+      <lpg-stats-card footer="View depots" title="Depot" value="320" icon="maps_home_work_outlined" color="danger"></lpg-stats-card>
+    </div>
+    <div class="col-lg-3 m-3">
+      <lpg-stats-card footer="View transporters" title="Transporters" value="443" icon="local_shipping_outlined" color="success"></lpg-stats-card>
+    </div>
+    <div class="col-lg-3 m-3">
+      <lpg-stats-card footer="View Dealers" title="Dealers" value="43" icon="attach_money" color="success"></lpg-stats-card>
+    </div>
+  </div>
 </lpg-layout>

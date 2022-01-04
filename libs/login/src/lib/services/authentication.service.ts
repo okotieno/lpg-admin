@@ -16,7 +16,7 @@ export class AuthenticationService {
   localStorageUser = JSON.parse(String(localStorage.getItem('currentUser')));
   sessionStorageUser = JSON.parse(String(sessionStorage.getItem('currentUser')));
   isLoggedInSubject: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
-  revokeToken: Observable<any> = this.http.get('api/users/auth/logout');
+  revokeToken: Observable<any> = this.http.get('users/auth/logout');
 
   constructor(private http: HttpClient) {
     this.isLoggedInSubject.next(!!this.authorizationToken);
@@ -43,7 +43,7 @@ export class AuthenticationService {
       return EMPTY;
     }
 
-    return this.http.get<IResponse<IUser>>('api/users/auth').pipe(
+    return this.http.get<IResponse<IUser>>('users/auth').pipe(
       map(({data}) => data),
       catchError(error => {
         if (error.status === 401) {
@@ -55,12 +55,12 @@ export class AuthenticationService {
 
 
   changePassword(data: { oldPassword: string, newPassword: string; newPasswordConfirmation: string; token: string }) {
-    return this.http.post<IResponse<any>>('api/password/reset', data);
+    return this.http.post<IResponse<any>>('password/reset', data);
   }
 
 
   resetPassword(email: { email: string }) {
-    return this.http.post('api/password/email', email);
+    return this.http.post('password/email', email);
   }
 
   login(data: { username: string; password: string; rememberMe: boolean }): Observable<any> {
@@ -73,7 +73,7 @@ export class AuthenticationService {
       password,
       scope: '',
     };
-    const url = `api/oauth/token`;
+    const url = `oauth/token`;
 
     return this.http.post<any>(url, loginData).pipe(
       tap(user => rememberMe ? localStorage.setItem('currentUser', JSON.stringify(user)) : ''),

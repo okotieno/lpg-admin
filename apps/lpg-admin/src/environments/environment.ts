@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  apiUrl: 'https://cylinder-manager.herokuapp.com',
+  apiUrl: 'http://localhost/api',
   passportClient: {
     grantType: 'password',
     clientSecret: 'duK0bplTPn2BeyrsjX1939Y9OPIjPytEFUUNwjqD',
