@@ -4,6 +4,12 @@
 
 export const environment = {
   production: false,
+  apiUrl: 'https://cylinder-manager.herokuapp.com',
+  passportClient: {
+    grantType: 'password',
+    clientSecret: 'duK0bplTPn2BeyrsjX1939Y9OPIjPytEFUUNwjqD',
+    clientId: '2'
+  }
 };
 
 /*

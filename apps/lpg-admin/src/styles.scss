@@ -12,3 +12,7 @@ mat-sidenav[style] {
 .mat-drawer {
   transform: none !important;
 }
+
+mat-form-field {
+  min-width: 300px;
+}
