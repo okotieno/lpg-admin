@@ -1,5 +1,8 @@
 <lpg-layout>
   <h2>Brands</h2>
+  <button color="primary" (click)="openAddBrandDialog()" mat-raised-button class="mb-2">
+    <mat-icon>post_add</mat-icon> New Brand
+  </button>
   <ng-container *ngIf="dataSource$ | async as dataSource">
     <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
 
@@ -18,14 +21,20 @@
         <td mat-cell *matCellDef="let element"> {{element.brandName}} </td>
       </ng-container>
 
+      <!-- Company Name -->
+      <ng-container matColumnDef="brandCompanyName">
+        <th mat-header-cell *matHeaderCellDef> Company Name </th>
+        <td mat-cell *matCellDef="let element"> {{element.brandCompanyName}} </td>
+      </ng-container>
+
       <!-- Actions -->
       <ng-container matColumnDef="actions">
         <th mat-header-cell *matHeaderCellDef> Actions </th>
         <td mat-cell *matCellDef="let element">
-          <button mat-icon-button color="primary">
+          <button (click)="openAddBrandDialog(element)" mat-icon-button color="primary">
             <mat-icon>edit</mat-icon>
           </button>
-          <button mat-icon-button color="warn">
+          <button (click)="openDeleteDialog(element)" mat-icon-button color="warn">
             <mat-icon>delete</mat-icon>
           </button>
         </td>

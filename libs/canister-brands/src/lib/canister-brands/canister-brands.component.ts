@@ -1,7 +1,12 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { CanisterBrandsService } from "@lpg/canister-brands-service";
-import { BehaviorSubject, Subject, takeUntil, tap } from "rxjs";
+import { BehaviorSubject, Subject, switchMap, take, takeUntil, tap } from "rxjs";
 import { PageEvent } from "@angular/material/paginator";
+import { MatDialog } from "@angular/material/dialog";
+import {
+  DeleteConfirmationComponent
+} from "../../../../delete-confirmation/src/lib/delete-confirmation/delete-confirmation.component";
+import { AddBrandComponent } from "../../../../add-brand/src/lib/add-brand/add-brand.component";
 
 @Component({
   selector: 'lpg-canister-brands',
@@ -10,13 +15,13 @@ import { PageEvent } from "@angular/material/paginator";
 })
 export class CanisterBrandsComponent implements OnInit, OnDestroy {
   destroyed$ = new Subject()
-  displayedColumns: string[] = ['id', 'brandName', 'actions'];
+  displayedColumns: string[] = ['id', 'brandName', 'brandCompanyName', 'actions'];
   dataSource$ = new BehaviorSubject<any[]>([]);
   perPage = 10;
   page = 1;
   meta?: { total?: number } = { total: 0 };
 
-  constructor(private brandService: CanisterBrandsService) {
+  constructor(private brandService: CanisterBrandsService, private dialog: MatDialog) {
   }
 
   setPage($event: PageEvent) {
@@ -41,5 +46,28 @@ export class CanisterBrandsComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.getBrands();
+  }
+
+  openDeleteDialog(element: { id: number, brandName: string }) {
+    console.log({element})
+    const deleteDialog = this.dialog.open(DeleteConfirmationComponent, {
+      data: {id: element.id, name: element.brandName}
+    })
+    deleteDialog.componentInstance.confirmed.pipe(
+      switchMap(() => this.brandService.deleteBrandWithId(element.id)),
+      tap(() => this.getBrands()),
+      take(1)
+    ).subscribe()
+  }
+
+  openAddBrandDialog(data?: any) {
+    const addBrandDialog = this.dialog.open(AddBrandComponent, {
+      data,
+    });
+
+    addBrandDialog.componentInstance.created.pipe(
+      tap(() => this.getBrands()),
+      take(1)
+    ).subscribe()
   }
 }

@@ -1,0 +1,14 @@
+<h1 mat-dialog-title>Delete {{ data.title }} Confirmation</h1>
+<div mat-dialog-content>
+  <p>
+    Please enter <strong>{{ '#' + data.id }}</strong> to confirm deletion
+  </p>
+  <mat-form-field appearance="outline">
+    <mat-label>#ID</mat-label>
+    <input placeholder="Please enter id of item to delete" matInput [(ngModel)]="idConfirmation">
+  </mat-form-field>
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="onNoClick()">Cancel</button>
+  <button (click)="confirmAction()" [disabled]="idConfirmation !== ('#' + data.id)" color="warn" mat-button cdkFocusInitial mat-raised-button>Confirm</button>
+</div>

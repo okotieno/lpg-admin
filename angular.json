@@ -1,6 +1,32 @@
 {
   "version": 1,
   "projects": {
+    "add-brand": {
+      "projectType": "library",
+      "root": "libs/add-brand",
+      "sourceRoot": "libs/add-brand/src",
+      "prefix": "lpg",
+      "architect": {
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/add-brand"],
+          "options": {
+            "jestConfig": "libs/add-brand/jest.config.js",
+            "passWithNoTests": true
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/add-brand/src/**/*.ts",
+              "libs/add-brand/src/**/*.html"
+            ]
+          }
+        }
+      },
+      "tags": []
+    },
     "add-depot": {
       "projectType": "library",
       "root": "libs/add-depot",
@@ -225,6 +251,32 @@
           "options": {
             "jestConfig": "libs/data/data/jest.config.js",
             "passWithNoTests": true
+          }
+        }
+      },
+      "tags": []
+    },
+    "delete-confirmation": {
+      "projectType": "library",
+      "root": "libs/delete-confirmation",
+      "sourceRoot": "libs/delete-confirmation/src",
+      "prefix": "lpg",
+      "architect": {
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/delete-confirmation"],
+          "options": {
+            "jestConfig": "libs/delete-confirmation/jest.config.js",
+            "passWithNoTests": true
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/delete-confirmation/src/**/*.ts",
+              "libs/delete-confirmation/src/**/*.html"
+            ]
           }
         }
       },

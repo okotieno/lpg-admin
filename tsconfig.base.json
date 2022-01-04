@@ -15,6 +15,7 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
+      "@lpg/add-brand": ["libs/add-brand/src/index.ts"],
       "@lpg/add-depot": ["libs/add-depot/src/index.ts"],
       "@lpg/auth-guard": ["libs/auth-guard/src/index.ts"],
       "@lpg/canister-brands": ["libs/canister-brands/src/index.ts"],
@@ -24,6 +25,7 @@
       "@lpg/dashboard": ["libs/dashboard/src/index.ts"],
       "@lpg/data": ["libs/data/src/index.ts"],
       "@lpg/data/data": ["libs/data/data/src/index.ts"],
+      "@lpg/delete-confirmation": ["libs/delete-confirmation/src/index.ts"],
       "@lpg/depots": ["libs/depots/src/index.ts"],
       "@lpg/depots-service": ["libs/depots-service/src/index.ts"],
       "@lpg/guest-guard": ["libs/guest-guard/src/index.ts"],
