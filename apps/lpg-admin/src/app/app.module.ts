@@ -11,6 +11,8 @@ import { environment } from '../environments/environment';
 import { HTTP_INTERCEPTORS, HttpClientModule } from "@angular/common/http";
 import { JwtInterceptor } from "./interceptors/jwt.interceptor";
 import { APIInterceptor } from "./interceptors/api.interceptor";
+import { LoadingModule } from "@lpg/loading";
+import { LoadingInterceptor } from "@lpg/loading";
 
 @NgModule({
   declarations: [AppComponent],
@@ -31,9 +33,11 @@ import { APIInterceptor } from "./interceptors/api.interceptor";
     ),
     EffectsModule.forRoot([]),
     !environment.production ? StoreDevtoolsModule.instrument() : [],
+    LoadingModule
   ],
   providers: [
     {provide: 'apiUrl', useValue: environment.apiUrl},
+    {provide: HTTP_INTERCEPTORS, useClass: LoadingInterceptor, multi: true},
     {provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true},
     {provide: HTTP_INTERCEPTORS, useClass: APIInterceptor, multi: true},
   ],

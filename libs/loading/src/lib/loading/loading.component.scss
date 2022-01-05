@@ -1,0 +1,14 @@
+mat-progress-spinner {
+  position: absolute;
+  z-index: 5;
+  transform: translate(-50%,-50%);
+  top: 50%;
+  left: 50%;
+}
+.backdrop {
+  min-width: 100vw;
+  min-height: 100vh;
+  position: absolute;
+  background: rgba(35, 2, 54, 0.5);
+  z-index: 5;
+}

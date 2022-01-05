@@ -524,6 +524,29 @@
       "tags": [],
       "implicitDependencies": ["layout"]
     },
+    "loading": {
+      "root": "libs/loading",
+      "sourceRoot": "libs/loading/src",
+      "projectType": "library",
+      "architect": {
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "outputs": ["{options.outputFile}"],
+          "options": {
+            "lintFilePatterns": ["libs/loading/**/*.ts"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/loading"],
+          "options": {
+            "jestConfig": "libs/loading/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      },
+      "tags": []
+    },
     "login": {
       "projectType": "library",
       "root": "libs/login",
