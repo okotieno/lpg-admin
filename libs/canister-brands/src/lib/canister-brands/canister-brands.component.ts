@@ -49,9 +49,8 @@ export class CanisterBrandsComponent implements OnInit, OnDestroy {
   }
 
   openDeleteDialog(element: { id: number, brandName: string }) {
-    console.log({element})
     const deleteDialog = this.dialog.open(DeleteConfirmationComponent, {
-      data: {id: element.id, name: element.brandName}
+      data: {id: element.id, name: element.brandName, title: 'brand'}
     })
     deleteDialog.componentInstance.confirmed.pipe(
       switchMap(() => this.brandService.deleteBrandWithId(element.id)),

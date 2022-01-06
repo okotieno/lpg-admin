@@ -1,17 +1,94 @@
-import { Component } from '@angular/core';
-import { FormBuilder, Validators } from "@angular/forms";
+import { Component, EventEmitter, Inject, OnDestroy, OnInit, Output } from '@angular/core';
+import { FormArray, FormBuilder, Validators } from "@angular/forms";
+import { DepotsService } from "@lpg/depots-service";
+import { BehaviorSubject, Subject, takeUntil, tap } from "rxjs";
+import { CanisterBrandsService } from "@lpg/canister-brands-service";
+import { MAT_DIALOG_DATA, MatDialog } from "@angular/material/dialog";
 
 @Component({
   selector: 'lpg-add-depot',
   templateUrl: './add-depot.component.html',
   styleUrls: ['./add-depot.component.scss']
 })
-export class AddDepotComponent {
+export class AddDepotComponent implements OnInit, OnDestroy {
+  @Output() created = new EventEmitter();
+  destroyed$ = new Subject();
+  brands$ = new BehaviorSubject<any[]>([]);
   form = this.fb.group({
-    'depotName': ['', [Validators.required]]
+    'depotName': ['', [Validators.required]],
+    'brandIds': [[], [Validators.required, Validators.minLength(1)]],
+    'depotLocation': ['', Validators.required],
+    'depotEPRALicenceNo': ['', Validators.required],
+    'depotCode': ['', Validators.required],
   });
+  allSelected = false;
 
-  constructor(private fb: FormBuilder) {
+  constructor(
+    @Inject(MAT_DIALOG_DATA) public data: {
+      id: number,
+      depotName: string,
+      brandIds: number[];
+      },
+    private fb: FormBuilder, private brandService: CanisterBrandsService,
+    private depotService: DepotsService,
+    private dialog: MatDialog
+  ) {
   }
 
+  ngOnDestroy(): void {
+    this.destroyed$.next(null)
+  }
+
+  ngOnInit(): void {
+    if(this.data) {
+      this.form.patchValue(this.data)
+    }
+    this.brandService.getBrands({perPage: 100, page: 1}).pipe(
+      tap(({ data }) => {
+        this.brands$.next(data)
+      }),
+      takeUntil(this.destroyed$)
+    ).subscribe();
+
+    this.brandIdsControl.valueChanges.pipe(
+      tap(({ length }: []) => {
+        if(length === this.brands$.value.length) {
+          this.allSelected = true;
+        }
+        if(length === 0) {
+          this.allSelected = false;
+        }
+      }),
+      takeUntil(this.destroyed$)
+    ).subscribe();
+  }
+
+  toggleAllSelection() {
+    if (this.allSelected) {
+      this.brandIdsControl.setValue(this.brands$.value.map(({ id }) => id))
+    } else {
+      this.brandIdsControl.setValue([])
+    }
+  }
+
+  get brandIdsControl(): FormArray {
+    return this.form.get('brandIds') as FormArray
+  }
+
+  get someSelected() {
+    return this.brandIdsControl.value.length !== this.brands$.value.length &&
+      this.brandIdsControl.value.length !== 0
+  }
+
+  addDepot() {
+    let data = this.form.value;
+    if (this.data?.id) {
+      data = { ...data, id: this.data.id }
+    }
+    const service = this.data?.id ? this.depotService.updateDepot(data) : this.depotService.createDepot(data);
+    service.pipe(
+      tap(() => this.created.emit(true)),
+      tap(() => this.dialog.closeAll()),
+    ).subscribe()
+  }
 }

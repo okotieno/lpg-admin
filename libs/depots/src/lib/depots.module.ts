@@ -8,20 +8,22 @@ import { MatButtonModule } from "@angular/material/button";
 import { MatIconModule } from "@angular/material/icon";
 import { AddDepotModule } from "@lpg/add-depot";
 import { MatDialogModule } from "@angular/material/dialog";
+import { MatPaginatorModule } from "@angular/material/paginator";
 
 @NgModule({
-  imports: [
-    CommonModule,
-    RouterModule.forChild([
-      {path: '', pathMatch: 'full', component: DepotsComponent}
-    ]),
-    LayoutModule,
-    MatTableModule,
-    MatButtonModule,
-    MatIconModule,
-    AddDepotModule,
-    MatDialogModule
-  ],
+    imports: [
+        CommonModule,
+        RouterModule.forChild([
+            {path: '', pathMatch: 'full', component: DepotsComponent}
+        ]),
+        LayoutModule,
+        MatTableModule,
+        MatButtonModule,
+        MatIconModule,
+        AddDepotModule,
+        MatDialogModule,
+        MatPaginatorModule
+    ],
   declarations: [
     DepotsComponent
   ],

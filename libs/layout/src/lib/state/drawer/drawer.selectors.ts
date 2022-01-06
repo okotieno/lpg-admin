@@ -17,8 +17,6 @@ export const getShowDrawerHeader = createSelector(
   getDrawerOpen,
   getDrawerMini,
   (open, mini) => {
-    console.log({ open, mini })
-
     return !open && !mini
   }
 );

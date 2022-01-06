@@ -1,7 +1,12 @@
-import { Component } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import {animate, state, style, transition, trigger} from '@angular/animations';
 import { DepotsService } from "@lpg/depots-service";
 import { MatDialog } from "@angular/material/dialog";
+import { BehaviorSubject, Subject, switchMap, take, takeUntil, tap } from "rxjs";
+import { PageEvent } from "@angular/material/paginator";
+import {
+  DeleteConfirmationComponent
+} from "../../../../delete-confirmation/src/lib/delete-confirmation/delete-confirmation.component";
 import { AddDepotComponent } from "../../../../add-depot/src/lib/add-depot/add-depot.component";
 
 export interface PeriodicElement {
@@ -24,21 +29,65 @@ export interface PeriodicElement {
     ]),
   ],
 })
-export class DepotsComponent {
+export class DepotsComponent implements OnInit, OnDestroy {
+  expandedElement: PeriodicElement | null = null;
+
+  destroyed$ = new Subject()
+  displayedColumns: string[] = ['id', 'depotName', 'depotCode', 'depotEPRALicenceNo', 'depotLocation', 'actions'];
+  dataSource$ = new BehaviorSubject<any[]>([]);
+  perPage = 10;
+  page = 1;
+  meta?: { total?: number } = { total: 0 };
+
   constructor(private depotsService: DepotsService, private dialog: MatDialog) {
 
   }
 
-  dataSource$ = this.depotsService.depots$;
-  columnsToDisplay = ['name', 'weight', 'symbol', 'position'];
-  expandedElement: PeriodicElement | null = null;
 
-  openAddDepotDialog() {
-    this.dialog.open(AddDepotComponent, {
-      data: {
-        animal: 'panda',
-      },
+  setPage($event: PageEvent) {
+    this.perPage = $event.pageSize;
+    this.page = $event.pageIndex + 1;
+    this.getDepots();
+  }
+
+  getDepots() {
+    return this.depotsService.getDepots({perPage: this.perPage, page: this.page}).pipe(
+      tap((res) => {
+        this.dataSource$.next(res.data);
+        this.meta = res.meta;
+      }),
+      takeUntil(this.destroyed$)
+    ).subscribe();
+  }
+
+  ngOnDestroy(): void {
+    this.destroyed$.next(null);
+  }
+
+  ngOnInit(): void {
+    this.getDepots();
+  }
+
+  openDeleteDialog(element: { id: number, depotName: string }) {
+    const deleteDialog = this.dialog.open(DeleteConfirmationComponent, {
+      data: {id: element.id, name: element.depotName, title: 'depot'}
+    })
+    deleteDialog.componentInstance.confirmed.pipe(
+      switchMap(() => this.depotsService.deleteDepotWithId(element.id)),
+      tap(() => this.getDepots()),
+      take(1)
+    ).subscribe()
+  }
+
+  openAddDepotDialog(data?: any) {
+    const addDepotDialog = this.dialog.open(AddDepotComponent, {
+      data,
     });
+
+    addDepotDialog.componentInstance.created.pipe(
+      tap(() => this.getDepots()),
+      take(1)
+    ).subscribe()
   }
 }
 

@@ -13,6 +13,7 @@ import { JwtInterceptor } from "./interceptors/jwt.interceptor";
 import { APIInterceptor } from "./interceptors/api.interceptor";
 import { LoadingModule } from "@lpg/loading";
 import { LoadingInterceptor } from "@lpg/loading";
+import { ErrorsModule } from "@lpg/errors";
 
 @NgModule({
   declarations: [AppComponent],
@@ -33,7 +34,8 @@ import { LoadingInterceptor } from "@lpg/loading";
     ),
     EffectsModule.forRoot([]),
     !environment.production ? StoreDevtoolsModule.instrument() : [],
-    LoadingModule
+    LoadingModule,
+    ErrorsModule
   ],
   providers: [
     {provide: 'apiUrl', useValue: environment.apiUrl},

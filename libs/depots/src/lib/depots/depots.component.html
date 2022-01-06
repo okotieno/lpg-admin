@@ -1,41 +1,106 @@
 <lpg-layout>
+
+  <h2>Depots</h2>
   <button color="primary" (click)="openAddDepotDialog()" mat-raised-button class="mb-2">
     <mat-icon>add_location_outlined</mat-icon> New Depot
   </button>
-  <table mat-table
-         [dataSource]="(dataSource$ | async) ?? []" multiTemplateDataRows
-         class="mat-elevation-z8">
-    <ng-container matColumnDef="{{column}}" *ngFor="let column of columnsToDisplay">
-      <th mat-header-cell *matHeaderCellDef> {{column}} </th>
-      <td mat-cell *matCellDef="let element"> {{element[column]}} </td>
-    </ng-container>
+  <ng-container *ngIf="dataSource$ | async as dataSource">
+    <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
 
-    <!-- Expanded Content Column - The detail row is made up of this one column that spans across all columns -->
-    <ng-container matColumnDef="expandedDetail">
-      <td mat-cell *matCellDef="let element" [attr.colspan]="columnsToDisplay.length">
-        <div class="element-detail"
-             [@detailExpand]="element === expandedElement ? 'expanded' : 'collapsed'">
-          <div class="element-diagram">
-            <div class="element-position"> {{element.position}} </div>
-            <div class="element-symbol"> {{element.symbol}} </div>
-            <div class="element-name"> {{element.name}} </div>
-            <div class="element-weight"> {{element.weight}} </div>
-          </div>
-          <div class="element-description">
-            {{element.description}}
-            <span class="element-description-attribution"> -- Wikipedia </span>
-          </div>
-        </div>
-      </td>
-    </ng-container>
+      <!--- Note that these columns can be defined in any order.
+            The actual rendered columns are set as a property on the row definition" -->
 
-    <tr mat-header-row *matHeaderRowDef="columnsToDisplay"></tr>
-    <tr mat-row *matRowDef="let element; columns: columnsToDisplay;"
-        class="element-row"
-        [class.expanded-row]="expandedElement === element"
-        (click)="expandedElement = expandedElement === element ? null : element">
-    </tr>
-    <tr mat-row *matRowDef="let row; columns: ['expandedDetail']" class="detail-row"></tr>
-  </table>
+      <!-- Position Column -->
+      <ng-container matColumnDef="id">
+        <th mat-header-cell *matHeaderCellDef> #ID </th>
+        <td mat-cell *matCellDef="let element"> {{element.id}} </td>
+      </ng-container>
+
+      <!-- Name Column -->
+      <ng-container matColumnDef="depotName">
+        <th mat-header-cell *matHeaderCellDef> Brand Name </th>
+        <td mat-cell *matCellDef="let element"> {{element.depotName}} </td>
+      </ng-container>
+
+      <!-- Code Column -->
+      <ng-container matColumnDef="depotCode">
+        <th mat-header-cell *matHeaderCellDef> Code</th>
+        <td mat-cell *matCellDef="let element"> {{element.depotCode}} </td>
+      </ng-container>
+
+      <!-- Location Column -->
+      <ng-container matColumnDef="depotLocation">
+        <th mat-header-cell *matHeaderCellDef> Location</th>
+        <td mat-cell *matCellDef="let element"> {{element.depotLocation}} </td>
+      </ng-container>
+
+      <!-- Location Column -->
+      <ng-container matColumnDef="depotEPRALicenceNo">
+        <th mat-header-cell *matHeaderCellDef> EPRA Licence Number</th>
+        <td mat-cell *matCellDef="let element"> {{element.depotEPRALicenceNo}} </td>
+      </ng-container>
+
+
+      <!-- Actions -->
+      <ng-container matColumnDef="actions">
+        <th mat-header-cell *matHeaderCellDef> Actions </th>
+        <td mat-cell *matCellDef="let element">
+          <button (click)="openAddDepotDialog(element)" mat-icon-button color="primary">
+            <mat-icon>edit</mat-icon>
+          </button>
+          <button (click)="openDeleteDialog(element)" mat-icon-button color="warn">
+            <mat-icon>delete</mat-icon>
+          </button>
+        </td>
+      </ng-container>`
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+    <ng-container>
+      <mat-paginator (page)="setPage($event)" [length]="meta?.total ?? 0" [pageSizeOptions]="[10, 20, 50, 100]"
+                     showFirstLastButtons
+                     aria-label="Select page of periodic elements">
+      </mat-paginator>
+    </ng-container>
+  </ng-container>
+<!--  <button color="primary" (click)="openAddDepotDialog()" mat-raised-button class="mb-2">-->
+<!--    <mat-icon>add_location_outlined</mat-icon> New Depot-->
+<!--  </button>-->
+<!--  <table mat-table-->
+<!--         [dataSource]="(dataSource$ | async) ?? []" multiTemplateDataRows-->
+<!--         class="mat-elevation-z8">-->
+<!--    <ng-container matColumnDef="{{column}}" *ngFor="let column of columnsToDisplay">-->
+<!--      <th mat-header-cell *matHeaderCellDef> {{column}} </th>-->
+<!--      <td mat-cell *matCellDef="let element"> {{element[column]}} </td>-->
+<!--    </ng-container>-->
+
+<!--    &lt;!&ndash; Expanded Content Column - The detail row is made up of this one column that spans across all columns &ndash;&gt;-->
+<!--    <ng-container matColumnDef="expandedDetail">-->
+<!--      <td mat-cell *matCellDef="let element" [attr.colspan]="columnsToDisplay.length">-->
+<!--        <div class="element-detail"-->
+<!--             [@detailExpand]="element === expandedElement ? 'expanded' : 'collapsed'">-->
+<!--          <div class="element-diagram">-->
+<!--            <div class="element-position"> {{element.position}} </div>-->
+<!--            <div class="element-symbol"> {{element.symbol}} </div>-->
+<!--            <div class="element-name"> {{element.name}} </div>-->
+<!--            <div class="element-weight"> {{element.weight}} </div>-->
+<!--          </div>-->
+<!--          <div class="element-description">-->
+<!--            {{element.description}}-->
+<!--            <span class="element-description-attribution"> &#45;&#45; Wikipedia </span>-->
+<!--          </div>-->
+<!--        </div>-->
+<!--      </td>-->
+<!--    </ng-container>-->
+
+<!--    <tr mat-header-row *matHeaderRowDef="columnsToDisplay"></tr>-->
+<!--    <tr mat-row *matRowDef="let element; columns: columnsToDisplay;"-->
+<!--        class="element-row"-->
+<!--        [class.expanded-row]="expandedElement === element"-->
+<!--        (click)="expandedElement = expandedElement === element ? null : element">-->
+<!--    </tr>-->
+<!--    <tr mat-row *matRowDef="let row; columns: ['expandedDetail']" class="detail-row"></tr>-->
+<!--  </table>-->
 
 </lpg-layout>

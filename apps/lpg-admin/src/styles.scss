@@ -38,3 +38,26 @@ mat-sidenav[style] {
 table {
   width: 100%;
 }
+
+fieldset
+{
+  border: lighten($dark, 80%) solid;
+  -moz-border-radius:8px;
+  -webkit-border-radius:8px;
+  border-radius:8px;
+  margin-bottom: 16px;
+}
+legend h2 {
+  padding-top: 16px;
+}
+
+.mat-dialog-title {
+  margin-bottom: 0 !important;
+  h1 {
+    margin-bottom: 0;
+  }
+}
+
+.mat-radio-button ~ .mat-radio-button {
+  margin-left: 16px;
+}

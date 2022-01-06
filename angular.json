@@ -53,6 +53,32 @@
       },
       "tags": []
     },
+    "add-user": {
+      "projectType": "library",
+      "root": "libs/add-user",
+      "sourceRoot": "libs/add-user/src",
+      "prefix": "lpg",
+      "architect": {
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/add-user"],
+          "options": {
+            "jestConfig": "libs/add-user/jest.config.js",
+            "passWithNoTests": true
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/add-user/src/**/*.ts",
+              "libs/add-user/src/**/*.html"
+            ]
+          }
+        }
+      },
+      "tags": []
+    },
     "auth-guard": {
       "root": "libs/auth-guard",
       "sourceRoot": "libs/auth-guard/src",
@@ -326,6 +352,32 @@
           "options": {
             "jestConfig": "libs/depots-service/jest.config.js",
             "passWithNoTests": true
+          }
+        }
+      },
+      "tags": []
+    },
+    "errors": {
+      "projectType": "library",
+      "root": "libs/errors",
+      "sourceRoot": "libs/errors/src",
+      "prefix": "lpg",
+      "architect": {
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/errors"],
+          "options": {
+            "jestConfig": "libs/errors/jest.config.js",
+            "passWithNoTests": true
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/errors/src/**/*.ts",
+              "libs/errors/src/**/*.html"
+            ]
           }
         }
       },
@@ -842,6 +894,32 @@
       "tags": [],
       "implicitDependencies": ["sidenav"]
     },
+    "state-errors": {
+      "projectType": "library",
+      "root": "libs/state/errors",
+      "sourceRoot": "libs/state/errors/src",
+      "prefix": "lpg",
+      "architect": {
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/state/errors"],
+          "options": {
+            "jestConfig": "libs/state/errors/jest.config.js",
+            "passWithNoTests": true
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/state/errors/src/**/*.ts",
+              "libs/state/errors/src/**/*.html"
+            ]
+          }
+        }
+      },
+      "tags": []
+    },
     "stats-card": {
       "projectType": "library",
       "root": "libs/stats-card",
@@ -863,6 +941,55 @@
               "libs/stats-card/src/**/*.ts",
               "libs/stats-card/src/**/*.html"
             ]
+          }
+        }
+      },
+      "tags": []
+    },
+    "users": {
+      "projectType": "library",
+      "root": "libs/users",
+      "sourceRoot": "libs/users/src",
+      "prefix": "lpg",
+      "architect": {
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/users"],
+          "options": {
+            "jestConfig": "libs/users/jest.config.js",
+            "passWithNoTests": true
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/users/src/**/*.ts",
+              "libs/users/src/**/*.html"
+            ]
+          }
+        }
+      },
+      "tags": []
+    },
+    "users-service": {
+      "root": "libs/users-service",
+      "sourceRoot": "libs/users-service/src",
+      "projectType": "library",
+      "architect": {
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "outputs": ["{options.outputFile}"],
+          "options": {
+            "lintFilePatterns": ["libs/users-service/**/*.ts"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/users-service"],
+          "options": {
+            "jestConfig": "libs/users-service/jest.config.js",
+            "passWithNoTests": true
           }
         }
       },

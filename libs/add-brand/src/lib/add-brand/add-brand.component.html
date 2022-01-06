@@ -1,4 +1,4 @@
-<h1>Add Brand</h1>
+<h1>{{ data ? 'Edit': 'Add' }} Brand</h1>
 
 <form [formGroup]="form" (ngSubmit)="addBrand()">
   <div class="">
@@ -16,5 +16,5 @@
     </div>
   </div>
 
-  <button [disabled]="form.invalid" type="submit" mat-raised-button color="primary">Submit</button>
+  <button [disabled]="form.invalid" type="submit" mat-raised-button color="primary">{{ data ? 'Update': 'Save' }} </button>
 </form>

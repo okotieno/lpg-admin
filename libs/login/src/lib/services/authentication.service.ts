@@ -24,7 +24,6 @@ export class AuthenticationService {
 
   get authorizationToken(): string | undefined {
 
-    console.log(this.sessionStorageUser);
     if (this.sessionStorageUser) {
       return `Bearer ${this.sessionStorageUser.access_token}`;
     }
