@@ -16,7 +16,7 @@ export class AuthenticationService {
   localStorageUser = JSON.parse(String(localStorage.getItem('currentUser')));
   sessionStorageUser = JSON.parse(String(sessionStorage.getItem('currentUser')));
   isLoggedInSubject: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
-  revokeToken: Observable<any> = this.http.get('users/auth/logout');
+  revokeToken: Observable<any> = this.http.get('oauth/revoke');
 
   constructor(private http: HttpClient) {
     this.isLoggedInSubject.next(!!this.authorizationToken);
@@ -92,6 +92,7 @@ export class AuthenticationService {
 
   logout(): Observable<any> {
     if (!this.isLoggedInSubject.value) {
+      this.clearStorage();
       return EMPTY;
     }
     return this.revokeToken.pipe(

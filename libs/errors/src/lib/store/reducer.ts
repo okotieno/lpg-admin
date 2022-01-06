@@ -4,15 +4,22 @@ import { loadError } from "./actions";
 export const ERROR_FEATURE_KEY = 'errors';
 
 export interface State {
-  message?: string;
-  statusCode?: number
+  formErrors: string[],
+  pageError: {
+    message?: string;
+    status?: number;
+    help?: string
+  }
 }
 
-export const initialState: State[] = [];
+export const initialState: State = {
+  formErrors: [],
+  pageError: {}
+};
 
 const errorsReducer = createReducer(
   initialState,
-  on(loadError, (state, action) =>  [...action.data]),
+  on(loadError, (state, action) =>  ({ ...state, ...action.data })),
 );
 
-export const reducer = (state: State[], action: Action) => errorsReducer(state, action);
+export const reducer = (state: State, action: Action) => errorsReducer(state, action);

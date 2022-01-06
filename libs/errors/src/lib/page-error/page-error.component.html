@@ -1,0 +1,17 @@
+<ng-container *ngIf="pageError$ | async as pageError">
+  <div *ngIf="pageError.message" class="alert alert-danger d-flex justify-content-between">
+  <span>
+    <button mat-icon-button class="btn-close">
+    <mat-icon>warning</mat-icon>
+  </button>
+  <strong>
+  {{ pageError.status }} : {{ pageError.message }}
+  </strong>
+    {{ pageError.help ?? ''}}
+  </span>
+    <button class="ml-auto" mat-icon-button (click)="close()">
+      <mat-icon>close</mat-icon>
+    </button>
+  </div>
+</ng-container>
+

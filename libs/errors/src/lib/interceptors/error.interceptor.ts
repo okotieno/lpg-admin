@@ -5,8 +5,9 @@ import {
   HttpEvent,
   HttpInterceptor
 } from '@angular/common/http';
-import { catchError, Observable, throwError } from 'rxjs';
+import { catchError, Observable, take, throwError } from 'rxjs';
 import { ErrorFacade } from "../store/facade";
+import { AuthenticationService } from "../../../../login/src/lib/services/authentication.service";
 
 export interface MessageInterface {
   type?: string;
@@ -17,7 +18,7 @@ export interface MessageInterface {
 
 @Injectable()
 export class ErrorInterceptor implements HttpInterceptor {
-  constructor(private errorFacade: ErrorFacade) {
+  constructor(private errorFacade: ErrorFacade, private authenticationService: AuthenticationService) {
   }
   private message: MessageInterface | undefined;
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
@@ -80,6 +81,7 @@ export class ErrorInterceptor implements HttpInterceptor {
           status: err.status,
           help: err.error.message
         };
+        this.authenticationService.clearStorage();
       }
       if (err.status === 400 || err.status === 405 || err.status === 409) {
         this.message = {
@@ -95,7 +97,7 @@ export class ErrorInterceptor implements HttpInterceptor {
       //   title: this.message?.message as string,
       //   status: this.message?.status
       // }));
-      console.log(this.message?.message);
+      this.errorFacade.loadPageErrors(this.message);
       return throwError(() => new Error(this.message?.message));
 
     }));

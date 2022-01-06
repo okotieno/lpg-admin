@@ -5,8 +5,8 @@ mat-progress-spinner {
   left: 50%;
 }
 .backdrop {
-  min-width: 100%;
-  min-height: 100%;
+  min-width: 100vw;
+  min-height: 100vh;
   display: block;
   position: absolute;
   background: rgba(35, 2, 54, 0.5);
