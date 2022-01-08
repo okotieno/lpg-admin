@@ -4,7 +4,7 @@ export const loadError = createAction(
   '[Error] load errors',
   props<{
     data: {
-      formErrors?: string[],
+      formErrors?: { message: string }[],
       pageError?: { message?: string; status?: number }
     }
   }>()

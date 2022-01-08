@@ -7,6 +7,7 @@ import {
   DeleteConfirmationComponent
 } from "../../../../delete-confirmation/src/lib/delete-confirmation/delete-confirmation.component";
 import { AddBrandComponent } from "../../../../add-brand/src/lib/add-brand/add-brand.component";
+import { IBrand } from "@lpg/data";
 
 @Component({
   selector: 'lpg-canister-brands',
@@ -48,12 +49,12 @@ export class CanisterBrandsComponent implements OnInit, OnDestroy {
     this.getBrands();
   }
 
-  openDeleteDialog(element: { id: number, brandName: string }) {
+  openDeleteDialog(element: IBrand) {
     const deleteDialog = this.dialog.open(DeleteConfirmationComponent, {
-      data: {id: element.id, name: element.brandName, title: 'brand'}
+      data: {id: element.brandId, name: element.brandName, title: 'brand'}
     })
     deleteDialog.componentInstance.confirmed.pipe(
-      switchMap(() => this.brandService.deleteBrandWithId(element.id)),
+      switchMap(() => this.brandService.deleteBrandWithId(element.brandId)),
       tap(() => this.getBrands()),
       take(1)
     ).subscribe()

@@ -1,0 +1,13 @@
+<ng-container *ngIf="formErrors$ | async as formErrors">
+
+
+  <div *ngIf="formErrors.length > 0" class="alert alert-danger p-0">
+    <button (click)="closeAlert()" style="z-index:20; position: absolute; top: -5px; right:0" type="button" class="close" data-dismiss="alert" aria-label="Close" mat-icon-button>
+      <mat-icon>close</mat-icon>
+    </button>
+    <mat-list role="list" *ngFor="let err of formErrors">
+      <mat-list-item role="listitem">{{ err?.message }}</mat-list-item>
+    </mat-list>
+  </div>
+
+</ng-container>

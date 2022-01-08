@@ -1,0 +1,23 @@
+<h1>{{ data ? 'Edit' : 'Add' }} Transporter</h1>
+
+<form [formGroup]="form" (ngSubmit)="addTransporter()">
+  <div>
+    <div class="p-1">
+      <mat-form-field appearance="outline">
+        <mat-label>Transporter Name</mat-label>
+        <input formControlName="transporterName" matInput placeholder="Enter Transporter Name">
+      </mat-form-field>
+    </div>
+   <div class="p-1">
+     <mat-form-field appearance="outline" class="">
+       <mat-label>Transporter Code</mat-label>
+       <input formControlName="transporterCode" matInput placeholder="Enter Transporter Code">
+     </mat-form-field>
+   </div>
+  </div>
+
+  <lpg-form-error></lpg-form-error>
+
+  <button [disabled]="form.invalid" type="submit" mat-raised-button
+          color="primary">{{ data ? 'Update' : 'Save' }} </button>
+</form>

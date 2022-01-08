@@ -1,12 +1,11 @@
 <div mat-dialog-title class="d-flex justify-content-between">
   <h1>{{ data ? 'Edit' : 'Add' }} User </h1>
-  <button class="ml-auto" mat-icon-button mat-dialog-close="">
+  <button type="button" class="ml-auto" mat-icon-button mat-dialog-close="">
     <mat-icon>close</mat-icon>
   </button>
 </div>
 
 <form id="add-user-form" mat-dialog-content [formGroup]="form" (ngSubmit)="addUser()">
-  <pre>{{form.value | json }}</pre>
   <fieldset>
     <legend><h2>General Info</h2></legend>
     <div class="d-flex flex-wrap">
@@ -75,18 +74,21 @@
           <td mat-cell *matCellDef="let element; let i = index" [formGroupName]="i">
             <mat-form-field class="no-min-width" appearance="outline" *ngIf="stationSpecificRolesControl.controls[i].get(stationSelection[i] + 'Id')">
               <mat-label>Select Station</mat-label>
-              <mat-select [formControlName]="stationSelection[i] + 'Id'" >
+              <mat-select (selectionChange)="getStationRoles($event, i)" [formControlName]="stationSelection[i] + 'Id'" >
                 <mat-option *ngFor="let station of stations[i] | async" [value]="station[stationSelection[i] + 'Id']">
                   {{ station[stationSelection[i] + 'Name'] | titlecase }}
                   {{ station[stationSelection[i] + 'Id'] }}
                 </mat-option>
               </mat-select>
             </mat-form-field>
-            <mat-radio-group color="primary" aria-label="Select an option">
-              <mat-radio-button value="1">User</mat-radio-button>
-              <mat-radio-button value="2">Admin User</mat-radio-button>
+          </td>
+        </ng-container>
+        <ng-container matColumnDef="selectStationRole">
+          <th mat-header-cell *matHeaderCellDef> User Type</th>
+          <td mat-cell *matCellDef="let element; let i = index" [formGroupName]="i">
+            <mat-radio-group formControlName="roleId" color="primary" aria-label="Select an option">
+              <mat-radio-button *ngFor="let role of stationsRoles[i]" [value]="role.roleId">{{ role.roleName }}</mat-radio-button>
             </mat-radio-group>
-            {{ element.value | json }}
           </td>
         </ng-container>
         <tr mat-header-row *matHeaderRowDef="displayedDepotColumns"></tr>

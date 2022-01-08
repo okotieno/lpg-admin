@@ -8,6 +8,8 @@ import { PageErrorComponent } from './page-error/page-error.component';
 import { MatCardModule } from "@angular/material/card";
 import { MatButtonModule } from "@angular/material/button";
 import { MatIconModule } from "@angular/material/icon";
+import { FormErrorComponent } from './form-error/form-error.component';
+import { MatListModule } from "@angular/material/list";
 
 @NgModule({
   imports: [
@@ -15,16 +17,17 @@ import { MatIconModule } from "@angular/material/icon";
     StoreModule.forFeature(ERROR_FEATURE_KEY, reducer),
     MatCardModule,
     MatButtonModule,
-    MatIconModule
+    MatIconModule,
+    MatListModule
   ],
-  providers: [
-    {provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true},
-  ],
+  providers: [],
   declarations: [
-    PageErrorComponent
+    PageErrorComponent,
+    FormErrorComponent
   ],
   exports: [
-    PageErrorComponent
+    PageErrorComponent,
+    FormErrorComponent
   ]
 })
 export class ErrorsModule {}

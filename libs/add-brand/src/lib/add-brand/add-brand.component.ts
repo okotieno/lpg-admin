@@ -3,6 +3,7 @@ import { FormBuilder, Validators } from "@angular/forms";
 import { CanisterBrandsService } from "@lpg/canister-brands-service";
 import { tap } from "rxjs";
 import { MAT_DIALOG_DATA, MatDialog } from "@angular/material/dialog";
+import { IBrand } from "@lpg/data";
 
 @Component({
   selector: 'lpg-add-brand',
@@ -17,16 +18,16 @@ export class AddBrandComponent implements OnInit {
   });
 
   constructor(
-    @Inject(MAT_DIALOG_DATA) public data: { id: number, brandName: string, brandCompanyName: string; },
+    @Inject(MAT_DIALOG_DATA) public data: IBrand,
     private dialog: MatDialog, private fb: FormBuilder, private brandService: CanisterBrandsService) {
   }
 
   addBrand() {
     let data = this.form.value;
-    if (this.data?.id) {
-      data = { ...data, id: this.data.id }
+    if (this.data?.brandId) {
+      data = { ...data, id: this.data.brandId }
     }
-    const service = this.data?.id ? this.brandService.updateBrand(data) : this.brandService.createBrand(data);
+    const service = this.data?.brandId ? this.brandService.updateBrand(data) : this.brandService.createBrand(data);
     service.pipe(
       tap(() => this.created.emit(true)),
       tap(() => this.dialog.closeAll()),

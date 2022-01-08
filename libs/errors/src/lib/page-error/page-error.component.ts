@@ -11,7 +11,7 @@ export class PageErrorComponent implements OnDestroy {
   destroyed$ = new Subject();
   pageError$ = this.errorFacade.pageError$.pipe(
     tap((err) => {
-      if(err.message) {
+      if(err && err.message) {
          setTimeout(() => {
            this.errorFacade.clearPageErrors();
          },10000)

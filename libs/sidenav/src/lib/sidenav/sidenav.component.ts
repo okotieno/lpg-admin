@@ -18,6 +18,7 @@ export class SidenavComponent {
     {link: ["/users"], name: "Users Management", icon: "people_alt"},
     {link: ["/brands"], name: "Canister Brands Management", icon: "branding_watermark"},
     {link: ["/depots"], name: "Depots Management", icon: "warehouse"},
+    {link: ["/transporters"], name: "Transporters Management", icon: "local_shipping"},
   ];
 
 

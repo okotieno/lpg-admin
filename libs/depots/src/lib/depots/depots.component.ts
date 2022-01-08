@@ -8,6 +8,7 @@ import {
   DeleteConfirmationComponent
 } from "../../../../delete-confirmation/src/lib/delete-confirmation/delete-confirmation.component";
 import { AddDepotComponent } from "../../../../add-depot/src/lib/add-depot/add-depot.component";
+import { IDepot } from "@lpg/data";
 
 export interface PeriodicElement {
   name: string;
@@ -68,12 +69,12 @@ export class DepotsComponent implements OnInit, OnDestroy {
     this.getDepots();
   }
 
-  openDeleteDialog(element: { id: number, depotName: string }) {
+  openDeleteDialog(element: IDepot) {
     const deleteDialog = this.dialog.open(DeleteConfirmationComponent, {
-      data: {id: element.id, name: element.depotName, title: 'depot'}
+      data: {id: element.depotId, name: element.depotName, title: 'depot'}
     })
     deleteDialog.componentInstance.confirmed.pipe(
-      switchMap(() => this.depotsService.deleteDepotWithId(element.id)),
+      switchMap(() => this.depotsService.deleteDepotWithId(element.depotId)),
       tap(() => this.getDepots()),
       take(1)
     ).subscribe()

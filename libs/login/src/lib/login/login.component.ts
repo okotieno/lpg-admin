@@ -26,6 +26,6 @@ export class LoginComponent {
   submit() {
     this.authenticationService.login(this.form.value).pipe(
       tap(() => this.router.navigate(['/dashboard']))
-    ).subscribe(console.log)
+    ).subscribe()
   }
 }

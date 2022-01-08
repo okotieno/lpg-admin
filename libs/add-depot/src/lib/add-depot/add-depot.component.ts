@@ -4,6 +4,7 @@ import { DepotsService } from "@lpg/depots-service";
 import { BehaviorSubject, Subject, takeUntil, tap } from "rxjs";
 import { CanisterBrandsService } from "@lpg/canister-brands-service";
 import { MAT_DIALOG_DATA, MatDialog } from "@angular/material/dialog";
+import { IBrand, IDepot } from "@lpg/data";
 
 @Component({
   selector: 'lpg-add-depot',
@@ -13,7 +14,7 @@ import { MAT_DIALOG_DATA, MatDialog } from "@angular/material/dialog";
 export class AddDepotComponent implements OnInit, OnDestroy {
   @Output() created = new EventEmitter();
   destroyed$ = new Subject();
-  brands$ = new BehaviorSubject<any[]>([]);
+  brands$ = new BehaviorSubject<IBrand[]>([]);
   form = this.fb.group({
     'depotName': ['', [Validators.required]],
     'brandIds': [[], [Validators.required, Validators.minLength(1)]],
@@ -24,11 +25,7 @@ export class AddDepotComponent implements OnInit, OnDestroy {
   allSelected = false;
 
   constructor(
-    @Inject(MAT_DIALOG_DATA) public data: {
-      id: number,
-      depotName: string,
-      brandIds: number[];
-      },
+    @Inject(MAT_DIALOG_DATA) public data: IDepot,
     private fb: FormBuilder, private brandService: CanisterBrandsService,
     private depotService: DepotsService,
     private dialog: MatDialog
@@ -65,7 +62,7 @@ export class AddDepotComponent implements OnInit, OnDestroy {
 
   toggleAllSelection() {
     if (this.allSelected) {
-      this.brandIdsControl.setValue(this.brands$.value.map(({ id }) => id))
+      this.brandIdsControl.setValue(this.brands$.value.map(({ brandId }) => brandId))
     } else {
       this.brandIdsControl.setValue([])
     }
@@ -82,10 +79,10 @@ export class AddDepotComponent implements OnInit, OnDestroy {
 
   addDepot() {
     let data = this.form.value;
-    if (this.data?.id) {
-      data = { ...data, id: this.data.id }
+    if (this.data?.depotId) {
+      data = { ...data, id: this.data.depotId }
     }
-    const service = this.data?.id ? this.depotService.updateDepot(data) : this.depotService.createDepot(data);
+    const service = this.data?.depotId ? this.depotService.updateDepot(data) : this.depotService.createDepot(data);
     service.pipe(
       tap(() => this.created.emit(true)),
       tap(() => this.dialog.closeAll()),

@@ -1,11 +1,6 @@
 import { Injectable } from '@angular/core';
-import {
-  HttpRequest,
-  HttpHandler,
-  HttpEvent,
-  HttpInterceptor
-} from '@angular/common/http';
-import { catchError, Observable, take, throwError } from 'rxjs';
+import { HttpEvent, HttpHandler, HttpInterceptor, HttpRequest } from '@angular/common/http';
+import { catchError, Observable, of, throwError } from 'rxjs';
 import { ErrorFacade } from "../store/facade";
 import { AuthenticationService } from "../../../../login/src/lib/services/authentication.service";
 
@@ -22,7 +17,7 @@ export class ErrorInterceptor implements HttpInterceptor {
   }
   private message: MessageInterface | undefined;
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-    return next.handle(request).pipe(catchError(err => {
+    return next.handle(request).pipe(catchError((err: any) => {
       let helperMessage: string;
       if (typeof err.error === 'string') {
         helperMessage = err.error;
@@ -91,15 +86,8 @@ export class ErrorInterceptor implements HttpInterceptor {
           help: err.error.message
         };
       }
-      // this.store.dispatch(loadErrorMessagesSuccess({
-      //   body: String(this.message?.help),
-      //   show: true,
-      //   title: this.message?.message as string,
-      //   status: this.message?.status
-      // }));
       this.errorFacade.loadPageErrors(this.message);
       return throwError(() => new Error(this.message?.message));
-
     }));
   }
 }

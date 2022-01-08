@@ -53,6 +53,32 @@
       },
       "tags": []
     },
+    "add-transporter": {
+      "projectType": "library",
+      "root": "libs/add-transporter",
+      "sourceRoot": "libs/add-transporter/src",
+      "prefix": "lpg",
+      "architect": {
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/add-transporter"],
+          "options": {
+            "jestConfig": "libs/add-transporter/jest.config.js",
+            "passWithNoTests": true
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/add-transporter/src/**/*.ts",
+              "libs/add-transporter/src/**/*.html"
+            ]
+          }
+        }
+      },
+      "tags": []
+    },
     "add-user": {
       "projectType": "library",
       "root": "libs/add-user",
@@ -282,6 +308,58 @@
       },
       "tags": []
     },
+    "dealer-service": {
+      "projectType": "library",
+      "root": "libs/dealer-service",
+      "sourceRoot": "libs/dealer-service/src",
+      "prefix": "lpg",
+      "architect": {
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/dealer-service"],
+          "options": {
+            "jestConfig": "libs/dealer-service/jest.config.js",
+            "passWithNoTests": true
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/dealer-service/src/**/*.ts",
+              "libs/dealer-service/src/**/*.html"
+            ]
+          }
+        }
+      },
+      "tags": []
+    },
+    "dealers-service": {
+      "projectType": "library",
+      "root": "libs/dealers-service",
+      "sourceRoot": "libs/dealers-service/src",
+      "prefix": "lpg",
+      "architect": {
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/dealers-service"],
+          "options": {
+            "jestConfig": "libs/dealers-service/jest.config.js",
+            "passWithNoTests": true
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/dealers-service/src/**/*.ts",
+              "libs/dealers-service/src/**/*.html"
+            ]
+          }
+        }
+      },
+      "tags": []
+    },
     "delete-confirmation": {
       "projectType": "library",
       "root": "libs/delete-confirmation",
@@ -302,6 +380,32 @@
             "lintFilePatterns": [
               "libs/delete-confirmation/src/**/*.ts",
               "libs/delete-confirmation/src/**/*.html"
+            ]
+          }
+        }
+      },
+      "tags": []
+    },
+    "depot-service": {
+      "projectType": "library",
+      "root": "libs/depot-service",
+      "sourceRoot": "libs/depot-service/src",
+      "prefix": "lpg",
+      "architect": {
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/depot-service"],
+          "options": {
+            "jestConfig": "libs/depot-service/jest.config.js",
+            "passWithNoTests": true
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/depot-service/src/**/*.ts",
+              "libs/depot-service/src/**/*.html"
             ]
           }
         }
@@ -940,6 +1044,84 @@
             "lintFilePatterns": [
               "libs/stats-card/src/**/*.ts",
               "libs/stats-card/src/**/*.html"
+            ]
+          }
+        }
+      },
+      "tags": []
+    },
+    "transporter-service": {
+      "projectType": "library",
+      "root": "libs/transporter-service",
+      "sourceRoot": "libs/transporter-service/src",
+      "prefix": "lpg",
+      "architect": {
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/transporter-service"],
+          "options": {
+            "jestConfig": "libs/transporter-service/jest.config.js",
+            "passWithNoTests": true
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/transporter-service/src/**/*.ts",
+              "libs/transporter-service/src/**/*.html"
+            ]
+          }
+        }
+      },
+      "tags": []
+    },
+    "transporters": {
+      "projectType": "library",
+      "root": "libs/transporters",
+      "sourceRoot": "libs/transporters/src",
+      "prefix": "lpg",
+      "architect": {
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/transporters"],
+          "options": {
+            "jestConfig": "libs/transporters/jest.config.js",
+            "passWithNoTests": true
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/transporters/src/**/*.ts",
+              "libs/transporters/src/**/*.html"
+            ]
+          }
+        }
+      },
+      "tags": []
+    },
+    "transporters-service": {
+      "projectType": "library",
+      "root": "libs/transporters-service",
+      "sourceRoot": "libs/transporters-service/src",
+      "prefix": "lpg",
+      "architect": {
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/transporters-service"],
+          "options": {
+            "jestConfig": "libs/transporters-service/jest.config.js",
+            "passWithNoTests": true
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/transporters-service/src/**/*.ts",
+              "libs/transporters-service/src/**/*.html"
             ]
           }
         }

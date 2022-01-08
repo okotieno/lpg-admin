@@ -7,6 +7,7 @@ import { PageEvent } from "@angular/material/paginator";
 import {
   DeleteConfirmationComponent
 } from "../../../../delete-confirmation/src/lib/delete-confirmation/delete-confirmation.component";
+import { IUser } from "@lpg/data";
 
 @Component({
   selector: 'lpg-users',
@@ -17,7 +18,7 @@ export class UsersComponent implements OnInit, OnDestroy {
 
   destroyed$ = new Subject()
   displayedColumns: string[] = ['id', 'username', 'name', 'email', 'phone', 'actions'];
-  dataSource$ = new BehaviorSubject<any[]>([]);
+  dataSource$ = new BehaviorSubject<IUser[]>([]);
   perPage = 10;
   page = 1;
   meta?: { total?: number } = { total: 0 };

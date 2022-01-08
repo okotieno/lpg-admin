@@ -7,3 +7,7 @@ export const selectPageError = createSelector(
   selectErrorState,
   (state) => state.pageError
 )
+export const selectFormErrors = createSelector(
+  selectErrorState,
+  (state) => state.formErrors
+)

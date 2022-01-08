@@ -31,7 +31,7 @@ export interface IOauth {
 }
 
 export interface IUser {
-  id: number;
+  userId: number;
   name: string;
   phone?: string;
   email?: string;
@@ -41,5 +41,18 @@ export interface IUser {
 }
 
 export interface IDepot {
-  depotName: string;
+  depotId: number;
+  depotName: string,
+  brandIds: number[];
+}
+
+export interface IBrand {
+  brandId: number;
+  brandName: string;
+  brandCompanyName: string;
+}
+
+export interface ITransporter {
+  transporterId: number;
+  transporterName: string;
 }

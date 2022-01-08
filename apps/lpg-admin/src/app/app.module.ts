@@ -14,6 +14,7 @@ import { APIInterceptor } from "./interceptors/api.interceptor";
 import { LoadingModule } from "@lpg/loading";
 import { LoadingInterceptor } from "@lpg/loading";
 import { ErrorsModule } from "@lpg/errors";
+import { ErrorInterceptor } from "../../../../libs/errors/src/lib/interceptors/error.interceptor";
 
 @NgModule({
   declarations: [AppComponent],
@@ -42,6 +43,7 @@ import { ErrorsModule } from "@lpg/errors";
     {provide: HTTP_INTERCEPTORS, useClass: LoadingInterceptor, multi: true},
     {provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true},
     {provide: HTTP_INTERCEPTORS, useClass: APIInterceptor, multi: true},
+    {provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true},
   ],
   bootstrap: [AppComponent],
 })
