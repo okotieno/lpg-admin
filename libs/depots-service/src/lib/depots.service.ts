@@ -11,7 +11,7 @@ export class DepotsService {
 
   depots$ = this.getDepots({ perPage: 100, page: 1}).pipe(
     map(({ data }) => data ),
-    shareReplay()
+    // shareReplay()
   )
 
   constructor(private http: HttpClient) {

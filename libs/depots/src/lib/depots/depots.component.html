@@ -2,7 +2,7 @@
 
   <h2>Depots</h2>
   <button color="primary" (click)="openAddDepotDialog()" mat-raised-button class="mb-2">
-    <mat-icon>add_location_outlined</mat-icon> New Depot
+    <mat-icon>add_business</mat-icon> New Depot
   </button>
   <ng-container *ngIf="dataSource$ | async as dataSource">
     <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">

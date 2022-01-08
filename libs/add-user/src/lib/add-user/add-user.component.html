@@ -6,6 +6,7 @@
 </div>
 
 <form id="add-user-form" mat-dialog-content [formGroup]="form" (ngSubmit)="addUser()">
+  <pre>{{form.value | json }}</pre>
   <fieldset>
     <legend><h2>General Info</h2></legend>
     <div class="d-flex flex-wrap">
@@ -43,75 +44,64 @@
   </fieldset>
   <fieldset>
     <legend><h2>User Allocation</h2></legend>
-    <div class="p-2 mb-3">
-      <mat-checkbox formControlName="depotAllocated" color="primary">
-        Allocate to Depot
-      </mat-checkbox>
-      <div class="p-2 pt-4" *ngIf="depotAllocatedControl.value">
-
-<!--        <div class="d-flex align-items-center">-->
-<!--          <button type="button"-->
-<!--                  mat-button color="primary" (click)="addDepotToAllocateTo = !addDepotToAllocateTo"-->
-<!--          >-->
-<!--            <mat-icon>{{ addDepotToAllocateTo ? 'add_circle_outline' : 'remove_circle_outline' }}</mat-icon>-->
-<!--            <mat-icon></mat-icon>-->
-<!--            Add Depot to allocate to-->
-<!--          </button>-->
-<!--          <ng-container *ngIf="addDepotToAllocateTo">-->
-<!--            <mat-form-field appearance="outline">-->
-<!--              <mat-label>Depot Selection</mat-label>-->
-<!--              <mat-select [(ngModel)]="currentDepotSelection" [ngModelOptions]="{standalone: true}">-->
-<!--                <mat-option *ngFor="let item of depots$ | async" [value]="item.id">-->
-<!--                  {{ item.depotName }}-->
-<!--                </mat-option>-->
-<!--              </mat-select>-->
-<!--              <mat-hint>Select depot to allocate to the user.</mat-hint>-->
-<!--            </mat-form-field>-->
-<!--            <button class="ms-2" type="button" mat-raised-button color="primary">Add</button>-->
-<!--          </ng-container>-->
-
-<!--        </div>-->
-        <div>
-
-          <table mat-table [dataSource]="depots$">
-            <ng-container matColumnDef="select">
-              <th mat-header-cell *matHeaderCellDef>
-                <mat-checkbox color="primary">
-                </mat-checkbox>
-              </th>
-              <td mat-cell *matCellDef="let row">
-                <mat-checkbox color="primary">
-                </mat-checkbox>
-              </td>
-            </ng-container>
-            <ng-container matColumnDef="depotName">
-              <th mat-header-cell *matHeaderCellDef> #ID</th>
-              <td mat-cell *matCellDef="let element"> {{element.depotName}} </td>
-            </ng-container>
-            <ng-container matColumnDef="userType">
-              <th mat-header-cell *matHeaderCellDef> User Type</th>
-              <td mat-cell *matCellDef="let element">
-                <mat-radio-group color="primary" aria-label="Select an option">
-                  <mat-radio-button value="1">User</mat-radio-button>
-                  <mat-radio-button value="2">Admin User</mat-radio-button>
-                </mat-radio-group>
-              </td>
-            </ng-container>
-            <tr mat-header-row *matHeaderRowDef="displayedDepotColumns"></tr>
-            <tr mat-row *matRowDef="let row; columns: displayedDepotColumns;"></tr>
-          </table>
-        </div>
-      </div>
-    </div>
-    <div class="p-2 mb-3">
-      <mat-checkbox color="primary">
-        Allocate to Transporter
-      </mat-checkbox>
-    </div>
-    <div class="p-2 mb-3">
-      <mat-checkbox color="primary">
-        Allocate to Dealer
-      </mat-checkbox>
+    <button
+      matTooltip="Add Station Allocation"
+      matTooltipPosition="right"
+      [matTooltipShowDelay]="500"
+      [matTooltipHideDelay]="1000"
+      aria-label="Add Station Allocation" mat-icon-button color="primary"
+      type="button"
+      (click)="addStationSpecificRole()"
+    >
+      <mat-icon>playlist_add</mat-icon>
+    </button>
+    <div formArrayName="stationSpecificRoles">
+      <table mat-table [dataSource]="stationSpecificRolesControl.controls">
+        <ng-container matColumnDef="select">
+          <th mat-header-cell *matHeaderCellDef>
+            <mat-checkbox color="primary">
+            </mat-checkbox>
+          </th>
+          <td mat-cell *matCellDef="let row">
+            <mat-checkbox color="primary">
+            </mat-checkbox>
+          </td>
+        </ng-container>
+        <ng-container matColumnDef="selectStationType">
+          <th mat-header-cell *matHeaderCellDef>Station</th>
+          <td mat-cell *matCellDef="let element let i = index;">
+            <mat-form-field class="no-min-width" appearance="outline">
+              <mat-label>Select Station Type</mat-label>
+              <mat-select (ngModelChange)="stationChanged($event, i)" [(ngModel)]="stationSelection[i]" [ngModelOptions]="{standalone: true}">
+                <mat-option *ngFor="let station of stationsTypes" [value]="station.name">
+                  {{ station.name | titlecase }}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </td>
+        </ng-container>
+        <ng-container matColumnDef="selectStationName">
+          <th mat-header-cell *matHeaderCellDef> User Type</th>
+          <td mat-cell *matCellDef="let element; let i = index" [formGroupName]="i">
+            <mat-form-field class="no-min-width" appearance="outline" *ngIf="stationSpecificRolesControl.controls[i].get(stationSelection[i] + 'Id')">
+              <mat-label>Select Station</mat-label>
+              <mat-select [formControlName]="stationSelection[i] + 'Id'" >
+                <mat-option *ngFor="let station of stations[i] | async" [value]="station[stationSelection[i] + 'Id']">
+                  {{ station[stationSelection[i] + 'Name'] | titlecase }}
+                  {{ station[stationSelection[i] + 'Id'] }}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+            <mat-radio-group color="primary" aria-label="Select an option">
+              <mat-radio-button value="1">User</mat-radio-button>
+              <mat-radio-button value="2">Admin User</mat-radio-button>
+            </mat-radio-group>
+            {{ element.value | json }}
+          </td>
+        </ng-container>
+        <tr mat-header-row *matHeaderRowDef="displayedDepotColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedDepotColumns;"></tr>
+      </table>
     </div>
   </fieldset>
 

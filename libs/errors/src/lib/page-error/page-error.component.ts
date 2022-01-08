@@ -14,7 +14,7 @@ export class PageErrorComponent implements OnDestroy {
       if(err.message) {
          setTimeout(() => {
            this.errorFacade.clearPageErrors();
-         },6000)
+         },10000)
       }
     }),
     takeUntil(this.destroyed$)

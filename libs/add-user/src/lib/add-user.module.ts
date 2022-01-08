@@ -11,22 +11,24 @@ import { MatCheckboxModule } from "@angular/material/checkbox";
 import { MatRadioModule } from "@angular/material/radio";
 import { MatSelectModule } from "@angular/material/select";
 import { MatTableModule } from "@angular/material/table";
+import { MatTooltipModule } from "@angular/material/tooltip";
 
 @NgModule({
-  imports: [
-    CommonModule,
-    ReactiveFormsModule,
-    MatDialogModule,
-    MatButtonModule,
-    MatFormFieldModule,
-    MatInputModule,
-    MatIconModule,
-    MatCheckboxModule,
-    MatRadioModule,
-    MatSelectModule,
-    MatTableModule,
-    FormsModule
-  ],
+    imports: [
+        CommonModule,
+        ReactiveFormsModule,
+        MatDialogModule,
+        MatButtonModule,
+        MatFormFieldModule,
+        MatInputModule,
+        MatIconModule,
+        MatCheckboxModule,
+        MatRadioModule,
+        MatSelectModule,
+        MatTableModule,
+        FormsModule,
+        MatTooltipModule
+    ],
   declarations: [
     AddUserComponent
   ],

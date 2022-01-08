@@ -14,7 +14,7 @@ export class SidenavComponent {
   isOpen$ = this.drawerFacade.open$;
 
   public routeLinks = [
-    {link: ["/"], name: "Home", icon: "dashboard"},
+    {link: ["/"], name: "Home", icon: "home"},
     {link: ["/users"], name: "Users Management", icon: "people_alt"},
     {link: ["/brands"], name: "Canister Brands Management", icon: "branding_watermark"},
     {link: ["/depots"], name: "Depots Management", icon: "warehouse"},
