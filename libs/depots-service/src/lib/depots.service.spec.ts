@@ -1,7 +1,7 @@
-import { depotsService } from './depots.service';
+import { DepotsService } from './depots.service';
 
 describe('depotsService', () => {
   it('should work', () => {
-    expect(depotsService()).toEqual('depots-service');
+    expect(DepotsService).toEqual('depots-service');
   });
 });

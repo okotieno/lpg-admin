@@ -44,17 +44,7 @@
   </fieldset>
   <fieldset>
     <legend><h2>User Allocation</h2></legend>
-    <button
-      matTooltip="Add Station Allocation"
-      matTooltipPosition="right"
-      [matTooltipShowDelay]="500"
-      [matTooltipHideDelay]="1000"
-      aria-label="Add Station Allocation" mat-icon-button color="primary"
-      type="button"
-      (click)="addStationSpecificRole()"
-    >
-      <mat-icon>playlist_add</mat-icon>
-    </button>
+
     <div formArrayName="stationSpecificRoles">
       <table mat-table [dataSource]="stationSpecificRolesControl.controls">
         <ng-container matColumnDef="select">
@@ -103,6 +93,17 @@
         <tr mat-row *matRowDef="let row; columns: displayedDepotColumns;"></tr>
       </table>
     </div>
+    <button
+      matTooltip="Add Station Allocation"
+      matTooltipPosition="right"
+      [matTooltipShowDelay]="500"
+      [matTooltipHideDelay]="1000"
+      aria-label="Add Station Allocation" mat-icon-button color="primary"
+      type="button"
+      (click)="addStationSpecificRole()"
+    >
+      <mat-icon>playlist_add</mat-icon>
+    </button>
   </fieldset>
 
 </form>

@@ -45,7 +45,9 @@ export class AddUserComponent implements OnInit {
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: { id: number, brandName: string, brandCompanyName: string; },
     private dialog: MatDialog, private fb: FormBuilder, private userService: UsersService,
-    private depotService: DepotsService
+    private depotService: DepotsService,
+    // private dealerService: Deale,
+    private transportService: DepotsService,
   ) {
   }
 
@@ -84,7 +86,6 @@ export class AddUserComponent implements OnInit {
   }
 
   stationChanged(selectedValue: string, i: number) {
-
     this.stations[i] = this.stationsTypes.find(({ name }) => selectedValue === name)?.stations ?? [];
     const control = this.stationSpecificRolesControl.controls[i] as FormGroup;
     this.stationsTypes.forEach(({name}) => {
@@ -95,6 +96,5 @@ export class AddUserComponent implements OnInit {
       this.fb.control('', [Validators.required])
     );
 
-    console.log(this.form.get('stationSpecificRoles.0.depotId'))
   }
 }
