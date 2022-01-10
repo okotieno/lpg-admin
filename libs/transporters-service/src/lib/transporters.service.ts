@@ -33,4 +33,7 @@ export class TransportersService {
     return this.http.patch<IResponse<any[]>>(`${this.url}/${id}`, data)
   };
 
+  getRoles({ transporterId, perPage, page}: { perPage: number, page: number, transporterId: number }) {
+    return this.http.get<IResponse<any[]>>(`${this.url}/${transporterId}/roles`, {params: {['page_size']: perPage, page}});
+  }
 }

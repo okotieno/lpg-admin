@@ -32,4 +32,7 @@ export class DealersService {
     return this.http.patch<IResponse<any[]>>(`${this.url}/${id}`, data)
   };
 
+  getRoles({ dealerId, perPage, page}: { perPage: number, page: number, dealerId: number }) {
+    return this.http.get<IResponse<any[]>>(`${this.url}/${dealerId}/roles`, {params: {['page_size']: perPage, page}});
+  }
 }

@@ -38,6 +38,23 @@ export interface IUser {
   permissions?: string[];
   roles?: string[];
   ['access_token']: string;
+  stationSpecificRoles: {
+    "roleId": number,
+    "roleName": string,
+    "permissions":
+      {
+        permissionId: number,
+        permissionName: string
+      }[],
+    depotId?: number,
+    depotName?: string,
+    dealerId?: number,
+    dealerName?: string,
+    transporterId?: number,
+    transporterName?: string,
+  }[]
+
+
 }
 
 export interface IDepot {
