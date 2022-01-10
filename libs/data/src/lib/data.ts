@@ -31,6 +31,9 @@ export interface IOauth {
 }
 
 export interface IUser {
+  lastName: string;
+  firstName: string;
+  username: string;
   userId: number;
   name: string;
   phone?: string;

@@ -6,7 +6,7 @@
 </div>
 <mat-divider></mat-divider>
 <form id="add-user-form" mat-dialog-content [formGroup]="form" (ngSubmit)="addUser()">
-  <pre>{{ form.value | json }}</pre>
+
   <fieldset>
     <legend><h2>General Info</h2></legend>
     <div class="d-flex flex-wrap">
@@ -44,11 +44,8 @@
   </fieldset>
   <fieldset>
     <legend><h2>User Allocation</h2></legend>
-<!--<pre>{{ stationSpecificRolesControl.value | json }}</pre>-->
-<!--<pre>{{ stationSpecificRolesControl.controls[0].value | json }}</pre>-->
     <div formArrayName="stationSpecificRoles">
-      <table mat-table [dataSource]="selectedDataSource">
-<!--      <table mat-table [dataSource]="stationSpecificRolesControl.controls">-->
+      <table mat-table [dataSource]="stationSpecificRolesControl.controls">
         <ng-container matColumnDef="select">
           <th mat-header-cell *matHeaderCellDef>
             <mat-checkbox color="primary">
@@ -81,7 +78,6 @@
                 <mat-option disabled></mat-option>
                 <mat-option *ngFor="let station of stations[i] | async" [value]="station[stationSelection[i] + 'Id']">
                   {{ station[stationSelection[i] + 'Name'] | titlecase }}
-                  {{ station[stationSelection[i] + 'Id'] }}
                 </mat-option>
               </mat-select>
             </mat-form-field>
@@ -116,7 +112,7 @@
       [matTooltipHideDelay]="1000"
       aria-label="Add Station Allocation" mat-icon-button color="primary"
       type="button"
-      (click)="addStationSpecificRole(selectedDataSource.value.length - 1)"
+      (click)="addStationSpecificRole(stationSpecificRolesControl.controls.length - 1)"
     >
       <mat-icon>playlist_add</mat-icon>
     </button>

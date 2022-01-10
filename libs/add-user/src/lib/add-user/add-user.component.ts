@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Inject, OnInit, Output, ViewChild } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from "@angular/forms";
 import { MAT_DIALOG_DATA, MatDialog } from "@angular/material/dialog";
-import { BehaviorSubject, shareReplay, take, tap } from "rxjs";
+import { shareReplay, take, tap } from "rxjs";
 import { UsersService } from "@lpg/users-service";
 import { DepotsService } from "@lpg/depots-service";
 import { MatTable } from "@angular/material/table";
@@ -23,7 +23,7 @@ export class AddUserComponent implements OnInit {
     {name: 'dealer', stations: this.dealers$},
     {name: 'depot', stations: this.depots$},
     {name: 'transporter', stations: this.transporter$}
-  ];
+  ].map(type => ({...type, idName: `${type.name}Id`, apiLink: `${type.name}s`}));
   @Output() created = new EventEmitter();
   @ViewChild(MatTable) table?: MatTable<any>;
   form = this.fb.group({
@@ -33,11 +33,8 @@ export class AddUserComponent implements OnInit {
     lastName: ['', [Validators.required]],
     phone: ['', [Validators.pattern("^[0-9]*$")]],
     stationSpecificRoles: this.fb.array([]),
-
-    depotAllocated: [false],
   });
 
-  selectedDataSource = new BehaviorSubject<any[]>([]);
   displayedDepotColumns: string[] = ['selectStationType', 'selectStationName', 'selectStationRole', 'actions'];
   addDepotToAllocateTo = false;
   stationSelection: string[] = [];
@@ -64,9 +61,15 @@ export class AddUserComponent implements OnInit {
   ngOnInit() {
 
     if (this.data) {
+      this.form.patchValue({...this.data, stationSpecificRoles: []})
       this.data.stationSpecificRoles.forEach(
         (role, index) => {
           this.addStationSpecificRole(index, role);
+
+          const intersection = Object.keys(role).filter(element => this.stationsTypes.map(({idName}) => idName).includes(element));
+          this.stations[index] = this.stationsTypes.find(({idName}) => intersection[0] === idName)?.stations ?? [];
+
+          this.getStationRoles({value: role.dealerId ?? role.depotId ?? role.transporterId} as MatSelectChange, index)
         }
       );
     } else {
@@ -88,13 +91,10 @@ export class AddUserComponent implements OnInit {
     ).subscribe()
   }
 
-  trackByIdentity = (index: number, item: any) => item;
-
   addStationSpecificRole(index: number, controlValue?: any) {
 
     this.stationSpecificRolesControl.push(this.generateStationSpecificRole(index, controlValue));
 
-    this.selectedDataSource.next(this.stationSpecificRolesControl.value)
     if (this.table) {
       (this.table as MatTable<any>).renderRows();
     }
@@ -102,8 +102,8 @@ export class AddUserComponent implements OnInit {
 
   removeAllocation(i: number) {
     this.stationSpecificRolesControl.removeAt(i);
-    this.selectedDataSource.next(this.stationSpecificRolesControl.value);
-    this.stationsTypes.splice(i, 1);
+    this.stations.splice(i, 1);
+    this.stationsRoles.splice(i, 1);
     this.stationSelection.splice(i, 1);
     (this.table as MatTable<any>).renderRows();
   }
@@ -146,33 +146,22 @@ export class AddUserComponent implements OnInit {
   }
 
   getStationRoles($event: MatSelectChange, i: number) {
-    if(this.stationSelection[i] === 'depot') {
-      this.depotService.getRoles({depotId: $event.value, page: 1, perPage: 100})
-        .pipe(
-          tap(({data}) => {
-            this.stationsRoles[i] = data
-          }),
-          take(1)
-        )
-        .subscribe(console.log)
-    } else if(this.stationSelection[i] === 'transporter') {
-      this.transportersService.getRoles({transporterId: $event.value, page: 1, perPage: 100})
-        .pipe(
-          tap(({data}) => {
-            this.stationsRoles[i] = data
-          }),
-          take(1)
-        )
-        .subscribe(console.log)
-    } else if(this.stationSelection[i] === 'dealer') {
-      this.dealerService.getRoles({dealerId: $event.value, page: 1, perPage: 100})
-        .pipe(
-          tap(({data}) => {
-            this.stationsRoles[i] = data
-          }),
-          take(1)
-        )
-        .subscribe(console.log)
+    let service = null;
+    if (this.stationSelection[i] === 'depot') {
+      service = this.depotService.getRoles({depotId: $event.value, page: 1, perPage: 100})
+    } else if (this.stationSelection[i] === 'transporter') {
+      service = this.transportersService.getRoles({transporterId: $event.value, page: 1, perPage: 100})
+    } else if (this.stationSelection[i] === 'dealer') {
+      service = this.dealerService.getRoles({dealerId: $event.value, page: 1, perPage: 100})
+    }
+    if (service) {
+      service.pipe(
+        tap(({data}) => {
+          this.stationsRoles[i] = data
+        }),
+        take(1)
+      )
+        .subscribe()
     }
   }
 }
