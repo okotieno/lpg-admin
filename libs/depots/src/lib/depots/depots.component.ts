@@ -83,6 +83,8 @@ export class DepotsComponent implements OnInit, OnDestroy {
   openAddDepotDialog(data?: any) {
     const addDepotDialog = this.dialog.open(AddDepotComponent, {
       data,
+      minWidth: '80vw',
+      disableClose: true
     });
 
     addDepotDialog.componentInstance.created.pipe(

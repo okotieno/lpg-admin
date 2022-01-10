@@ -1,0 +1,51 @@
+<div mat-dialog-title class="d-flex justify-content-between">
+  <h1>{{ data ? 'Edit' : 'Add' }} Dealer </h1>
+  <button type="button" class="ml-auto" mat-icon-button mat-dialog-close="">
+    <mat-icon>close</mat-icon>
+  </button>
+</div>
+
+<form id="add-dealer-form" mat-dialog-content [formGroup]="form" (ngSubmit)="addDealer()">
+  <div>
+    <div class="d-flex flex-wrap">
+      <div class="col-lg-4">
+        <mat-form-field appearance="outline">
+          <mat-label>Dealer name</mat-label>
+          <input formControlName="dealerName" matInput placeholder="Enter Dealer Name">
+        </mat-form-field>
+      </div>
+
+      <div class="col-lg-4">
+        <mat-form-field appearance="outline">
+          <mat-label>Dealer Code</mat-label>
+          <input formControlName="dealerCode" matInput placeholder="Enter Dealer Code">
+        </mat-form-field>
+      </div>
+
+      <div class="col-lg-4">
+        <mat-form-field appearance="outline">
+          <mat-label>Dealer EPRA Licence Number</mat-label>
+          <input formControlName="dealerEPRALicenceNo" matInput placeholder="Enter ERPA Licence Number">
+        </mat-form-field>
+      </div>
+      <div class="col-lg-4">
+        <mat-form-field appearance="outline">
+          <mat-label>Dealer Location</mat-label>
+          <input formControlName="dealerLocation" matInput placeholder="Enter Dealer Location">
+        </mat-form-field>
+      </div>
+      <div class="col-lg-4">
+        <mat-form-field appearance="outline">
+          <mat-label>Dealer GPS</mat-label>
+          <input formControlName="dealerGPS" matInput placeholder="Enter Dealer GPS">
+        </mat-form-field>
+      </div>
+    </div>
+  </div>
+  <div>
+    <lpg-form-error></lpg-form-error>
+  </div>
+</form>
+<div mat-dialog-actions>
+  <button form="add-dealer-form" mat-raised-button color="primary" [disabled]="form.invalid">{{ data ? 'Update': 'Save' }}</button>
+</div>

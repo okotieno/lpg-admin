@@ -27,6 +27,32 @@
       },
       "tags": []
     },
+    "add-dealer": {
+      "projectType": "library",
+      "root": "libs/add-dealer",
+      "sourceRoot": "libs/add-dealer/src",
+      "prefix": "lpg",
+      "architect": {
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/add-dealer"],
+          "options": {
+            "jestConfig": "libs/add-dealer/jest.config.js",
+            "passWithNoTests": true
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/add-depot/src/**/*.ts",
+              "libs/add-depot/src/**/*.html"
+            ]
+          }
+        }
+      },
+      "tags": []
+    },
     "add-depot": {
       "projectType": "library",
       "root": "libs/add-depot",
@@ -285,40 +311,17 @@
       },
       "tags": []
     },
-    "data-data": {
-      "root": "libs/data/data",
-      "sourceRoot": "libs/data/data/src",
+    "dealers": {
       "projectType": "library",
-      "architect": {
-        "lint": {
-          "builder": "@nrwl/linter:eslint",
-          "outputs": ["{options.outputFile}"],
-          "options": {
-            "lintFilePatterns": ["libs/data/data/**/*.ts"]
-          }
-        },
-        "test": {
-          "builder": "@nrwl/jest:jest",
-          "outputs": ["coverage/libs/data/data"],
-          "options": {
-            "jestConfig": "libs/data/data/jest.config.js",
-            "passWithNoTests": true
-          }
-        }
-      },
-      "tags": []
-    },
-    "dealer-service": {
-      "projectType": "library",
-      "root": "libs/dealer-service",
-      "sourceRoot": "libs/dealer-service/src",
+      "root": "libs/dealers",
+      "sourceRoot": "libs/dealers/src",
       "prefix": "lpg",
       "architect": {
         "test": {
           "builder": "@nrwl/jest:jest",
-          "outputs": ["coverage/libs/dealer-service"],
+          "outputs": ["coverage/libs/dealers"],
           "options": {
-            "jestConfig": "libs/dealer-service/jest.config.js",
+            "jestConfig": "libs/dealers/jest.config.js",
             "passWithNoTests": true
           }
         },
@@ -326,8 +329,8 @@
           "builder": "@nrwl/linter:eslint",
           "options": {
             "lintFilePatterns": [
-              "libs/dealer-service/src/**/*.ts",
-              "libs/dealer-service/src/**/*.html"
+              "libs/dealers/src/**/*.ts",
+              "libs/dealers/src/**/*.html"
             ]
           }
         }
@@ -380,32 +383,6 @@
             "lintFilePatterns": [
               "libs/delete-confirmation/src/**/*.ts",
               "libs/delete-confirmation/src/**/*.html"
-            ]
-          }
-        }
-      },
-      "tags": []
-    },
-    "depot-service": {
-      "projectType": "library",
-      "root": "libs/depot-service",
-      "sourceRoot": "libs/depot-service/src",
-      "prefix": "lpg",
-      "architect": {
-        "test": {
-          "builder": "@nrwl/jest:jest",
-          "outputs": ["coverage/libs/depot-service"],
-          "options": {
-            "jestConfig": "libs/depot-service/jest.config.js",
-            "passWithNoTests": true
-          }
-        },
-        "lint": {
-          "builder": "@nrwl/linter:eslint",
-          "options": {
-            "lintFilePatterns": [
-              "libs/depot-service/src/**/*.ts",
-              "libs/depot-service/src/**/*.html"
             ]
           }
         }
@@ -998,27 +975,24 @@
       "tags": [],
       "implicitDependencies": ["sidenav"]
     },
-    "state-errors": {
+    "statistics-service": {
+      "root": "libs/statistics-service",
+      "sourceRoot": "libs/statistics-service/src",
       "projectType": "library",
-      "root": "libs/state/errors",
-      "sourceRoot": "libs/state/errors/src",
-      "prefix": "lpg",
       "architect": {
-        "test": {
-          "builder": "@nrwl/jest:jest",
-          "outputs": ["coverage/libs/state/errors"],
-          "options": {
-            "jestConfig": "libs/state/errors/jest.config.js",
-            "passWithNoTests": true
-          }
-        },
         "lint": {
           "builder": "@nrwl/linter:eslint",
+          "outputs": ["{options.outputFile}"],
           "options": {
-            "lintFilePatterns": [
-              "libs/state/errors/src/**/*.ts",
-              "libs/state/errors/src/**/*.html"
-            ]
+            "lintFilePatterns": ["libs/statistics-service/**/*.ts"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/statistics-service"],
+          "options": {
+            "jestConfig": "libs/statistics-service/jest.config.js",
+            "passWithNoTests": true
           }
         }
       },
@@ -1044,32 +1018,6 @@
             "lintFilePatterns": [
               "libs/stats-card/src/**/*.ts",
               "libs/stats-card/src/**/*.html"
-            ]
-          }
-        }
-      },
-      "tags": []
-    },
-    "transporter-service": {
-      "projectType": "library",
-      "root": "libs/transporter-service",
-      "sourceRoot": "libs/transporter-service/src",
-      "prefix": "lpg",
-      "architect": {
-        "test": {
-          "builder": "@nrwl/jest:jest",
-          "outputs": ["coverage/libs/transporter-service"],
-          "options": {
-            "jestConfig": "libs/transporter-service/jest.config.js",
-            "passWithNoTests": true
-          }
-        },
-        "lint": {
-          "builder": "@nrwl/linter:eslint",
-          "options": {
-            "lintFilePatterns": [
-              "libs/transporter-service/src/**/*.ts",
-              "libs/transporter-service/src/**/*.html"
             ]
           }
         }

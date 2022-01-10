@@ -12,6 +12,7 @@ import { MatRadioModule } from "@angular/material/radio";
 import { MatSelectModule } from "@angular/material/select";
 import { MatTableModule } from "@angular/material/table";
 import { MatTooltipModule } from "@angular/material/tooltip";
+import { MatDividerModule } from "@angular/material/divider";
 
 @NgModule({
     imports: [
@@ -27,7 +28,8 @@ import { MatTooltipModule } from "@angular/material/tooltip";
         MatSelectModule,
         MatTableModule,
         FormsModule,
-        MatTooltipModule
+        MatTooltipModule,
+        MatDividerModule
     ],
   declarations: [
     AddUserComponent

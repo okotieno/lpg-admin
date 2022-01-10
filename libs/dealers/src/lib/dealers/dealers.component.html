@@ -1,0 +1,54 @@
+<lpg-layout>
+
+  <h2>Dealers</h2>
+  <button color="primary" (click)="openAddDealerDialog()" mat-raised-button class="mb-2">
+    <mat-icon>add_business</mat-icon>
+    New Dealer
+  </button>
+  <table mat-table [dataSource]="dataSource$" class="mat-elevation-z8">
+
+    <!--- Note that these columns can be defined in any order.
+          The actual rendered columns are set as a property on the row definition" -->
+
+    <!-- Position Column -->
+    <ng-container matColumnDef="id">
+      <th mat-header-cell *matHeaderCellDef> #ID</th>
+      <td mat-cell *matCellDef="let element"> {{element.dealerId}} </td>
+    </ng-container>
+
+    <!-- Name Column -->
+    <ng-container matColumnDef="dealerName">
+      <th mat-header-cell *matHeaderCellDef> Dealer Name</th>
+      <td mat-cell *matCellDef="let element"> {{element.dealerName}} </td>
+    </ng-container>
+
+    <!-- Name Column -->
+    <ng-container matColumnDef="dealerCode">
+      <th mat-header-cell *matHeaderCellDef> Dealer Code</th>
+      <td mat-cell *matCellDef="let element"> {{element.dealerCode}} </td>
+    </ng-container>
+
+    <!-- Actions -->
+    <ng-container matColumnDef="actions">
+      <th mat-header-cell *matHeaderCellDef> Actions</th>
+      <td mat-cell *matCellDef="let element">
+        <button (click)="openAddDealerDialog(element)" mat-icon-button color="primary">
+          <mat-icon>edit</mat-icon>
+        </button>
+        <button (click)="openDeleteDialog(element)" mat-icon-button color="warn">
+          <mat-icon>delete</mat-icon>
+        </button>
+      </td>
+    </ng-container>
+    `
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+  <ng-container>
+    <mat-paginator (page)="setPage($event)" [length]="meta?.total ?? 0" [pageSizeOptions]="[10, 20, 50, 100]"
+                   showFirstLastButtons
+                   aria-label="Select page of periodic elements">
+    </mat-paginator>
+  </ng-container>
+</lpg-layout>

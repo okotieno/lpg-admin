@@ -38,7 +38,7 @@ export class AddUserComponent implements OnInit {
   });
 
   selectedDepotDataSource: any;
-  displayedDepotColumns: string[] = ['selectStationType', 'selectStationName', 'selectStationRole'];
+  displayedDepotColumns: string[] = ['selectStationType', 'selectStationName', 'selectStationRole', 'actions'];
   addDepotToAllocateTo = false;
   stationSelection: string[] = [];
   stations: any[] = [];
@@ -81,8 +81,15 @@ export class AddUserComponent implements OnInit {
     ).subscribe()
   }
 
+  trackByIdentity = (index: number, item: any) => item;
+
   addStationSpecificRole() {
     this.stationSpecificRolesControl.push(this.generateStationSpecificRole());
+    (this.table as MatTable<any>).renderRows();
+  }
+
+  removeAllocation(i: number) {
+    this.stationSpecificRolesControl.removeAt(i);
     (this.table as MatTable<any>).renderRows();
   }
 

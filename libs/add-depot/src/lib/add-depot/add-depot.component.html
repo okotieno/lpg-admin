@@ -1,49 +1,57 @@
-<h1 mat-dialog-title>{{ data ? 'Edit': 'Add' }} Depot</h1>
+<div mat-dialog-title class="d-flex justify-content-between">
+  <h1>{{ data ? 'Edit' : 'Add' }} Depot </h1>
+  <button type="button" class="ml-auto" mat-icon-button mat-dialog-close="">
+    <mat-icon>close</mat-icon>
+  </button>
+</div>
 
-<form mat-dialog-content [formGroup]="form" (ngSubmit)="addDepot()">
+<form id="add-depot-form" mat-dialog-content [formGroup]="form" (ngSubmit)="addDepot()">
   <div>
-    <div class="col-12">
-      <mat-form-field appearance="outline">
-        <mat-label>Depot name</mat-label>
-        <input formControlName="depotName" matInput placeholder="Enter Depot Name">
-      </mat-form-field>
-    </div>
-    <div class="col-12">
-      <mat-form-field appearance="outline">
-        <mat-label>Brands</mat-label>
-        <mat-select multiple formControlName="brandIds"  placeholder="Select brands dealt at depot">
-          <div class="select-all">
-            <mat-checkbox [(ngModel)]="allSelected"
-                          [indeterminate]="someSelected"
-                          [ngModelOptions]="{standalone: true}"
-                          (change)="toggleAllSelection()"
-                          color="primary"
-            >Select All</mat-checkbox>
-          </div>
-          <mat-option *ngFor="let brand of brands$ | async" [value]="brand.brandId">{{ brand.brandName }}</mat-option>
-        </mat-select>
-      </mat-form-field>
-    </div>
-    <div class="col-12">
-      <mat-form-field appearance="outline">
-        <mat-label>Depot Location</mat-label>
-        <input formControlName="depotLocation" matInput placeholder="Enter Depot Location">
-      </mat-form-field>
-    </div>
-    <div class="col-12">
-      <mat-form-field appearance="outline">
-        <mat-label>Depot Code</mat-label>
-        <input formControlName="depotCode" matInput placeholder="Enter Depot Code">
-      </mat-form-field>
-    </div>
-    <div class="col-12">
-      <mat-form-field appearance="outline">
-        <mat-label>Depot EPRA Licence Number</mat-label>
-        <input formControlName="depotEPRALicenceNo" matInput placeholder="Enter EPRA Licence Number">
-      </mat-form-field>
+    <div class="d-flex flex-wrap">
+      <div class="col-lg-4">
+        <mat-form-field appearance="outline">
+          <mat-label>Depot name</mat-label>
+          <input formControlName="depotName" matInput placeholder="Enter Depot Name">
+        </mat-form-field>
+      </div>
+      <div class="col-lg-4">
+        <mat-form-field appearance="outline">
+          <mat-label>Brands</mat-label>
+          <mat-select multiple formControlName="brandIds"  placeholder="Select brands dealt at depot">
+            <div class="select-all">
+              <mat-checkbox [(ngModel)]="allSelected"
+                            [indeterminate]="someSelected"
+                            [ngModelOptions]="{standalone: true}"
+                            (change)="toggleAllSelection()"
+                            color="primary"
+              >Select All</mat-checkbox>
+            </div>
+            <mat-option *ngFor="let brand of brands$ | async" [value]="brand.brandId">{{ brand.brandName }}</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <div class="col-lg-4">
+        <mat-form-field appearance="outline">
+          <mat-label>Depot Location</mat-label>
+          <input formControlName="depotLocation" matInput placeholder="Enter Depot Location">
+        </mat-form-field>
+      </div>
+      <div class="col-lg-4">
+        <mat-form-field appearance="outline">
+          <mat-label>Depot Code</mat-label>
+          <input formControlName="depotCode" matInput placeholder="Enter Depot Code">
+        </mat-form-field>
+      </div>
+      <div class="col-lg-4">
+        <mat-form-field appearance="outline">
+          <mat-label>Depot EPRA Licence Number</mat-label>
+          <input formControlName="depotEPRALicenceNo" matInput placeholder="Enter EPRA Licence Number">
+        </mat-form-field>
+      </div>
     </div>
   </div>
-  <div mat-dialog-actions>
-    <button mat-raised-button color="primary" [disabled]="form.invalid">{{ data ? 'Update': 'Save' }}</button>
-  </div>
+
 </form>
+<div mat-dialog-actions>
+  <button form="add-depot-form" mat-raised-button color="primary" [disabled]="form.invalid">{{ data ? 'Update': 'Save' }}</button>
+</div>

@@ -1,10 +1,10 @@
-<div mat-dialog-title class="d-flex justify-content-between">
-  <h1>{{ data ? 'Edit' : 'Add' }} User </h1>
+<div mat-dialog-title class="d-flex justify-content-between align-items-center">
+  <h1 class="col-11">{{ data ? 'Edit' : 'Add' }} User </h1>
   <button type="button" class="ml-auto" mat-icon-button mat-dialog-close="">
     <mat-icon>close</mat-icon>
   </button>
 </div>
-
+<mat-divider></mat-divider>
 <form id="add-user-form" mat-dialog-content [formGroup]="form" (ngSubmit)="addUser()">
   <fieldset>
     <legend><h2>General Info</h2></legend>
@@ -70,7 +70,7 @@
           </td>
         </ng-container>
         <ng-container matColumnDef="selectStationName">
-          <th mat-header-cell *matHeaderCellDef> User Type</th>
+          <th mat-header-cell *matHeaderCellDef> Select Station</th>
           <td mat-cell *matCellDef="let element; let i = index" [formGroupName]="i">
             <mat-form-field class="no-min-width" appearance="outline" *ngIf="stationSpecificRolesControl.controls[i].get(stationSelection[i] + 'Id')">
               <mat-label>Select Station</mat-label>
@@ -84,11 +84,21 @@
           </td>
         </ng-container>
         <ng-container matColumnDef="selectStationRole">
-          <th mat-header-cell *matHeaderCellDef> User Type</th>
+          <th mat-header-cell *matHeaderCellDef> Select User Type</th>
           <td mat-cell *matCellDef="let element; let i = index" [formGroupName]="i">
             <mat-radio-group formControlName="roleId" color="primary" aria-label="Select an option">
               <mat-radio-button *ngFor="let role of stationsRoles[i]" [value]="role.roleId">{{ role.roleName }}</mat-radio-button>
             </mat-radio-group>
+          </td>
+        </ng-container>
+
+        <!--Actions Column -->
+        <ng-container matColumnDef="actions">
+          <th mat-header-cell *matHeaderCellDef> Actions</th>
+          <td mat-cell *matCellDef="let element; let i = index" [formGroupName]="i">
+            <button (click)="removeAllocation(i)" type="button" color="warn" mat-icon-button>
+              <mat-icon>remove_circle_outline</mat-icon>
+            </button>
           </td>
         </ng-container>
         <tr mat-header-row *matHeaderRowDef="displayedDepotColumns"></tr>
@@ -109,7 +119,7 @@
   </fieldset>
 
 </form>
-
+<mat-divider></mat-divider>
 <div mat-dialog-actions>
   <button mat-dialog-close="" mat-button color="primary">Cancel</button>
   <button form="add-user-form" mat-raised-button color="primary"

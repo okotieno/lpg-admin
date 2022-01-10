@@ -1,6 +1,11 @@
-<h1>{{ data ? 'Edit': 'Add' }} Brand</h1>
-
-<form [formGroup]="form" (ngSubmit)="addBrand()">
+<div mat-dialog-title class="d-flex justify-content-between align-items-center">
+  <h1 class="col-11">{{ data ? 'Edit' : 'Add' }} Brand </h1>
+  <button class="ms-auto" type="button" mat-icon-button mat-dialog-close="">
+    <mat-icon>close</mat-icon>
+  </button>
+</div>
+<mat-divider></mat-divider>
+<form mat-dialog-content id="add-brand-form" [formGroup]="form" (ngSubmit)="addBrand()">
   <div class="">
     <div class="col-5">
       <mat-form-field  appearance="outline">
@@ -15,6 +20,10 @@
       </mat-form-field>
     </div>
   </div>
-
-  <button [disabled]="form.invalid" type="submit" mat-raised-button color="primary">{{ data ? 'Update': 'Save' }} </button>
 </form>
+<mat-divider></mat-divider>
+<div mat-dialog-actions>
+  <button mat-dialog-close="" mat-button color="primary">Cancel</button>
+  <button form="add-brand-form" mat-raised-button color="primary"
+          [disabled]="form.invalid">{{ data ? 'Update' : 'Save' }}</button>
+</div>

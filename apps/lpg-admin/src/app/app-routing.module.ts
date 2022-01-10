@@ -42,6 +42,11 @@ import { GuestGuard } from "@lpg/guest-guard";
         path: 'users',
         canActivate: [AuthGuard],
         loadChildren: () => import('@lpg/users').then(m => m.UsersModule)
+      },
+      {
+        path: 'dealers',
+        canActivate: [AuthGuard],
+        loadChildren: () => import('@lpg/dealers').then(m => m.DealersModule)
       }
     ])
   ],

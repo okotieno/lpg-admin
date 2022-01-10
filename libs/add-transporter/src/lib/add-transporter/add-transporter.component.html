@@ -1,6 +1,11 @@
-<h1>{{ data ? 'Edit' : 'Add' }} Transporter</h1>
-
-<form [formGroup]="form" (ngSubmit)="addTransporter()">
+<div mat-dialog-title class="d-flex justify-content-between align-items-center">
+  <h1 class="col-11">{{ data ? 'Edit' : 'Add' }} Transporter </h1>
+  <button class="ms-auto" type="button" mat-icon-button mat-dialog-close="">
+    <mat-icon>close</mat-icon>
+  </button>
+</div>
+<mat-divider></mat-divider>
+<form id="add-transporter-form" mat-dialog-content [formGroup]="form" (ngSubmit)="addTransporter()">
   <div>
     <div class="p-1">
       <mat-form-field appearance="outline">
@@ -18,6 +23,11 @@
 
   <lpg-form-error></lpg-form-error>
 
-  <button [disabled]="form.invalid" type="submit" mat-raised-button
-          color="primary">{{ data ? 'Update' : 'Save' }} </button>
 </form>
+
+
+<div mat-dialog-actions>
+  <button mat-dialog-close="" mat-button color="primary">Cancel</button>
+  <button form="add-transporter-form" [disabled]="form.invalid" type="submit" mat-raised-button
+          color="primary">{{ data ? 'Update' : 'Save' }} </button>
+</div>

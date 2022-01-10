@@ -56,3 +56,9 @@ export interface ITransporter {
   transporterId: number;
   transporterName: string;
 }
+
+export interface IDealer {
+  dealerId: number;
+  dealerName: string;
+  dealerCode: string;
+}
