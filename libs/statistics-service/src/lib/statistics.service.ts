@@ -1,6 +1,6 @@
 import { Injectable } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
-import { IResponse } from "@lpg/data";
+import { IDashboardStats, IResponse } from "@lpg/data";
 import { map } from "rxjs";
 
 @Injectable({
@@ -11,7 +11,7 @@ export class StatisticsService {
   }
 
   getDashboardSummaryStats() {
-    return this.http.get<IResponse<any>>('statistics/dashboard-summary')
+    return this.http.get<IResponse<IDashboardStats>>('statistics/dashboard-summary')
       .pipe(map(({data}) => data))
   }
 }

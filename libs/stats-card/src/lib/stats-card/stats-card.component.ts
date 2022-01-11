@@ -12,6 +12,7 @@ export class StatsCardComponent {
   @Input() title = 'users';
   @Input() icon = 'warning';
   @Input() color = 'success';
+  @Input() linksToQueryParams = {};
 
 }
 

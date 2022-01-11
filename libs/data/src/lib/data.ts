@@ -82,3 +82,12 @@ export interface IDealer {
   dealerName: string;
   dealerCode: string;
 }
+
+export interface IDashboardStats {
+  depotsCount: number;
+  transportersCount: number;
+  dealersCount: number;
+  inActiveUsersCount: number;
+  activeUsersCount: number;
+  newUsersCount: number;
+}

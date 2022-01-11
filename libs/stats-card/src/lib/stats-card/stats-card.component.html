@@ -1,9 +1,9 @@
-<mat-card class="card card-stats" [routerLink]="linksTo">
+<mat-card class="card card-stats" [routerLink]="linksTo" [queryParams]="linksToQueryParams">
   <div class="card-header card-header-icon"
        [class.card-header-primary]="color === 'primary'"
        [class.card-header-success]="color === 'success'"
        [class.card-header-danger]="color === 'danger'"
-       [class.card-header-warning]="color === 'warning'"
+       [class.card-header-warn]="color === 'warn'"
   >
     <div class="card-icon d-flex align-items-center justify-content-center">
       <mat-icon>{{ icon }}</mat-icon>
