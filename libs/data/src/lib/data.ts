@@ -91,3 +91,20 @@ export interface IDashboardStats {
   activeUsersCount: number;
   newUsersCount: number;
 }
+
+export interface ICanisterBatch {
+
+  canisterBatchId: number,
+  canisterBatchReceived: boolean,
+  fromDepotId?: number,
+  fromDealerId?: number,
+  toDealerId?: number,
+  toDepotId?: number,
+  fromDepotName?: string,
+  fromDealerName?: string,
+  toDealerName?: string,
+  toDepotName?: string,
+  transporterId: number,
+  transporterName: string,
+  canisters: any[]
+}

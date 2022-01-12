@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { DrawerFacade } from "@lpg/layout";
+import { MatIconRegistry } from "@angular/material/icon";
 
 @Component({
   selector: 'lpg-sidenav',
@@ -20,6 +21,7 @@ export class SidenavComponent {
     {link: ["/depots"], name: "Depots Management", icon: "warehouse"},
     {link: ["/transporters"], name: "Transporters Management", icon: "local_shipping"},
     {link: ["/dealers"], name: "Dealers Management", icon: "storefront"},
+    {link: ["/transfers"], name: "Transfers", icon: "transfer_within_a_station"},
   ];
 
 

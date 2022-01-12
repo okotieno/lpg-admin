@@ -438,6 +438,29 @@
       },
       "tags": []
     },
+    "dispatches-service": {
+      "root": "libs/dispatches-service",
+      "sourceRoot": "libs/dispatches-service/src",
+      "projectType": "library",
+      "architect": {
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "outputs": ["{options.outputFile}"],
+          "options": {
+            "lintFilePatterns": ["libs/dispatches-service/**/*.ts"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/dispatches-service"],
+          "options": {
+            "jestConfig": "libs/dispatches-service/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      },
+      "tags": []
+    },
     "errors": {
       "projectType": "library",
       "root": "libs/errors",
@@ -1018,6 +1041,32 @@
             "lintFilePatterns": [
               "libs/stats-card/src/**/*.ts",
               "libs/stats-card/src/**/*.html"
+            ]
+          }
+        }
+      },
+      "tags": []
+    },
+    "transfers": {
+      "projectType": "library",
+      "root": "libs/transfers",
+      "sourceRoot": "libs/transfers/src",
+      "prefix": "lpg",
+      "architect": {
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/transfers"],
+          "options": {
+            "jestConfig": "libs/transfers/jest.config.js",
+            "passWithNoTests": true
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/transfers/src/**/*.ts",
+              "libs/transfers/src/**/*.html"
             ]
           }
         }

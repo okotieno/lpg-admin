@@ -6,7 +6,8 @@
        [class.card-header-warn]="color === 'warn'"
   >
     <div class="card-icon d-flex align-items-center justify-content-center">
-      <mat-icon>{{ icon }}</mat-icon>
+      <mat-icon *ngIf="icon">{{ icon }}</mat-icon>
+      <mat-icon *ngIf="svgIcon" [svgIcon]="svgIcon">{{ icon }}</mat-icon>
     </div>
     <p class="card-category">{{ title | titlecase }}</p>
     <span class="card-title">{{ value }}</span>

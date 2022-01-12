@@ -16,13 +16,13 @@
   <h2>Users</h2>
   <div class="d-flex flex-wrap">
     <div class="col-lg-3 m-3">
-      <lpg-stats-card [linksTo]="['/users']" footer="View Active Users" title="Active Users" [value]="stats.activeUsersCount" icon="maps_home_work_outlined" color="success"></lpg-stats-card>
+      <lpg-stats-card [linksTo]="['/users']" footer="View Active Users" title="Active Users"  svgIcon="active-user" [value]="stats.activeUsersCount" color="success"></lpg-stats-card>
     </div>
     <div class="col-lg-3 m-3">
-      <lpg-stats-card [linksTo]="['/users?active=false']" footer="View Inactive users" title="Inactive Users" [value]="stats.inActiveUsersCount" icon="local_shipping_outlined" color="warn"></lpg-stats-card>
+      <lpg-stats-card [linksTo]="['/users?active=tr8e']" footer="View Inactive users" title="Inactive Users" [value]="stats.inActiveUsersCount" svgIcon="inactive-user" color="warn"></lpg-stats-card>
     </div>
     <div class="col-lg-3 m-3">
-      <lpg-stats-card [linksTo]="['/users?new-users=true']" footer="View New Users" title="New Users" [value]="stats.newUsersCount" icon="attach_money" color="accent"></lpg-stats-card>
+      <lpg-stats-card [linksTo]="['/users?new-users=false']" footer="View New Users" title="New Users" [value]="stats.newUsersCount" svgIcon="active-user" color="accent"></lpg-stats-card>
     </div>
   </div>
 </ng-container>
