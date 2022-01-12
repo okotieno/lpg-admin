@@ -5,11 +5,11 @@
   </button>
   <span>LPG ADMIN</span>
   <span class="spacer"></span>
-  <button (click)="logout()" class="me-2" mat-button [matMenuTriggerFor]="menu" aria-label="Toggle User menu">
-    <mat-icon>person</mat-icon><span>James Bond</span><mat-icon>arrow_drop_down</mat-icon>
+  <button *ngIf="profile$ | async as profile" class="me-2" mat-button [matMenuTriggerFor]="menu" aria-label="Toggle User menu">
+    <mat-icon>person</mat-icon><span>{{ profile.firstName }} {{ profile.lastName }}</span><mat-icon>arrow_drop_down</mat-icon>
   </button>
   <mat-menu #menu="matMenu">
-    <button mat-menu-item>
+    <button mat-menu-item (click)="logout()">
       <mat-icon>logout</mat-icon>
       <span>Logout</span>
     </button>

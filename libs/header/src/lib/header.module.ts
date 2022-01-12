@@ -6,9 +6,18 @@ import { MatIconModule } from "@angular/material/icon";
 import { MatButtonModule } from "@angular/material/button";
 import { MatMenuModule } from "@angular/material/menu";
 import { RouterModule } from "@angular/router";
+import { ProfileStoreModule } from "@lpg/profile-store";
 
 @NgModule({
-  imports: [CommonModule, MatToolbarModule, MatIconModule, MatButtonModule, MatMenuModule, RouterModule],
+  imports: [
+    CommonModule,
+    MatToolbarModule,
+    MatIconModule,
+    MatButtonModule,
+    MatMenuModule,
+    RouterModule,
+    ProfileStoreModule
+  ],
   declarations: [
     HeaderComponent
   ],

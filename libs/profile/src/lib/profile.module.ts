@@ -5,6 +5,9 @@ import { ProfileComponent } from './profile.component';
 import { LayoutModule } from "@lpg/layout";
 import { MatSlideToggleModule } from "@angular/material/slide-toggle";
 import { FormsModule } from "@angular/forms";
+import { ProfileStoreModule } from "@lpg/profile-store";
+import { MatIconModule } from "@angular/material/icon";
+import { MatTooltipModule } from "@angular/material/tooltip";
 
 @NgModule({
   imports: [
@@ -14,7 +17,10 @@ import { FormsModule } from "@angular/forms";
     ]),
     LayoutModule,
     MatSlideToggleModule,
-    FormsModule
+    FormsModule,
+    ProfileStoreModule,
+    MatIconModule,
+    MatTooltipModule
   ],
   declarations: [
     ProfileComponent

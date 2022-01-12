@@ -100,4 +100,10 @@ export class AuthenticationService {
       tap(this.clearStorage)
     );
   }
+
+  getLoggedInUser() {
+    return this.http.get<IResponse<IUser>>('oauth/user').pipe(
+      map(({data}) => data)
+    );
+  }
 }

@@ -31,6 +31,8 @@ export interface IOauth {
 }
 
 export interface IUser {
+  phoneVerified?: boolean;
+  emailVerified?: boolean;
   lastName: string;
   firstName: string;
   username: string;

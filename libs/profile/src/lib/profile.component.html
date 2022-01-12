@@ -1,6 +1,34 @@
 <lpg-layout>
   <h1>My Profile</h1>
-
+  <fieldset>
+    <legend><h2>Personal Info</h2></legend>
+    <div *ngIf="profile$ | async as profile" class="d-flex flex-wrap justify-content-start">
+     <div class="col-lg-4 d-flex p-2 align-items-center">
+       <div class="col-4">Username</div>
+       <div class="col-8 mat-body-strong">{{ profile.username ?? 'NOT SET' }}</div>
+     </div>
+      <div class="col-lg-4 d-flex p-2 align-items-center">
+        <div class="col-4">Name</div>
+        <div class="col-8 mat-body-strong">{{ profile.firstName + ' ' + profile.lastName }}</div>
+      </div>
+      <div class="col-lg-4 d-flex p-2 align-items-center">
+        <div class="col-4">Email</div>
+        <div class="col-8 mat-body-strong">
+          <span>{{ profile.email }}</span>
+          <mat-icon color="primary" *ngIf="profile.emailVerified" matTooltip="Verified">verified</mat-icon>
+          <mat-icon color="warn" *ngIf="!profile.emailVerified" matTooltip="Unverified">priority_high</mat-icon>
+        </div>
+      </div>
+      <div class="col-lg-4 d-flex p-2 align-items-center">
+        <div class="col-4">Phone</div>
+        <div class="col-8">
+          <span class="mat-body-strong">{{ profile.phone ?? 'NOT SET' }}</span>
+          <mat-icon  color="primary" *ngIf="profile.phoneVerified" matTooltip="Verified">verified</mat-icon>
+          <mat-icon color="warn" *ngIf="!profile.phoneVerified" matTooltip="Unverified">priority_high</mat-icon>
+        </div>
+      </div>
+    </div>
+  </fieldset>
   <fieldset>
     <legend><h2>Preference</h2></legend>
     <div class="col-lg-6 d-flex">

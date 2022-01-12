@@ -1,6 +1,6 @@
-<div [class.theme-alternate]="(darkMode$ | async) === false">
+<ng-container *ngIf="!((darkMode$ | async) === null)">
   <lpg-loading></lpg-loading>
   <router-outlet></router-outlet>
   <lpg-page-error></lpg-page-error>
-</div>
+</ng-container>
 

@@ -1,7 +1,9 @@
 import { Component, OnInit, ChangeDetectionStrategy, OnDestroy } from '@angular/core';
-import { Subject } from "rxjs";
+import { Observable, Subject } from "rxjs";
 import { DrawerFacade } from "@lpg/layout";
 import { ThemeFacade } from "../../../layout/src/lib/state/theme/theme.facade";
+import { ProfileStoreFacade } from "../../../profile-store/src/lib/store/profile-store.facade";
+import { IUser } from "@lpg/data";
 
 @Component({
   templateUrl: './profile.component.html',
@@ -12,8 +14,14 @@ export class ProfileComponent implements OnInit, OnDestroy {
 
   darkMode$ = this.themeFacade.darkMode$;
   darkMode = false;
+  profile$: Observable<IUser> = this.profileFacade.myProfile$;
   private destroyed$ = new Subject();
-  constructor(private drawerFacade: DrawerFacade, private themeFacade: ThemeFacade) {
+  constructor(
+    private drawerFacade: DrawerFacade,
+    private themeFacade: ThemeFacade,
+    private profileFacade: ProfileStoreFacade
+    ) {
+    this.profileFacade.init();
   }
 
 
