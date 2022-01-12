@@ -52,6 +52,11 @@ import { GuestGuard } from "@lpg/guest-guard";
         path: 'transfers',
         canActivate: [AuthGuard],
         loadChildren: () => import('@lpg/transfers').then(m => m.TransfersModule)
+      },
+      {
+        path: 'profile',
+        canActivate: [AuthGuard],
+        loadChildren: () => import('@lpg/profile').then(m => m.ProfileModule)
       }
     ])
   ],

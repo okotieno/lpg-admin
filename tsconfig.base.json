@@ -40,6 +40,8 @@
       "@lpg/layout": ["libs/layout/src/index.ts"],
       "@lpg/loading": ["libs/loading/src/index.ts"],
       "@lpg/login": ["libs/login/src/index.ts"],
+      "@lpg/profile": ["libs/profile/src/index.ts"],
+      "@lpg/profile-store": ["libs/profile-store/src/index.ts"],
       "@lpg/sidenav": ["libs/sidenav/src/index.ts"],
       "@lpg/statistics-service": ["libs/statistics-service/src/index.ts"],
       "@lpg/stats-card": ["libs/stats-card/src/index.ts"],

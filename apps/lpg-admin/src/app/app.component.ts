@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { ThemeFacade } from "../../../../libs/layout/src/lib/state/theme/theme.facade";
 
 @Component({
   selector: 'lpg-root',
@@ -7,4 +8,7 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'lpg-admin';
+  darkMode$ = this.themeFacade.darkMode$;
+  constructor(private themeFacade: ThemeFacade) {
+  }
 }

@@ -1,0 +1,15 @@
+<lpg-layout>
+  <h1>My Profile</h1>
+
+  <fieldset>
+    <legend><h2>Preference</h2></legend>
+    <div class="col-lg-6 d-flex">
+      <div class="col-lg-6">
+        Theme
+      </div>
+      <div class="col">
+        <mat-slide-toggle [(ngModel)]="darkMode" (ngModelChange)="changeTheme()">Dark Mode</mat-slide-toggle>
+      </div>
+    </div>
+  </fieldset>
+</lpg-layout>

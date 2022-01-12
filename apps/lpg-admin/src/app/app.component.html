@@ -1,3 +1,6 @@
-<lpg-loading></lpg-loading>
-<router-outlet></router-outlet>
-<lpg-page-error></lpg-page-error>
+<div [class.theme-alternate]="(darkMode$ | async) === false">
+  <lpg-loading></lpg-loading>
+  <router-outlet></router-outlet>
+  <lpg-page-error></lpg-page-error>
+</div>
+

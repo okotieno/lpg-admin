@@ -809,7 +809,7 @@
               "apps/lpg-admin/src/assets"
             ],
             "styles": [
-              "./node_modules/@angular/material/prebuilt-themes/deeppurple-amber.css",
+              "apps/lpg-admin/src/theme/custom.theme.scss",
               "apps/lpg-admin/src/styles.scss"
             ],
             "scripts": []
@@ -912,6 +912,58 @@
       },
       "tags": [],
       "implicitDependencies": ["lpg-admin"]
+    },
+    "profile": {
+      "projectType": "library",
+      "root": "libs/profile",
+      "sourceRoot": "libs/profile/src",
+      "prefix": "lpg",
+      "architect": {
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/profile"],
+          "options": {
+            "jestConfig": "libs/profile/jest.config.js",
+            "passWithNoTests": true
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/profile/src/**/*.ts",
+              "libs/profile/src/**/*.html"
+            ]
+          }
+        }
+      },
+      "tags": []
+    },
+    "profile-store": {
+      "projectType": "library",
+      "root": "libs/profile-store",
+      "sourceRoot": "libs/profile-store/src",
+      "prefix": "lpg",
+      "architect": {
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/profile-store"],
+          "options": {
+            "jestConfig": "libs/profile-store/jest.config.js",
+            "passWithNoTests": true
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/profile-store/src/**/*.ts",
+              "libs/profile-store/src/**/*.html"
+            ]
+          }
+        }
+      },
+      "tags": []
     },
     "sidenav": {
       "projectType": "library",
