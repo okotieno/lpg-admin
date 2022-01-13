@@ -11,11 +11,14 @@ import { environment } from '../environments/environment';
 import { HTTP_INTERCEPTORS, HttpClientModule } from "@angular/common/http";
 import { JwtInterceptor } from "./interceptors/jwt.interceptor";
 import { APIInterceptor } from "./interceptors/api.interceptor";
-import { LoadingModule } from "@lpg/loading";
-import { LoadingInterceptor } from "@lpg/loading";
+import { LoadingInterceptor, LoadingModule } from "@lpg/loading";
 import { ErrorsModule } from "@lpg/errors";
 import { ErrorInterceptor } from "../../../../libs/errors/src/lib/interceptors/error.interceptor";
 import { ThemeStoreModule } from "@lpg/theme-store";
+import {
+  MessageAlertsInterceptor
+} from "../../../../libs/message-alerts/src/lib/message-alerts/message-alerts.interceptor";
+import { MatSnackBarModule } from "@angular/material/snack-bar";
 
 @NgModule({
   declarations: [AppComponent],
@@ -38,7 +41,8 @@ import { ThemeStoreModule } from "@lpg/theme-store";
     !environment.production ? StoreDevtoolsModule.instrument() : [],
     LoadingModule,
     ErrorsModule,
-    ThemeStoreModule
+    ThemeStoreModule,
+    MatSnackBarModule
   ],
   providers: [
     {provide: 'apiUrl', useValue: environment.apiUrl},
@@ -46,6 +50,7 @@ import { ThemeStoreModule } from "@lpg/theme-store";
     {provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true},
     {provide: HTTP_INTERCEPTORS, useClass: APIInterceptor, multi: true},
     {provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true},
+    {provide: HTTP_INTERCEPTORS, useClass: MessageAlertsInterceptor, multi: true},
   ],
   bootstrap: [AppComponent],
 })

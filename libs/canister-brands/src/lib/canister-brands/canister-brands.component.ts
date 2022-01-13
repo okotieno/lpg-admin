@@ -16,8 +16,8 @@ import { IBrand } from "@lpg/data";
 })
 export class CanisterBrandsComponent implements OnInit, OnDestroy {
   destroyed$ = new Subject()
-  displayedColumns: string[] = ['id', 'brandName', 'brandCompanyName', 'actions'];
-  dataSource$ = new BehaviorSubject<any[]>([]);
+  displayedColumns: string[] = ['brandId', 'brandName', 'brandCompanyName', 'actions'];
+  dataSource$ = new BehaviorSubject<IBrand[]>([]);
   perPage = 10;
   page = 1;
   meta?: { total?: number } = { total: 0 };

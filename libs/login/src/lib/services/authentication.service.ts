@@ -115,4 +115,8 @@ export class AuthenticationService {
       tap(() => this.isLoggedInSubject.next(true)),
     )
   }
+
+  passwordChange (formValue: any) {
+    return this.http.post('oauth/password-change', formValue);
+  }
 }

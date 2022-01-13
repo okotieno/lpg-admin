@@ -1,7 +1,7 @@
 /**
 * Generated theme by Material Theme Generator
 * https://materialtheme.arcsine.dev
-* Fork at: https://materialtheme.arcsine.dev/?c=YHBhbGV0dGU$YHByaW1hcnk$YF48IzAxOGQ1MiIsIj9lcjwjYjNkZGNiIiwiO2VyPCMwMTcwMzh$LCIlPmBePCNiZWI2MzEiLCI~ZXI8I2VjZTljMSIsIjtlcjwjYTc5ZTFmfiwid2Fybj5gXjwjZjEwMDAwIiwiP2VyPCNmYmIzYjMiLCI7ZXI8I2ViMDAwMH4sIj9UZXh0PCMwMDAwMDAiLCI~PTwjZmFmYWZhIiwiO1RleHQ8I2ZmZmZmZiIsIjs9PCMzMzMzMzN$LCJmb250cz5bYEA8KC00fixgQDwoLTN$LGBAPCgtMn4sYEA8KC0xfixgQDxoZWFkbGluZX4sYEA8dGl0bGV$LGBAPHN1YiktMn4sYEA8c3ViKS0xfixgQDxib2R5LTJ$LGBAPGJvZHktMX4sYEA8YnV0dG9ufixgQDxjYXB0aW9ufixgQDxpbnB1dCIsInNpemU$bnVsbH1dLCJpY29uczxSb3VuZGVkIiwiP25lc3M$ZmFsc2UsInZlcnNpb24$MTN9
+* Fork at: https://materialtheme.arcsine.dev/?c=YHBhbGV0dGU$YHByaW1hcnk$YF48IzQ4ZTQyZSIsIj9lcjwjYzhmN2MwIiwiO2VyPCMzMGQ5MWR$LCIlPmBePCM5ZGUwZTciLCI~ZXI8I2UyZjZmOCIsIjtlcjwjODFkM2Rkfiwid2Fybj5gXjwjZTkyYjJiIiwiP2VyPCNmOGJmYmYiLCI7ZXI8I2RmMWExYX4sIj9UZXh0PCMzMzJmMmYiLCI~PTwjZmZmZmZmIiwiO1RleHQ8I2ZmZmZmZiIsIjs9PCM0MzFkMWR$LCJmb250cz5bYEA8KC00fixgQDwoLTN$LGBAPCgtMn4sYEA8KC0xfixgQDxoZWFkbGluZX4sYEA8dGl0bGV$LGBAPHN1YiktMn4sYEA8c3ViKS0xfixgQDxib2R5LTJ$LGBAPGJvZHktMX4sYEA8YnV0dG9ufixgQDxjYXB0aW9ufixgQDxpbnB1dCIsInNpemU$bnVsbH1dLCJpY29uczxPdXRsaW5lZCIsIj9uZXNzPmZhbHNlLCJ2ZXJzaW9uPjEzfQ==
 */
 
 @use '@angular/material' as mat;
@@ -10,7 +10,7 @@
 // have to load a single css file for Angular Material in your app.
 
 // Fonts
-@import 'https://fonts.googleapis.com/css?family=Material+Icons+Round';
+@import 'https://fonts.googleapis.com/css?family=Material+Icons+Outlined';
 @import url('https://fonts.googleapis.com/css?family=Roboto:300,400,500');
 
 $fontConfig: (
@@ -32,7 +32,7 @@ $fontConfig: (
 // Foreground Elements
 
 // Light Theme Text
-$dark-text: #000000;
+$dark-text: #332f2f;
 $dark-primary-text: rgba($dark-text, 0.87);
 $dark-accent-text: rgba($dark-primary-text, 0.54);
 $dark-disabled-text: rgba($dark-primary-text, 0.38);
@@ -87,15 +87,15 @@ $mat-dark-theme-foreground: (
 
 // Background config
 // Light bg
-$light-background:    #fafafa;
+$light-background:    #ffffff;
 $light-bg-darker-5:   darken($light-background, 5%);
 $light-bg-darker-10:  darken($light-background, 10%);
 $light-bg-darker-20:  darken($light-background, 20%);
 $light-bg-darker-30:  darken($light-background, 30%);
 $light-bg-lighter-5:  lighten($light-background, 5%);
-$dark-bg-tooltip:     lighten(#333333, 20%);
-$dark-bg-alpha-4:     rgba(#333333, 0.04);
-$dark-bg-alpha-12:    rgba(#333333, 0.12);
+$dark-bg-tooltip:     lighten(#431d1d, 20%);
+$dark-bg-alpha-4:     rgba(#431d1d, 0.04);
+$dark-bg-alpha-12:    rgba(#431d1d, 0.12);
 
 $mat-light-theme-background: (
   background:               $light-background,

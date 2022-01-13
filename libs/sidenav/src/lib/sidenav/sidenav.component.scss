@@ -14,17 +14,19 @@
 
 .nav {
   .active-link {
-    background-color: #fafafa;
+    background: black;
+
+    mat-icon {
+      color: #018d52 !important;
+    }
   }
 
-  .hover {
-    transition-duration: 400ms;
-    transition-timing-function: cubic-bezier(0.25, 0.8, 0.25, 1);
-    transition-property: transform, border, background-color;
+  &:hover {
+    background: black;
   }
 
-  mat-list-item,
-  a {
+  mat-list-item, a {
+    height: 40px;
     border: none;
     box-sizing: border-box;
     text-decoration: none;
@@ -32,8 +34,5 @@
       cursor: pointer;
       background-color: rgba(47, 0, 128, 0.1);
     }
-  }
-  mat-icon {
-    color: #1976d2;
   }
 }

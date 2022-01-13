@@ -13,6 +13,6 @@ export class DispatchesService {
   }
 
   getBatches({perPage, page}: { perPage: number, page: number }) {
-    return this.http.get<IResponse<ICanisterBatch[]>>(this.url, {params: {perPage, page}})
+    return this.http.get<IResponse<ICanisterBatch[]>>(this.url, {params: {['page_size']: perPage, page}})
   }
 }

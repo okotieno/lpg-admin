@@ -965,6 +965,29 @@
       "tags": [],
       "implicitDependencies": ["lpg-admin"]
     },
+    "message-alerts": {
+      "root": "libs/message-alerts",
+      "sourceRoot": "libs/message-alerts/src",
+      "projectType": "library",
+      "architect": {
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "outputs": ["{options.outputFile}"],
+          "options": {
+            "lintFilePatterns": ["libs/message-alerts/**/*.ts"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/message-alerts"],
+          "options": {
+            "jestConfig": "libs/message-alerts/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      },
+      "tags": []
+    },
     "otp-flow": {
       "projectType": "library",
       "root": "libs/otp-flow",

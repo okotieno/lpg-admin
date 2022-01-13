@@ -5,7 +5,6 @@
   margin-top: 30px;
   border-radius: 6px;
   color: #333;
-  background: rgba(255, 255, 255, 1);
   position: relative;
   display: flex;
   flex-direction: column;
@@ -13,7 +12,7 @@
   background-clip: border-box;
   font-size: .875rem;
   &:hover {
-    background: rgba(102, 0, 255, 0.1);
+    box-shadow: 0 4px 8px 0 rgba(255,255,255,.3);
     cursor: pointer;
   }
 }
@@ -54,7 +53,7 @@
 
 .card-stats .card-header.card-header-icon .card-category, .card-stats .card-header.card-header-icon .card-title, .card-stats .card-header.card-header-text .card-category, .card-stats .card-header.card-header-text .card-title {
   margin: 0;
-  color: #162634;
+  //color: #162634;
   line-height: 1.4em;
   font-size: 1.5625rem;
 }
