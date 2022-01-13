@@ -10,12 +10,7 @@ import { GuestGuard } from "@lpg/guest-guard";
     RouterModule.forRoot([
       {
         path: '',
-        pathMatch: 'full',
-        redirectTo: 'login'
-      },
-      {
-        path: 'login',
-        loadChildren: () => import('@lpg/login').then(m => m.LoginModule),
+        loadChildren: () => import('@lpg/authentication').then(m => m.AuthenticationModule),
         canActivate: [GuestGuard],
       },
       {
@@ -57,6 +52,11 @@ import { GuestGuard } from "@lpg/guest-guard";
         path: 'profile',
         canActivate: [AuthGuard],
         loadChildren: () => import('@lpg/profile').then(m => m.ProfileModule)
+      },
+      {
+        path: 'settings',
+        canActivate: [AuthGuard],
+        loadChildren: () => import('@lpg/settings').then(m => m.SettingsModule)
       }
     ])
   ],

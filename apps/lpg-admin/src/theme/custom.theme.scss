@@ -240,6 +240,17 @@ $altTheme: (
 
 // Specific component overrides, pieces that are not in line with the general theming
 
+a {
+  color: #6efaf5;
+  text-decoration: none;
+  &:hover {
+    text-decoration: underline;
+  }
+}
+.theme-alternate a {
+  color: #058c89;
+}
+
 // Handle buttons appropriately, with respect to line-height
 .mat-raised-button, .mat-stroked-button, .mat-flat-button {
   padding: 0 1.15em;

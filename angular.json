@@ -154,6 +154,32 @@
       },
       "tags": []
     },
+    "authentication": {
+      "projectType": "library",
+      "root": "libs/authentication",
+      "sourceRoot": "libs/authentication/src",
+      "prefix": "lpg",
+      "architect": {
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/authentication"],
+          "options": {
+            "jestConfig": "libs/authentication/jest.config.js",
+            "passWithNoTests": true
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/authentication/src/**/*.ts",
+              "libs/authentication/src/**/*.html"
+            ]
+          }
+        }
+      },
+      "tags": []
+    },
     "canister-brands": {
       "projectType": "library",
       "root": "libs/canister-brands",
@@ -481,6 +507,32 @@
             "lintFilePatterns": [
               "libs/errors/src/**/*.ts",
               "libs/errors/src/**/*.html"
+            ]
+          }
+        }
+      },
+      "tags": []
+    },
+    "forgot-password": {
+      "projectType": "library",
+      "root": "libs/forgot-password",
+      "sourceRoot": "libs/forgot-password/src",
+      "prefix": "lpg",
+      "architect": {
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/forgot-password"],
+          "options": {
+            "jestConfig": "libs/forgot-password/jest.config.js",
+            "passWithNoTests": true
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/forgot-password/src/**/*.ts",
+              "libs/forgot-password/src/**/*.html"
             ]
           }
         }
@@ -913,6 +965,110 @@
       "tags": [],
       "implicitDependencies": ["lpg-admin"]
     },
+    "otp-flow": {
+      "projectType": "library",
+      "root": "libs/otp-flow",
+      "sourceRoot": "libs/otp-flow/src",
+      "prefix": "lpg",
+      "architect": {
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/otp-flow"],
+          "options": {
+            "jestConfig": "libs/otp-flow/jest.config.js",
+            "passWithNoTests": true
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/otp-flow/src/**/*.ts",
+              "libs/otp-flow/src/**/*.html"
+            ]
+          }
+        }
+      },
+      "tags": []
+    },
+    "otp-input": {
+      "projectType": "library",
+      "root": "libs/otp-input",
+      "sourceRoot": "libs/otp-input/src",
+      "prefix": "lpg",
+      "architect": {
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/otp-input"],
+          "options": {
+            "jestConfig": "libs/otp-input/jest.config.js",
+            "passWithNoTests": true
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/otp-input/src/**/*.ts",
+              "libs/otp-input/src/**/*.html"
+            ]
+          }
+        }
+      },
+      "tags": []
+    },
+    "otp-password-change": {
+      "projectType": "library",
+      "root": "libs/otp-password-change",
+      "sourceRoot": "libs/otp-password-change/src",
+      "prefix": "lpg",
+      "architect": {
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/otp-password-change"],
+          "options": {
+            "jestConfig": "libs/otp-password-change/jest.config.js",
+            "passWithNoTests": true
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/otp-password-change/src/**/*.ts",
+              "libs/otp-password-change/src/**/*.html"
+            ]
+          }
+        }
+      },
+      "tags": []
+    },
+    "password-reset": {
+      "projectType": "library",
+      "root": "libs/password-reset",
+      "sourceRoot": "libs/password-reset/src",
+      "prefix": "lpg",
+      "architect": {
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/password-reset"],
+          "options": {
+            "jestConfig": "libs/password-reset/jest.config.js",
+            "passWithNoTests": true
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/password-reset/src/**/*.ts",
+              "libs/password-reset/src/**/*.html"
+            ]
+          }
+        }
+      },
+      "tags": []
+    },
     "profile": {
       "projectType": "library",
       "root": "libs/profile",
@@ -959,6 +1115,32 @@
             "lintFilePatterns": [
               "libs/profile-store/src/**/*.ts",
               "libs/profile-store/src/**/*.html"
+            ]
+          }
+        }
+      },
+      "tags": []
+    },
+    "settings": {
+      "projectType": "library",
+      "root": "libs/settings",
+      "sourceRoot": "libs/settings/src",
+      "prefix": "lpg",
+      "architect": {
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/settings"],
+          "options": {
+            "jestConfig": "libs/settings/jest.config.js",
+            "passWithNoTests": true
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/settings/src/**/*.ts",
+              "libs/settings/src/**/*.html"
             ]
           }
         }
@@ -1093,6 +1275,32 @@
             "lintFilePatterns": [
               "libs/stats-card/src/**/*.ts",
               "libs/stats-card/src/**/*.html"
+            ]
+          }
+        }
+      },
+      "tags": []
+    },
+    "theme-store": {
+      "projectType": "library",
+      "root": "libs/theme-store",
+      "sourceRoot": "libs/theme-store/src",
+      "prefix": "lpg",
+      "architect": {
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/theme-store"],
+          "options": {
+            "jestConfig": "libs/theme-store/jest.config.js",
+            "passWithNoTests": true
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/theme-store/src/**/*.ts",
+              "libs/theme-store/src/**/*.html"
             ]
           }
         }

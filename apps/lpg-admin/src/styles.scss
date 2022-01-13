@@ -16,6 +16,14 @@ mat-sidenav[style] {
 .mat-form-field {
   min-width: 300px;
 }
+
+.mat-form-field {
+  width: 100%;
+}
+
+.col-lg-4 .mat-form-field {
+  width: calc(100% - 20px);
+}
 .no-min-width {
   min-width: unset;
 }

@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import { ThemeFacade } from "../../../../libs/layout/src/lib/state/theme/theme.facade";
 import { tap } from "rxjs";
+import { ThemeFacade } from "../../../../libs/theme-store/src/lib/store/theme/theme.facade";
 
 @Component({
   selector: 'lpg-root',

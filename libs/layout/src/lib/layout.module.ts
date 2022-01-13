@@ -5,9 +5,9 @@ import { HeaderModule } from '@lpg/header';
 import { SidenavModule } from '@lpg/sidenav';
 import { StoreModule } from '@ngrx/store';
 import * as fromDrawer from './state/drawer/drawer.reducer';
-import * as fromTheme from './state/theme/theme.reducer';
 import { MatSidenavModule } from "@angular/material/sidenav";
 import { MatButtonModule } from "@angular/material/button";
+import { ThemeStoreModule } from "@lpg/theme-store";
 
 @NgModule({
   imports: [
@@ -15,9 +15,9 @@ import { MatButtonModule } from "@angular/material/button";
     HeaderModule,
     SidenavModule,
     StoreModule.forFeature(fromDrawer.DRAWER_FEATURE_KEY, fromDrawer.reducer),
-    StoreModule.forFeature(fromTheme.THEME_FEATURE_KEY, fromTheme.reducer),
     MatSidenavModule,
-    MatButtonModule
+    MatButtonModule,
+    ThemeStoreModule
   ],
   declarations: [LayoutComponent],
   exports: [LayoutComponent],

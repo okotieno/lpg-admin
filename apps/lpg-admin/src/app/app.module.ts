@@ -15,6 +15,7 @@ import { LoadingModule } from "@lpg/loading";
 import { LoadingInterceptor } from "@lpg/loading";
 import { ErrorsModule } from "@lpg/errors";
 import { ErrorInterceptor } from "../../../../libs/errors/src/lib/interceptors/error.interceptor";
+import { ThemeStoreModule } from "@lpg/theme-store";
 
 @NgModule({
   declarations: [AppComponent],
@@ -36,7 +37,8 @@ import { ErrorInterceptor } from "../../../../libs/errors/src/lib/interceptors/e
     EffectsModule.forRoot([]),
     !environment.production ? StoreDevtoolsModule.instrument() : [],
     LoadingModule,
-    ErrorsModule
+    ErrorsModule,
+    ThemeStoreModule
   ],
   providers: [
     {provide: 'apiUrl', useValue: environment.apiUrl},

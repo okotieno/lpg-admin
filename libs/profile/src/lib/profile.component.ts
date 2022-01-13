@@ -1,9 +1,9 @@
 import { Component, OnInit, ChangeDetectionStrategy, OnDestroy } from '@angular/core';
 import { Observable, Subject } from "rxjs";
 import { DrawerFacade } from "@lpg/layout";
-import { ThemeFacade } from "../../../layout/src/lib/state/theme/theme.facade";
 import { ProfileStoreFacade } from "../../../profile-store/src/lib/store/profile-store.facade";
 import { IUser } from "@lpg/data";
+import { ThemeFacade } from "../../../theme-store/src/lib/store/theme/theme.facade";
 
 @Component({
   templateUrl: './profile.component.html',

@@ -10,7 +10,6 @@ import { tap } from "rxjs";
   styleUrls: ['./login.component.scss']
 })
 export class LoginComponent {
-  error?: string;
   form = this.fb.group({
     username: ['', [Validators.required]],
     password: ['', [Validators.required]]

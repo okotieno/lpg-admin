@@ -59,7 +59,7 @@ export class AuthenticationService {
 
 
   resetPassword(email: { email: string }) {
-    return this.http.post('password/email', email);
+    return this.http.post<IResponse<{ identifier: string }>>('oauth/forgot-password', email);
   }
 
   login(data: { username: string; password: string; rememberMe: boolean }): Observable<any> {
@@ -105,5 +105,14 @@ export class AuthenticationService {
     return this.http.get<IResponse<IUser>>('oauth/user').pipe(
       map(({data}) => data)
     );
+  }
+
+
+  confirmPasswordResetOtp(data: any) {
+    return this.http.post<IResponse<any>>('oauth/reset-password', {...data}).pipe(
+      tap(({data}) => sessionStorage.setItem('currentUser', JSON.stringify(data))),
+      tap(({data}) => this.currentUserSubject.next(data)),
+      tap(() => this.isLoggedInSubject.next(true)),
+    )
   }
 }

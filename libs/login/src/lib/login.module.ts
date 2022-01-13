@@ -19,7 +19,6 @@ import { MatButtonModule } from "@angular/material/button";
         component: LoginComponent
       }
     ]),
-    MatGridListModule,
     MatFormFieldModule,
     MatInputModule,
     MatCardModule,
