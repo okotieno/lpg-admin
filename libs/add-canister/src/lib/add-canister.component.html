@@ -6,28 +6,76 @@
 </div>
 <mat-divider></mat-divider>
 <form mat-dialog-content id="add-canister-form" [formGroup]="form" (ngSubmit)="addCanister()">
-  <div class="d-flex flex-wrap justify-content-between">
+  <div class="d-flex flex-wrap justify-content-start">
     <div class="col-lg-4">
-      <mat-form-field  appearance="outline">
-        <mat-label>Canister QR</mat-label>
-        <input formControlName="canisterQR" matInput placeholder="Enter/ Scan QR Code">
-      </mat-form-field>
+      <mat-card style="width: 80%">
+        <mat-card-content>
+          <mat-slide-toggle [(ngModel)]="showScanner" [ngModelOptions]="{ standalone: true}" color="primary">
+            Show Scanner
+          </mat-slide-toggle>
+        </mat-card-content>
+        <mat-card-title>
+          <zxing-scanner *ngIf="showScanner" (scanSuccess)="scanSuccessHandler($event)">
+          </zxing-scanner>
+        </mat-card-title>
+      </mat-card>
     </div>
-    <div class="col-lg-4">
-      <mat-form-field appearance="outline">
-        <mat-label>Brand</mat-label>
-        <mat-select formControlName="canisterBrandId"  placeholder="Select Canister Brand">
-          <mat-option *ngFor="let brand of brands$ | async" [value]="brand.brandId">{{ brand.brandName }}</mat-option>
-        </mat-select>
-      </mat-form-field>
-    </div>
-    <div class="col-lg-4">
-      <mat-form-field appearance="outline">
-        <mat-label>Canister Size</mat-label>
-        <mat-select formControlName="canisterSize"  placeholder="Select Canister Brand">
-          <mat-option *ngFor="let size of canisterSizes$ | async" [value]="size.canisterSizeId">{{ size.canisterSizeName }}</mat-option>
-        </mat-select>
-      </mat-form-field>
+    <div class="col d-flex flex-wrap align-content-around">
+      <div class="col-lg-6">
+        <mat-form-field appearance="outline">
+          <mat-label>Canister QR</mat-label>
+          <input formControlName="canisterQR" matInput placeholder="Enter/ Scan QR Code">
+        </mat-form-field>
+      </div>
+      <div class="col-lg-6">
+        <mat-form-field appearance="outline">
+          <mat-label>Canister Code</mat-label>
+          <input formControlName="canisterCode" matInput placeholder="Enter Canister Code">
+        </mat-form-field>
+      </div>
+      <div class="col-lg-6">
+        <mat-form-field appearance="outline">
+          <mat-label>Canister Manufacturer</mat-label>
+          <input formControlName="canisterManuf" matInput placeholder="Enter Canister Manufacturer">
+        </mat-form-field>
+      </div>
+      <div class="col-lg-6">
+        <mat-form-field appearance="outline">
+          <mat-label>Canister Manufacturer Date</mat-label>
+          <input [matDatepicker]="picker" formControlName="canisterManufDate" matInput placeholder="Enter Canister Manufacturer Date">
+          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+      </div>
+      <div class="col-lg-6">
+        <mat-form-field appearance="outline">
+          <mat-label>Canister RFID</mat-label>
+          <input formControlName="canisterRFID" matInput placeholder="Enter Canister RFID">
+        </mat-form-field>
+      </div>
+      <div class="col-lg-6">
+        <mat-form-field appearance="outline">
+          <mat-label>Canister Recertification</mat-label>
+          <input formControlName="canisterRecertification" matInput placeholder="Enter Canister Recertification">
+        </mat-form-field>
+      </div>
+      <div class="col-lg-6">
+        <mat-form-field appearance="outline">
+          <mat-label>Brand</mat-label>
+          <mat-select formControlName="canisterBrandId" placeholder="Select Canister Brand">
+            <mat-option *ngFor="let brand of brands$ | async" [value]="brand.brandId">{{ brand.brandName }}</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <div class="col-lg-6">
+        <mat-form-field appearance="outline">
+          <mat-label>Canister Size</mat-label>
+          <mat-select formControlName="canisterSize" placeholder="Select Canister Brand">
+            <mat-option *ngFor="let size of canisterSizes$ | async"
+                        [value]="size.canisterSizeId">{{ size.canisterSizeName }}</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
     </div>
   </div>
 </form>

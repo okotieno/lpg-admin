@@ -26,9 +26,10 @@ export class AddCanisterComponent implements OnInit {
     canisterRecertification: ['', [Validators.required]],
   });
   canisterSizes$ = of([
-    {canisterSizeId: '6', canisterSizeName: '6 Kg Cylinders'},
-    {canisterSizeId: '13', canisterSizeName: '13 Kg Cylinders'}
+    {canisterSizeId: '6Kg', canisterSizeName: '6 Kg Cylinders'},
+    {canisterSizeId: '13Kg', canisterSizeName: '13 Kg Cylinders'}
   ]);
+  showScanner = false;
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: ICanister,
@@ -54,5 +55,11 @@ export class AddCanisterComponent implements OnInit {
     if (this.data) {
       this.form.patchValue(this.data)
     }
+  }
+
+  scanSuccessHandler($event: string) {
+    this.showScanner = false
+    console.log(JSON.stringify(this.form.value))
+    this.form.patchValue(JSON.parse($event));
   }
 }

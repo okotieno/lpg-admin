@@ -3,8 +3,8 @@
   <button color="primary" (click)="openAddCanisterDialog()" mat-raised-button class="mb-2">
     <mat-icon>post_add</mat-icon> New Canister
   </button>
-  <ng-container *ngIf="dataSource$ | async as dataSource">
-    <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+<!--  <ng-container *ngIf="dataSource$ | async as dataSource">-->
+    <table mat-table [dataSource]="dataSource$" class="mat-elevation-z8">
 
       <!--- Note that these columns can be defined in any order.
             The actual rendered columns are set as a property on the row definition" -->
@@ -12,19 +12,31 @@
       <!-- Position Column -->
       <ng-container matColumnDef="canisterId">
         <th mat-header-cell *matHeaderCellDef> #ID </th>
-        <td mat-cell *matCellDef="let element"> {{element.canisterId}} </td>
+        <td mat-cell *matCellDef="let element">
+          {{element.canisterId}}
+        </td>
+      </ng-container>
+
+      <!-- Position Brand Name -->
+      <ng-container matColumnDef="canisterBrandName">
+        <th mat-header-cell *matHeaderCellDef> Brand Name </th>
+        <td mat-cell *matCellDef="let element">
+          {{element.canisterBrandName}}
+        </td>
+      </ng-container>
+
+      <!-- Canister Size -->
+      <ng-container matColumnDef="canisterSize">
+        <th mat-header-cell *matHeaderCellDef> Canister Size </th>
+        <td mat-cell *matCellDef="let element">
+          {{element.canisterSize}}
+        </td>
       </ng-container>
 
       <!-- Name Column -->
       <ng-container matColumnDef="canisterQR">
         <th mat-header-cell *matHeaderCellDef>Canister QR </th>
         <td mat-cell *matCellDef="let element"> {{element.canisterQR}} </td>
-      </ng-container>
-
-      <!-- Canister Brand Name Column -->
-      <ng-container matColumnDef="canisterBrandName">
-        <th mat-header-cell *matHeaderCellDef>Canister QR </th>
-        <td mat-cell *matCellDef="let element"> {{element.canisterBrandName }} </td>
       </ng-container>
 
 
@@ -50,5 +62,5 @@
                      aria-label="Select page of periodic elements">
       </mat-paginator>
     </ng-container>
-  </ng-container>
+<!--  </ng-container>-->
 </lpg-layout>

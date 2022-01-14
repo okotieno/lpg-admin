@@ -1,14 +1,11 @@
-import { ChangeDetectionStrategy, Component, EventEmitter, Inject, OnDestroy, OnInit, Output } from '@angular/core';
-import { FormBuilder, Validators } from "@angular/forms";
-import { MAT_DIALOG_DATA, MatDialog } from "@angular/material/dialog";
-import { IBrand, ICanister } from "@lpg/data";
-import { CanisterBrandsService } from "@lpg/canister-brands-service";
+import { ChangeDetectionStrategy, Component, OnDestroy, OnInit } from '@angular/core';
+import { MatDialog } from "@angular/material/dialog";
+import { ICanister } from "@lpg/data";
 import { BehaviorSubject, Subject, switchMap, take, takeUntil, tap } from "rxjs";
 import { PageEvent } from "@angular/material/paginator";
 import {
   DeleteConfirmationComponent
 } from "../../../delete-confirmation/src/lib/delete-confirmation/delete-confirmation.component";
-import { AddBrandComponent } from "../../../add-brand/src/lib/add-brand/add-brand.component";
 import { CanistersService } from "../../../canisters-service/src/lib/canisters.service";
 import { AddCanisterComponent } from "../../../add-canister/src/lib/add-canister.component";
 
@@ -20,7 +17,7 @@ import { AddCanisterComponent } from "../../../add-canister/src/lib/add-canister
 })
 export class CanistersComponent implements OnInit, OnDestroy {
   destroyed$ = new Subject()
-  displayedColumns: string[] = ['canisterId', 'canisterBrandName', 'canisterQR', 'actions'];
+  displayedColumns: string[] = ['canisterId', 'canisterBrandName', 'canisterSize', 'canisterQR', 'actions'];
   dataSource$ = new BehaviorSubject<ICanister[]>([]);
   perPage = 10;
   page = 1;

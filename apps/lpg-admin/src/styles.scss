@@ -21,7 +21,7 @@ mat-sidenav[style] {
   width: 100%;
 }
 
-.col-lg-4 .mat-form-field {
+.col-lg-4 .mat-form-field, .col-lg-6 .mat-form-field {
   width: calc(100% - 20px);
 }
 .no-min-width {
