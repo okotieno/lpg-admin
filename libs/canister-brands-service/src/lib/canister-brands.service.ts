@@ -1,6 +1,7 @@
 import { Injectable } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
-import { IResponse } from "@lpg/data";
+import { IBrand, IResponse } from "@lpg/data";
+import { map } from "rxjs";
 
 @Injectable({
   providedIn: 'root'
@@ -8,11 +9,14 @@ import { IResponse } from "@lpg/data";
 
 export class CanisterBrandsService {
 
+  brands$ = this.getBrands({perPage: 100, page: 1}).pipe(
+    map(({data}) => data)
+  )
   constructor(private http: HttpClient) {
   }
 
   getBrands({perPage, page}: { perPage: number, page: number }) {
-    return this.http.get<IResponse<any[]>>('brands', {params: {['page_size']: perPage, page}});
+    return this.http.get<IResponse<IBrand[]>>('brands', {params: {['page_size']: perPage, page}});
   }
 
   deleteBrandWithId(id: number) {
@@ -20,10 +24,10 @@ export class CanisterBrandsService {
   };
 
   createBrand(data: { brandName: string }) {
-    return this.http.post<IResponse<any[]>>('brands', data)
+    return this.http.post<IResponse<IBrand>>('brands', data)
   };
 
   updateBrand({ id, ...data}: { brandName: string; id: number }) {
-    return this.http.patch<IResponse<any[]>>(`brands/${id}`, data)
+    return this.http.patch<IResponse<IBrand>>(`brands/${id}`, data)
   };
 }

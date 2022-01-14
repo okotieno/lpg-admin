@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { DrawerFacade } from "@lpg/layout";
+import { MatIconRegistry } from "@angular/material/icon";
+import { DomSanitizer } from "@angular/platform-browser";
 
 @Component({
   selector: 'lpg-sidenav',
@@ -8,13 +10,11 @@ import { DrawerFacade } from "@lpg/layout";
 })
 export class SidenavComponent {
 
-  constructor(private drawerFacade: DrawerFacade) {
-  }
-
   isOpen$ = this.drawerFacade.open$;
 
   public routeLinks = [
     {link: ["/dashboard"], name: "Home", icon: "home"},
+    {link: ["/canisters"], name: "Canisters Management", svgIcon: "mdi.gas-cylinder"},
     {link: ["/users"], name: "Users Management", icon: "people_alt"},
     {link: ["/brands"], name: "Canister Brands Management", icon: "branding_watermark"},
     {link: ["/depots"], name: "Depots Management", icon: "warehouse"},
@@ -31,5 +31,12 @@ export class SidenavComponent {
 
   toggleMenu() {
     this.drawerFacade.toggleOpen();
+  }
+
+  constructor(private drawerFacade: DrawerFacade, private matIconRegistry: MatIconRegistry, private domSanitizer: DomSanitizer) {
+    this.matIconRegistry.addSvgIcon(
+      `mdi.gas-cylinder`,
+      this.domSanitizer.bypassSecurityTrustResourceUrl("assets/icons/mdi.gas-cylinder.svg")
+    );
   }
 }

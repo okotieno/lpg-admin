@@ -1,0 +1,79 @@
+import { ChangeDetectionStrategy, Component, EventEmitter, Inject, OnDestroy, OnInit, Output } from '@angular/core';
+import { FormBuilder, Validators } from "@angular/forms";
+import { MAT_DIALOG_DATA, MatDialog } from "@angular/material/dialog";
+import { IBrand, ICanister } from "@lpg/data";
+import { CanisterBrandsService } from "@lpg/canister-brands-service";
+import { BehaviorSubject, Subject, switchMap, take, takeUntil, tap } from "rxjs";
+import { PageEvent } from "@angular/material/paginator";
+import {
+  DeleteConfirmationComponent
+} from "../../../delete-confirmation/src/lib/delete-confirmation/delete-confirmation.component";
+import { AddBrandComponent } from "../../../add-brand/src/lib/add-brand/add-brand.component";
+import { CanistersService } from "../../../canisters-service/src/lib/canisters.service";
+import { AddCanisterComponent } from "../../../add-canister/src/lib/add-canister.component";
+
+@Component({
+  selector: 'lpg-canisters',
+  templateUrl: './canisters.component.html',
+  styleUrls: ['./canisters.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
+})
+export class CanistersComponent implements OnInit, OnDestroy {
+  destroyed$ = new Subject()
+  displayedColumns: string[] = ['canisterId', 'canisterBrandName', 'canisterQR', 'actions'];
+  dataSource$ = new BehaviorSubject<ICanister[]>([]);
+  perPage = 10;
+  page = 1;
+  meta?: { total?: number } = { total: 0 };
+
+  constructor(private canisterService: CanistersService, private dialog: MatDialog) {
+  }
+
+  setPage($event: PageEvent) {
+    this.perPage = $event.pageSize;
+    this.page = $event.pageIndex + 1;
+    this.getCanisters();
+  }
+
+  getCanisters() {
+    return this.canisterService.getCanisters({perPage: this.perPage, page: this.page}).pipe(
+      tap((res) => {
+        this.dataSource$.next(res.data);
+        this.meta = res.meta;
+      }),
+      takeUntil(this.destroyed$)
+    ).subscribe();
+  }
+
+  ngOnDestroy(): void {
+    this.destroyed$.next(null);
+  }
+
+  ngOnInit(): void {
+    this.getCanisters();
+  }
+
+  openDeleteDialog(element: ICanister) {
+    const deleteDialog = this.dialog.open(DeleteConfirmationComponent, {
+      data: {id: element.canisterId, name: element.canisterQR, title: 'canister'}
+    })
+    deleteDialog.componentInstance.confirmed.pipe(
+      switchMap(() => this.canisterService.deleteCanisterWithId(element.canisterId)),
+      tap(() => this.getCanisters()),
+      take(1)
+    ).subscribe()
+  }
+
+  openAddCanisterDialog(data?: any) {
+    const addCanisterDialog = this.dialog.open(AddCanisterComponent, {
+      data,
+      minWidth: '80vw',
+      disableClose: true
+    });
+
+    addCanisterDialog.componentInstance.created.pipe(
+      tap(() => this.getCanisters()),
+      take(1)
+    ).subscribe()
+  }
+}

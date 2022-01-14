@@ -27,6 +27,32 @@
       },
       "tags": []
     },
+    "add-canister": {
+      "projectType": "library",
+      "root": "libs/add-canister",
+      "sourceRoot": "libs/add-canister/src",
+      "prefix": "load",
+      "architect": {
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/add-canister"],
+          "options": {
+            "jestConfig": "libs/add-canister/jest.config.js",
+            "passWithNoTests": true
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/add-canister/src/**/*.ts",
+              "libs/add-canister/src/**/*.html"
+            ]
+          }
+        }
+      },
+      "tags": []
+    },
     "add-dealer": {
       "projectType": "library",
       "root": "libs/add-dealer",
@@ -223,6 +249,55 @@
           "outputs": ["coverage/libs/canister-brands-service"],
           "options": {
             "jestConfig": "libs/canister-brands-service/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      },
+      "tags": []
+    },
+    "canisters": {
+      "projectType": "library",
+      "root": "libs/canisters",
+      "sourceRoot": "libs/canisters/src",
+      "prefix": "lpg",
+      "architect": {
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/canisters"],
+          "options": {
+            "jestConfig": "libs/canisters/jest.config.js",
+            "passWithNoTests": true
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/canisters/src/**/*.ts",
+              "libs/canisters/src/**/*.html"
+            ]
+          }
+        }
+      },
+      "tags": []
+    },
+    "canisters-service": {
+      "root": "libs/canisters-service",
+      "sourceRoot": "libs/canisters-service/src",
+      "projectType": "library",
+      "architect": {
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "outputs": ["{options.outputFile}"],
+          "options": {
+            "lintFilePatterns": ["libs/canisters-service/**/*.ts"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/canisters-service"],
+          "options": {
+            "jestConfig": "libs/canisters-service/jest.config.js",
             "passWithNoTests": true
           }
         }

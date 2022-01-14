@@ -16,6 +16,7 @@
     "baseUrl": ".",
     "paths": {
       "@lpg/add-brand": ["libs/add-brand/src/index.ts"],
+      "@lpg/add-canister": ["libs/add-canister/src/index.ts"],
       "@lpg/add-dealer": ["libs/add-dealer/src/index.ts"],
       "@lpg/add-depot": ["libs/add-depot/src/index.ts"],
       "@lpg/add-transporter": ["libs/add-transporter/src/index.ts"],
@@ -26,6 +27,8 @@
       "@lpg/canister-brands-service": [
         "libs/canister-brands-service/src/index.ts"
       ],
+      "@lpg/canisters": ["libs/canisters/src/index.ts"],
+      "@lpg/canisters-service": ["libs/canisters-service/src/index.ts"],
       "@lpg/dashboard": ["libs/dashboard/src/index.ts"],
       "@lpg/data": ["libs/data/src/index.ts"],
       "@lpg/data/data": ["libs/data/data/src/index.ts"],

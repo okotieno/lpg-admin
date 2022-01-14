@@ -1,0 +1,39 @@
+<div mat-dialog-title class="d-flex justify-content-between align-items-center">
+  <h1 class="col-11">{{ data ? 'Edit' : 'Add' }} Canister </h1>
+  <button type="button" class="ml-auto" mat-icon-button mat-dialog-close="">
+    <mat-icon>close</mat-icon>
+  </button>
+</div>
+<mat-divider></mat-divider>
+<form mat-dialog-content id="add-canister-form" [formGroup]="form" (ngSubmit)="addCanister()">
+  <div class="d-flex flex-wrap justify-content-between">
+    <div class="col-lg-4">
+      <mat-form-field  appearance="outline">
+        <mat-label>Canister QR</mat-label>
+        <input formControlName="canisterQR" matInput placeholder="Enter/ Scan QR Code">
+      </mat-form-field>
+    </div>
+    <div class="col-lg-4">
+      <mat-form-field appearance="outline">
+        <mat-label>Brand</mat-label>
+        <mat-select formControlName="canisterBrandId"  placeholder="Select Canister Brand">
+          <mat-option *ngFor="let brand of brands$ | async" [value]="brand.brandId">{{ brand.brandName }}</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+    <div class="col-lg-4">
+      <mat-form-field appearance="outline">
+        <mat-label>Canister Size</mat-label>
+        <mat-select formControlName="canisterSize"  placeholder="Select Canister Brand">
+          <mat-option *ngFor="let size of canisterSizes$ | async" [value]="size.canisterSizeId">{{ size.canisterSizeName }}</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+  </div>
+</form>
+<mat-divider></mat-divider>
+<div mat-dialog-actions>
+  <button mat-dialog-close="" mat-button color="primary">Cancel</button>
+  <button form="add-canister-form" mat-raised-button color="primary"
+          [disabled]="form.invalid">{{ data ? 'Update' : 'Save' }}</button>
+</div>

@@ -94,6 +94,18 @@ export interface IDashboardStats {
   newUsersCount: number;
 }
 
+export interface ICanister {
+  canisterQR: string;
+  canisterId: number;
+  canisterCode: string;
+  canisterManuf: string;
+  canisterManufDate : string;
+  canisterBrandId : string;
+  canisterBrandName : string;
+  canisterRFID : string;
+  canisterRecertification : string;
+}
+
 export interface ICanisterBatch {
 
   canisterBatchId: number,

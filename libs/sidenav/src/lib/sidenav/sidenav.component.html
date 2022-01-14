@@ -13,12 +13,20 @@
       [routerLink]="route.link"
     >
       <mat-icon
+        *ngIf="route.icon"
         mat-list-icon
         [matTooltip]="(isOpen$ | async) === false ? route.name : ''"
         matTooltipPosition="right"
       >
         {{ route.icon }}</mat-icon
       >
+      <mat-icon
+        *ngIf="route.svgIcon"
+        mat-list-icon
+        [matTooltip]="(isOpen$ | async) === false ? route.name : ''"
+        matTooltipPosition="right"
+        [svgIcon]="route.svgIcon"
+      ></mat-icon>
       <p matLine *ngIf="isOpen$ | async">{{ route.name }}</p>
     </a>
   </mat-list>
