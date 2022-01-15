@@ -95,7 +95,7 @@ export interface IDashboardStats {
 }
 
 export interface ICanister {
-  canisterQR: string;
+  canisterSize: string;
   canisterId: number;
   canisterCode: string;
   canisterManuf: string;

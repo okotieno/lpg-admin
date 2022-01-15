@@ -1,0 +1,65 @@
+<div mat-dialog-title class="d-flex justify-content-between align-items-center">
+  <h1 class="col-11">QR Code Viewer</h1>
+  <button class="ms-auto" type="button" mat-icon-button mat-dialog-close="">
+    <mat-icon>close</mat-icon>
+  </button>
+</div>
+<mat-divider></mat-divider>
+<mat-card>
+  <mat-card-title class="d-flex justify-content-around align-items-center">
+    <div class="mat-body-1 m-2">
+      <table>
+        <tr>
+          <td>canister Id</td>
+          <td>{{ data.canisterId }}</td>
+        </tr>
+        <tr>
+          <td>canister Size</td>
+          <td>{{ data.canisterSize }}</td>
+        </tr>
+        <tr>
+          <td>canister Code</td>
+          <td>{{ data.canisterCode }}</td>
+        </tr>
+        <tr>
+          <td>canister Recertification</td>
+          <td>{{ data.canisterRecertification }}</td>
+        </tr>
+        <tr>
+          <td>canister Manufacturer</td>
+          <td>{{ data.canisterManuf }}</td>
+        </tr>
+        <tr>
+          <td>canister Manufacturer Date</td>
+          <td>{{ data.canisterManufDate }}</td>
+        </tr>
+        <tr>
+          <td>canister RFID</td>
+          <td>{{ data.canisterRFID }}</td>
+        </tr>
+        <tr>
+          <td>canister Brand Id</td>
+          <td>{{ data.canisterBrandId }}</td>
+        </tr>
+        <tr>
+          <td>canister Brand Id</td>
+          <td>{{ data.canisterBrandName }}</td>
+        </tr>
+      </table>
+    </div>
+    <div class="m-2" #qrImgSection>
+      <qrcode [qrdata]="qrData | json" [width]="256" [errorCorrectionLevel]="'M'"></qrcode>
+    </div>
+  </mat-card-title>
+</mat-card>
+
+<div mat-dialog-actions>
+  <button matRipple mat-dialog-close="" class="m-2" mat-button color="primary">
+    <mat-icon>close</mat-icon>
+    Cancel</button>
+  <button matRipple (click)="downloadQRasImg()" class="m-2" mat-raised-button color="primary">
+    <mat-icon>file_download</mat-icon>
+    Download</button>
+</div>
+
+

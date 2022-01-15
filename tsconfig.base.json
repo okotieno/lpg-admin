@@ -52,6 +52,7 @@
       "@lpg/password-reset": ["libs/password-reset/src/index.ts"],
       "@lpg/profile": ["libs/profile/src/index.ts"],
       "@lpg/profile-store": ["libs/profile-store/src/index.ts"],
+      "@lpg/qr-viewer": ["libs/qr-viewer/src/index.ts"],
       "@lpg/settings": ["libs/settings/src/index.ts"],
       "@lpg/sidenav": ["libs/sidenav/src/index.ts"],
       "@lpg/statistics-service": ["libs/statistics-service/src/index.ts"],

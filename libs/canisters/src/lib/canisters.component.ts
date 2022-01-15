@@ -8,6 +8,8 @@ import {
 } from "../../../delete-confirmation/src/lib/delete-confirmation/delete-confirmation.component";
 import { CanistersService } from "../../../canisters-service/src/lib/canisters.service";
 import { AddCanisterComponent } from "../../../add-canister/src/lib/add-canister.component";
+import { QrViewerModule } from "@lpg/qr-viewer";
+import { QrViewerComponent } from "../../../qr-viewer/src/lib/qr-viewer.component";
 
 @Component({
   selector: 'lpg-canisters',
@@ -17,7 +19,7 @@ import { AddCanisterComponent } from "../../../add-canister/src/lib/add-canister
 })
 export class CanistersComponent implements OnInit, OnDestroy {
   destroyed$ = new Subject()
-  displayedColumns: string[] = ['canisterId', 'canisterBrandName', 'canisterSize', 'canisterQR', 'actions'];
+  displayedColumns: string[] = ['canisterId', 'canisterBrandName', 'canisterSize', 'actions'];
   dataSource$ = new BehaviorSubject<ICanister[]>([]);
   perPage = 10;
   page = 1;
@@ -52,7 +54,7 @@ export class CanistersComponent implements OnInit, OnDestroy {
 
   openDeleteDialog(element: ICanister) {
     const deleteDialog = this.dialog.open(DeleteConfirmationComponent, {
-      data: {id: element.canisterId, name: element.canisterQR, title: 'canister'}
+      data: {id: element.canisterId, name: element.canisterRFID, title: 'canister'}
     })
     deleteDialog.componentInstance.confirmed.pipe(
       switchMap(() => this.canisterService.deleteCanisterWithId(element.canisterId)),
@@ -72,5 +74,13 @@ export class CanistersComponent implements OnInit, OnDestroy {
       tap(() => this.getCanisters()),
       take(1)
     ).subscribe()
+  }
+
+  openQRDialog(data: any) {
+   this.dialog.open(QrViewerComponent, {
+      data,
+      minWidth: '40vw',
+      disableClose: true
+    });
   }
 }

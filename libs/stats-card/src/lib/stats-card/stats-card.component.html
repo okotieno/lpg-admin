@@ -1,7 +1,7 @@
 <mat-card class="card card-stats" [routerLink]="linksTo" [queryParams]="linksToQueryParams">
   <div class="card-header card-header-icon"
        [class.card-header-primary]="color === 'primary'"
-       [class.card-header-success]="color === 'success'"
+       [class.card-header-success]="color === 'success' || color === 'accent'"
        [class.card-header-danger]="color === 'danger'"
        [class.card-header-warn]="color === 'warn'"
   >

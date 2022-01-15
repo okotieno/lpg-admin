@@ -20,7 +20,7 @@ export class CanistersService {
     return this.http.delete<IResponse<{headers: {message: string}}>>(`${this.url}/${id}`)
   };
 
-  createCanister(data: { canisterQR: string }) {
+  createCanister(data: ICanister) {
     return this.http.post<IResponse<ICanister>>(this.url, data)
   };
 

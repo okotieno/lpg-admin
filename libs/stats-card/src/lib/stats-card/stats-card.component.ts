@@ -15,7 +15,7 @@ export class StatsCardComponent {
   @Input() title = 'users';
   @Input() icon?: string;
   @Input() svgIcon?: string;
-  @Input() color: 'warn' | 'danger' | 'primary' | 'accent' | 'success' = 'success';
+  @Input() color: 'warn' | 'danger' | 'primary' | 'accent' | 'success' = 'primary';
   @Input() linksToQueryParams = {};
 
   constructor(private matIconRegistry: MatIconRegistry, private domSanitizer: DomSanitizer) {

@@ -20,6 +20,7 @@ export class MessageAlertsInterceptor implements HttpInterceptor {
           if (event.body.headers && event.body.headers.message) {
             this.snackbar.open(
               event.body.headers.message, 'close', {
+                panelClass: 'alert-success',
                 duration: 5000,
                 verticalPosition: "top",
                 horizontalPosition: "right"

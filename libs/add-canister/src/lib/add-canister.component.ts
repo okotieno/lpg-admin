@@ -5,6 +5,7 @@ import { ICanister } from "@lpg/data";
 import { of, tap } from "rxjs";
 import { CanistersService } from "../../../canisters-service/src/lib/canisters.service";
 import { CanisterBrandsService } from "@lpg/canister-brands-service";
+import { QrViewerComponent } from "../../../qr-viewer/src/lib/qr-viewer.component";
 
 @Component({
   selector: 'load-add-canister',
@@ -17,7 +18,6 @@ export class AddCanisterComponent implements OnInit {
   brands$ = this.canisterBrandService.brands$;
   form = this.fb.group({
     canisterBrandId: ['', [Validators.required]],
-    canisterQR: ['', [Validators.required]],
     canisterSize: ['', [Validators.required]],
     canisterCode: ['', [Validators.required]],
     canisterManuf: ['', [Validators.required]],
@@ -48,6 +48,7 @@ export class AddCanisterComponent implements OnInit {
     service.pipe(
       tap(() => this.created.emit(true)),
       tap(() => this.dialog.closeAll()),
+      tap(({ data }) => this.openQRDialog(data))
     ).subscribe()
   }
 
@@ -61,5 +62,13 @@ export class AddCanisterComponent implements OnInit {
     this.showScanner = false
     console.log(JSON.stringify(this.form.value))
     this.form.patchValue(JSON.parse($event));
+  }
+
+  openQRDialog(data: ICanister) {
+    this.dialog.open(QrViewerComponent, {
+      data,
+      minWidth: '40vw',
+      disableClose: true
+    });
   }
 }

@@ -1219,6 +1219,32 @@
       },
       "tags": []
     },
+    "qr-viewer": {
+      "projectType": "library",
+      "root": "libs/qr-viewer",
+      "sourceRoot": "libs/qr-viewer/src",
+      "prefix": "lpg",
+      "architect": {
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/qr-viewer"],
+          "options": {
+            "jestConfig": "libs/qr-viewer/jest.config.js",
+            "passWithNoTests": true
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/qr-viewer/src/**/*.ts",
+              "libs/qr-viewer/src/**/*.html"
+            ]
+          }
+        }
+      },
+      "tags": []
+    },
     "settings": {
       "projectType": "library",
       "root": "libs/settings",

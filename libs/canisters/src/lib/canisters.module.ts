@@ -10,6 +10,7 @@ import { MatPaginatorModule } from "@angular/material/paginator";
 import { MatDialogModule } from "@angular/material/dialog";
 import { ReactiveFormsModule } from "@angular/forms";
 import { AddCanisterModule } from "@lpg/add-canister";
+import { QrViewerModule } from "@lpg/qr-viewer";
 
 @NgModule({
   imports: [
@@ -24,7 +25,8 @@ import { AddCanisterModule } from "@lpg/add-canister";
     MatPaginatorModule,
     MatDialogModule,
     ReactiveFormsModule,
-    AddCanisterModule
+    AddCanisterModule,
+    QrViewerModule
   ],
   declarations: [
     CanistersComponent

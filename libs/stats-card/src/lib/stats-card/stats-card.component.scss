@@ -1,10 +1,11 @@
+@import "apps/lpg-admin/src/theme/custom.theme";
 .card {
   box-shadow: 0 1px 4px 0 rgba(0,0,0,.14);
   border: 0;
   margin-bottom: 30px;
   margin-top: 30px;
   border-radius: 6px;
-  color: #333;
+  color: lighten($primary, 40%);
   position: relative;
   display: flex;
   flex-direction: column;
@@ -12,7 +13,7 @@
   background-clip: border-box;
   font-size: .875rem;
   &:hover {
-    box-shadow: 0 4px 8px 0 rgba(255,255,255,.3);
+    box-shadow: 0 4px 8px 0 rgba($primary,.3);
     cursor: pointer;
   }
 }
@@ -34,26 +35,25 @@
   height: 55px;
   background-color: #999;
   margin-top: -40px;
-  box-shadow: 0 4px 20px 0 rgba(0,0,0,.14),0 7px 10px -5px rgba(76,175,80,.4);
+  box-shadow: 0 4px 20px 0 rgba(0,0,0,.14),0 7px 10px -5px rgba($accent,.4);
 }
 
 .card .card-header-success .card-icon {
-  background: linear-gradient(60deg,#66bb6a,#43a047);
+  background: linear-gradient(60deg,$accent-lighter,$accent-darker);
 }
 .card .card-header-danger .card-icon {
-  background: linear-gradient(60deg,#ef5350,#e53935);
+  background: linear-gradient(60deg, $warn-darker, $warn-lighter);
 }
 .card .card-header-warn .card-icon {
-  background: linear-gradient(60deg,#ffa726,#fb8c00);
+  background: linear-gradient(60deg,$warn-lighter, $warn-darker);
 }
 
 .card .card-header-primary .card-icon {
-  background: linear-gradient(60deg, #5237fd, #2c009f);
+  background: linear-gradient(60deg, $primary-lighter, $primary-darker);
 }
 
 .card-stats .card-header.card-header-icon .card-category, .card-stats .card-header.card-header-icon .card-title, .card-stats .card-header.card-header-text .card-category, .card-stats .card-header.card-header-text .card-title {
   margin: 0;
-  //color: #162634;
   line-height: 1.4em;
   font-size: 1.5625rem;
 }

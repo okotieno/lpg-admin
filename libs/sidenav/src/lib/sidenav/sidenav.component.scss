@@ -1,3 +1,4 @@
+@import "./apps/lpg-admin/src/theme/variable";
 .sidenav {
   width: 250px;
 }
@@ -13,18 +14,6 @@
 }
 
 .nav {
-  .active-link {
-    background: black;
-
-    mat-icon {
-      color: #018d52 !important;
-    }
-  }
-
-  &:hover {
-    background: black;
-  }
-
   mat-list-item, a {
     height: 40px;
     border: none;
@@ -32,7 +21,17 @@
     text-decoration: none;
     &:hover {
       cursor: pointer;
-      background-color: rgba(47, 0, 128, 0.1);
+      background-color: lighten($primary, 10%);
     }
   }
+  .active-link {
+    background: black;
+    pointer-events: none;
+
+    mat-icon {
+      color: $primary !important;
+    }
+  }
+
+
 }
