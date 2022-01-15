@@ -1,6 +1,6 @@
-@import "apps/lpg-admin/src/theme/custom.theme";
+@import "apps/lpg-admin/src/theme/variable";
 .card {
-  box-shadow: 0 1px 4px 0 rgba(0,0,0,.14);
+  //box-shadow: 0 1px 4px 0 rgba(0,0,0,.14);
   border: 0;
   margin-bottom: 30px;
   margin-top: 30px;
@@ -52,11 +52,6 @@
   background: linear-gradient(60deg, $primary-lighter, $primary-darker);
 }
 
-.card-stats .card-header.card-header-icon .card-category, .card-stats .card-header.card-header-icon .card-title, .card-stats .card-header.card-header-text .card-category, .card-stats .card-header.card-header-text .card-title {
-  margin: 0;
-  line-height: 1.4em;
-  font-size: 1.5625rem;
-}
 
 
 .card-stats .card-header.card-header-icon i {

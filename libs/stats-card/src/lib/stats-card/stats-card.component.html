@@ -1,4 +1,4 @@
-<mat-card class="card card-stats" [routerLink]="linksTo" [queryParams]="linksToQueryParams">
+<mat-card class="mat-elevation-z2 card card-stats" [routerLink]="linksTo" [queryParams]="linksToQueryParams">
   <div class="card-header card-header-icon"
        [class.card-header-primary]="color === 'primary'"
        [class.card-header-success]="color === 'success' || color === 'accent'"
@@ -10,7 +10,7 @@
       <mat-icon *ngIf="svgIcon" [svgIcon]="svgIcon">{{ icon }}</mat-icon>
     </div>
     <p class="card-category">{{ title | titlecase }}</p>
-    <span class="card-title">{{ value }}</span>
+    <span class="card-title m-0 mat-display-3">{{ value }}</span>
   </div>
   <div class="card-footer">
     <div class="stats">
