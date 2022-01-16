@@ -105,6 +105,32 @@
       },
       "tags": []
     },
+    "add-order": {
+      "projectType": "library",
+      "root": "libs/add-order",
+      "sourceRoot": "libs/add-order/src",
+      "prefix": "lpg",
+      "architect": {
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/add-order"],
+          "options": {
+            "jestConfig": "libs/add-order/jest.config.js",
+            "passWithNoTests": true
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/add-order/src/**/*.ts",
+              "libs/add-order/src/**/*.html"
+            ]
+          }
+        }
+      },
+      "tags": []
+    },
     "add-transporter": {
       "projectType": "library",
       "root": "libs/add-transporter",
@@ -1084,6 +1110,29 @@
               "libs/orders/src/**/*.ts",
               "libs/orders/src/**/*.html"
             ]
+          }
+        }
+      },
+      "tags": []
+    },
+    "orders-service": {
+      "root": "libs/orders-service",
+      "sourceRoot": "libs/orders-service/src",
+      "projectType": "library",
+      "architect": {
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "outputs": ["{options.outputFile}"],
+          "options": {
+            "lintFilePatterns": ["libs/orders-service/**/*.ts"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/orders-service"],
+          "options": {
+            "jestConfig": "libs/orders-service/jest.config.js",
+            "passWithNoTests": true
           }
         }
       },

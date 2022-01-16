@@ -120,5 +120,16 @@ export interface ICanisterBatch {
   toDepotName?: string,
   transporterId: number,
   transporterName: string,
-  canisters: any[]
+  canisters: ICanister[]
+}
+
+export interface IOrder {
+
+  orderId: number;
+  orderQuantities: {
+    canisterSizeId: number;
+    canisterSizeName: string;
+    value: number;
+    quantity: number;
+  }[]
 }

@@ -1,3 +1,59 @@
 <lpg-layout>
   <h1>Orders</h1>
+  <button color="primary" (click)="openAddOrderDialog()" mat-raised-button class="mb-2">
+    <mat-icon>post_add</mat-icon> Add Order
+  </button>
+  <ng-container *ngIf="dataSource$ | async as dataSource">
+    <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+
+      <!--- Note that these columns can be defined in any order.
+            The actual rendered columns are set as a property on the row definition" -->
+
+      <!-- Position Column -->
+      <ng-container matColumnDef="orderId">
+        <th mat-header-cell *matHeaderCellDef> #ID </th>
+        <td mat-cell *matCellDef="let element"> {{element.orderId}} </td>
+      </ng-container>
+
+      <!-- Name Column -->
+      <ng-container matColumnDef="canisterSizeName">
+        <th mat-header-cell *matHeaderCellDef> Canister Size </th>
+        <td mat-cell *matCellDef="let element"> {{element.canisterSizeName}} </td>
+      </ng-container>
+
+      <!-- Quantity Name -->
+      <ng-container matColumnDef="quantity">
+        <th mat-header-cell *matHeaderCellDef> Quantity </th>
+        <td mat-cell *matCellDef="let element"> {{element.quantity}} </td>
+      </ng-container>
+
+      <!-- Order Completion -->
+      <ng-container matColumnDef="orderCompletionStatus">
+        <th mat-header-cell *matHeaderCellDef> Order Completion </th>
+        <td mat-cell *matCellDef="let element"> {{element.orderCompletionStatus}} </td>
+      </ng-container>
+
+      <!-- Actions -->
+      <ng-container matColumnDef="actions">
+        <th mat-header-cell *matHeaderCellDef> Actions </th>
+        <td mat-cell *matCellDef="let element">
+          <button (click)="openAddOrderDialog(element)" mat-icon-button color="primary">
+            <mat-icon>edit</mat-icon>
+          </button>
+          <button (click)="openDeleteDialog(element)" mat-icon-button color="warn">
+            <mat-icon>delete</mat-icon>
+          </button>
+        </td>
+      </ng-container>`
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+    <ng-container>
+      <mat-paginator (page)="setPage($event)" [length]="meta?.total ?? 0" [pageSizeOptions]="[10, 20, 50, 100]"
+                     showFirstLastButtons
+                     aria-label="Select page of periodic elements">
+      </mat-paginator>
+    </ng-container>
+  </ng-container>
 </lpg-layout>
