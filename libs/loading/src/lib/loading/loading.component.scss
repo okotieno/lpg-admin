@@ -1,3 +1,4 @@
+@import "apps/lpg-admin/src/theme/variable";
 mat-progress-spinner {
   position: absolute;
   transform: translate(-50%,-50%);
@@ -9,6 +10,6 @@ mat-progress-spinner {
   min-height: 100vh;
   display: block;
   position: absolute;
-  background: rgba(35, 2, 54, 0.5);
+  background: rgba($primary-lighter, 0.5);
   z-index: 2000;
 }

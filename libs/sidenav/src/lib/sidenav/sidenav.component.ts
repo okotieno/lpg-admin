@@ -15,15 +15,17 @@ export class SidenavComponent {
   public routeLinks = [
     {link: ["/dashboard"], name: "Home", icon: "home"},
     {link: ["/canisters"], name: "Canisters Management", svgIcon: "mdi.gas-cylinder"},
+    {link: ["/orders"], name: "Orders", svgIcon: "purchase-order"},
     {link: ["/users"], name: "Users Management", icon: "people_alt"},
-    {link: ["/brands"], name: "Canister Brands Management", icon: "branding_watermark"},
+    {link: ["/brands"], name: "Canister Brands Management", svgIcon: "brand"},
     {link: ["/depots"], name: "Depots Management", icon: "warehouse"},
     {link: ["/transporters"], name: "Transporters Management", icon: "local_shipping"},
-    {link: ["/dealers"], name: "Dealers Management", icon: "storefront"},
+    {link: ["/dealers"], name: "Dealers Management", svgIcon: "brokerage"},
     {link: ["/transfers"], name: "Transfers", icon: "transfer_within_a_station"},
     {link: ["/settings"], name: "Settings", icon: "settings"},
   ];
 
+  pageIcons = ['mdi.gas-cylinder', 'purchase-order', 'brand', 'brokerage'];
 
   hideMini() {
     this.drawerFacade.hideMini();
@@ -34,9 +36,11 @@ export class SidenavComponent {
   }
 
   constructor(private drawerFacade: DrawerFacade, private matIconRegistry: MatIconRegistry, private domSanitizer: DomSanitizer) {
-    this.matIconRegistry.addSvgIcon(
-      `mdi.gas-cylinder`,
-      this.domSanitizer.bypassSecurityTrustResourceUrl("assets/icons/mdi.gas-cylinder.svg")
-    );
+    this.pageIcons.forEach(icon => {
+      this.matIconRegistry.addSvgIcon(
+        icon,
+        this.domSanitizer.bypassSecurityTrustResourceUrl(`assets/icons/${icon}.svg`)
+      );
+    });
   }
 }

@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { LoadingService } from "../services/loading.service";
-import { debounceTime, distinctUntilChanged, tap } from "rxjs";
+import { debounceTime, distinctUntilChanged } from "rxjs";
 
 @Component({
   selector: 'lpg-loading',
