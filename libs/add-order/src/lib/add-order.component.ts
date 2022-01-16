@@ -19,7 +19,7 @@ export class AddOrderComponent implements OnInit {
   @Output() created = new EventEmitter();
   @ViewChild(MatTable) table?: MatTable<any>;
   dealers$ = this.dealerService.dealers$.pipe(shareReplay());
-  depots$ = this.depotService.depots$.pipe(shareReplay());;
+  depots$ = this.depotService.depots$.pipe(shareReplay());
   sizes$ = this.canisterSizesService.getSizes({perPage: 100, page: 1}).pipe(
     map(({data}) => data),
     shareReplay()
