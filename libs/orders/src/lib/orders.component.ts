@@ -17,7 +17,7 @@ import { OrdersService } from "../../../orders-service/src/lib/orders.service";
 export class OrdersComponent implements OnInit, OnDestroy {
 
   destroyed$ = new Subject()
-  displayedColumns: string[] = ['orderId', 'canisterSizeName', 'quantity', 'orderCompletionStatus', 'actions'];
+  displayedColumns: string[] = ['orderId', 'fromDepotName', 'toDealerName', 'canisterSizeName', 'orderCompletionStatus', 'actions'];
   dataSource$ = new BehaviorSubject<IOrder[]>([]);
   perPage = 10;
   page = 1;
@@ -35,7 +35,6 @@ export class OrdersComponent implements OnInit, OnDestroy {
   getOrders() {
     return this.orderService.getOrders({perPage: this.perPage, page: this.page}).pipe(
       tap((res) => {
-        console.log({res});
         this.dataSource$.next(res.data);
         this.meta = res.meta;
       }),

@@ -2,7 +2,7 @@ import { ChangeDetectionStrategy, Component, EventEmitter, Inject, OnInit, Outpu
 import { FormArray, FormBuilder, Validators } from "@angular/forms";
 import { MAT_DIALOG_DATA, MatDialog } from "@angular/material/dialog";
 import { IOrder } from "@lpg/data";
-import { map, tap } from "rxjs";
+import { map, shareReplay, tap } from "rxjs";
 import { OrdersService } from "../../../orders-service/src/lib/orders.service";
 import { DepotsService } from "@lpg/depots-service";
 import { DealersService } from "@lpg/dealers-service";
@@ -18,10 +18,11 @@ import { MatTable } from "@angular/material/table";
 export class AddOrderComponent implements OnInit {
   @Output() created = new EventEmitter();
   @ViewChild(MatTable) table?: MatTable<any>;
-  dealers$ = this.dealerService.dealers$;
-  depots$ = this.depotService.depots$;
+  dealers$ = this.dealerService.dealers$.pipe(shareReplay());
+  depots$ = this.depotService.depots$.pipe(shareReplay());;
   sizes$ = this.canisterSizesService.getSizes({perPage: 100, page: 1}).pipe(
-    map(({data}) => data)
+    map(({data}) => data),
+    shareReplay()
   );
   brands$ = this.brandService.brands$;
 
@@ -44,11 +45,11 @@ export class AddOrderComponent implements OnInit {
   ) {
   }
 
-  newQuantityControl() {
+  newQuantityControl(order: {canisterBrandId: number, canisterSizeId: number, quantity: number }) {
     return this.fb.group({
-      canisterBrandId: ['', [Validators.required]],
-      canisterSizeId: ['', [Validators.required]],
-      quantity: ['', [Validators.required]],
+      canisterBrandId: [order?.canisterBrandId ?? '', [Validators.required]],
+      canisterSizeId: [order?.canisterSizeId ?? '', [Validators.required]],
+      quantity: [order?.quantity ?? '', [Validators.required]],
     })
   }
 
@@ -67,15 +68,16 @@ export class AddOrderComponent implements OnInit {
   ngOnInit() {
     if (this.data) {
       this.form.patchValue(this.data);
-      console.log("Updated Items")
+      this.data.orderQuantities.forEach(order => {
+        this.addOrderQuantity(0,order)
+      })
     } else {
-      this.addOrderQuantity()
+      this.addOrderQuantity(0,{})
     }
   }
 
-  addOrderQuantity(index?: number) {
-    console.log(index)
-    this.orderQuantitiesControl.push(this.newQuantityControl());
+  addOrderQuantity(index?: number, order?: any) {
+    this.orderQuantitiesControl.push(this.newQuantityControl(order));
     if (this.table) {
       (this.table as MatTable<any>).renderRows();
     }
