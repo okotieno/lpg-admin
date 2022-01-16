@@ -281,6 +281,29 @@
       },
       "tags": []
     },
+    "canister-sizes-service": {
+      "root": "libs/canister-sizes-service",
+      "sourceRoot": "libs/canister-sizes-service/src",
+      "projectType": "library",
+      "architect": {
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "outputs": ["{options.outputFile}"],
+          "options": {
+            "lintFilePatterns": ["libs/canister-sizes-service/**/*.ts"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/canister-sizes-service"],
+          "options": {
+            "jestConfig": "libs/canister-sizes-service/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      },
+      "tags": []
+    },
     "canisters": {
       "projectType": "library",
       "root": "libs/canisters",

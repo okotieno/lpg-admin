@@ -6,8 +6,9 @@
 </div>
 <mat-divider></mat-divider>
 <form mat-dialog-content id="add-order-form" [formGroup]="form" (ngSubmit)="addOrder()">
-  <div class="">
-    <div class="col-4">
+  <pre>{{ form.value | json }}</pre>
+  <div class="d-flex">
+    <div class="col-lg-4">
       <mat-form-field appearance="outline">
         <mat-label>From</mat-label>
         <mat-select formControlName="fromDepotId">
@@ -17,7 +18,7 @@
         </mat-select>
       </mat-form-field>
     </div>
-    <div class="col-4">
+    <div class="col-lg-4">
       <mat-form-field appearance="outline">
         <mat-label>From</mat-label>
         <mat-select formControlName="toDealerId">
@@ -28,6 +29,76 @@
       </mat-form-field>
     </div>
   </div>
+
+  <fieldset>
+    <legend><h2>Brand Quantities</h2></legend>
+    <div formArrayName="orderQuantities">
+      <table #table mat-table [dataSource]="orderQuantitiesControl.controls">
+
+        <ng-container matColumnDef="brandType">
+          <th mat-header-cell *matHeaderCellDef>Brand</th>
+          <td mat-cell *matCellDef="let element let i = index;" [formGroupName]="i">
+            <mat-form-field class="no-min-width" appearance="outline">
+              <mat-label>Select Brand Type</mat-label>
+              <mat-select formControlName="canisterBrandId">
+                <mat-option *ngFor="let brand of brands$ | async" [value]="brand.brandId">
+                  {{ brand.brandName | titlecase }}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </td>
+        </ng-container>
+
+        <!-- Canister Size-->
+        <ng-container matColumnDef="canisterSize">
+          <th mat-header-cell *matHeaderCellDef>Canister Size</th>
+          <td mat-cell *matCellDef="let element let i = index;" [formGroupName]="i">
+            <mat-form-field class="no-min-width" appearance="outline">
+              <mat-label>Select Canister Size</mat-label>
+              <mat-select formControlName="canisterSizeId">
+                <mat-option *ngFor="let canisterSize of sizes$ | async" [value]="canisterSize.canisterSizeId">
+                  {{ canisterSize.canisterSizeName | titlecase }}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </td>
+        </ng-container>
+
+        <!-- Quantity-->
+        <ng-container matColumnDef="quantity">
+          <th mat-header-cell *matHeaderCellDef>Number of Items</th>
+          <td mat-cell *matCellDef="let element let i = index;" [formGroupName]="i">
+            <mat-form-field class="no-min-width" appearance="outline">
+              <mat-label>Enter quantity</mat-label>
+              <input type="number" matInput formControlName="quantity" />
+            </mat-form-field>
+          </td>
+        </ng-container>
+        <!--Actions Column -->
+        <ng-container matColumnDef="actions">
+          <th mat-header-cell *matHeaderCellDef> Actions</th>
+          <td mat-cell *matCellDef="let element; let i = index" [formGroupName]="i">
+            <button (click)="removeQuantity(i)" type="button" color="warn" mat-icon-button>
+              <mat-icon>remove_circle_outline</mat-icon>
+            </button>
+          </td>
+        </ng-container>
+        <tr mat-header-row *matHeaderRowDef="displayedQuantityColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedQuantityColumns;"></tr>
+      </table>
+    </div>
+    <button
+      matTooltip="Add Brand"
+      matTooltipPosition="right"
+      [matTooltipShowDelay]="500"
+      [matTooltipHideDelay]="1000"
+      aria-label="Add Station Allocation" mat-icon-button color="primary"
+      type="button"
+      (click)="addOrderQuantity(orderQuantitiesControl.controls.length - 1)"
+    >
+      <mat-icon>playlist_add</mat-icon>
+    </button>
+  </fieldset>
 </form>
 <mat-divider></mat-divider>
 <div mat-dialog-actions>

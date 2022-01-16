@@ -65,6 +65,7 @@ export class OrdersComponent implements OnInit, OnDestroy {
   openAddOrderDialog(data?: IOrder) {
     const addOrderDialog = this.dialog.open(AddOrderComponent, {
       data,
+      minWidth: '80vw'
     });
 
     addOrderDialog.componentInstance.created.pipe(
