@@ -14,7 +14,7 @@ import { IBrand, IDealer } from "@lpg/data";
 export class AddDealerComponent implements OnInit, OnDestroy {
   @Output() created = new EventEmitter();
   destroyed$ = new Subject();
-  brands$ = new BehaviorSubject<IBrand[]>([]);
+  // brands$ = new BehaviorSubject<IBrand[]>([]);
   form = this.fb.group({
     'dealerName': ['', [Validators.required]],
     'dealerCode': ['', Validators.required],
@@ -41,12 +41,12 @@ export class AddDealerComponent implements OnInit, OnDestroy {
     if(this.data) {
       this.form.patchValue(this.data)
     }
-    this.dealerService.getDealers({perPage: 100, page: 1}).pipe(
-      tap(({ data }) => {
-        this.brands$.next(data)
-      }),
-      takeUntil(this.destroyed$)
-    ).subscribe();
+    // this.dealerService.getDealers({perPage: 100, page: 1}).pipe(
+    //   tap(({ data }) => {
+    //     this.brands$.next(data)
+    //   }),
+    //   takeUntil(this.destroyed$)
+    // ).subscribe();
   }
 
   addDealer() {

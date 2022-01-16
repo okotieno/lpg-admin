@@ -1,6 +1,6 @@
 import { Injectable } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
-import { IResponse } from "@lpg/data";
+import { IDepot, IResponse } from "@lpg/data";
 import { map } from "rxjs";
 
 @Injectable({
@@ -18,19 +18,19 @@ export class DepotsService {
   }
 
   getDepots({perPage, page}: { perPage: number, page: number }) {
-    return this.http.get<IResponse<any[]>>('depots', {params: {['page_size']: perPage, page}});
+    return this.http.get<IResponse<IDepot[]>>('depots', {params: {['page_size']: perPage, page}});
   }
 
   deleteDepotWithId(id: number) {
-    return this.http.delete<IResponse<any[]>>(`depots/${id}`)
+    return this.http.delete<IResponse<{headers: {message: string}}>>(`depots/${id}`)
   };
 
   createDepot(data: { depotName: string }) {
-    return this.http.post<IResponse<any[]>>('depots', data)
+    return this.http.post<IResponse<IDepot>>('depots', data)
   };
 
   updateDepot({ id, ...data}: { depotName: string; id: number }) {
-    return this.http.patch<IResponse<any[]>>(`depots/${id}`, data)
+    return this.http.patch<IResponse<IDepot>>(`depots/${id}`, data)
   };
 
   getRoles({ depotId, perPage, page}: { perPage: number, page: number, depotId: number }) {

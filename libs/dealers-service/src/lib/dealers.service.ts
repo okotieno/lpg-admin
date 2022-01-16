@@ -1,6 +1,6 @@
 import { Injectable } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
-import { IResponse } from "@lpg/data";
+import { IDealer, IResponse } from "@lpg/data";
 import { map } from "rxjs";
 
 @Injectable({
@@ -17,22 +17,22 @@ export class DealersService {
   }
 
   getDealers({perPage, page}: { perPage: number, page: number }) {
-    return this.http.get<IResponse<any[]>>(this.url, {params: {['page_size']: perPage, page}});
+    return this.http.get<IResponse<IDealer[]>>(this.url, {params: {['page_size']: perPage, page}});
   }
 
   deleteDealerWithId(id: number) {
-    return this.http.delete<IResponse<any[]>>(`${this.url}/${id}`)
+    return this.http.delete<IResponse<IDealer[]>>(`${this.url}/${id}`)
   };
 
   createDealer(data: { dealerName: string }) {
-    return this.http.post<IResponse<any[]>>(this.url, data)
+    return this.http.post<IResponse<IDealer[]>>(this.url, data)
   };
 
   updateDealer({ id, ...data}: { dealerName: string; id: number }) {
-    return this.http.patch<IResponse<any[]>>(`${this.url}/${id}`, data)
+    return this.http.patch<IResponse<IDealer[]>>(`${this.url}/${id}`, data)
   };
 
   getRoles({ dealerId, perPage, page}: { perPage: number, page: number, dealerId: number }) {
-    return this.http.get<IResponse<any[]>>(`${this.url}/${dealerId}/roles`, {params: {['page_size']: perPage, page}});
+    return this.http.get<IResponse<IDealer[]>>(`${this.url}/${dealerId}/roles`, {params: {['page_size']: perPage, page}});
   }
 }
