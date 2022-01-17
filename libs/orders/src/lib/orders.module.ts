@@ -9,6 +9,7 @@ import { MatButtonModule } from "@angular/material/button";
 import { MatIconModule } from "@angular/material/icon";
 import { MatPaginatorModule } from "@angular/material/paginator";
 import { AddOrderModule } from "@lpg/add-order";
+import { AssignOrderModule } from "@lpg/assign-order";
 
 @NgModule({
   imports: [
@@ -22,7 +23,8 @@ import { AddOrderModule } from "@lpg/add-order";
     MatButtonModule,
     MatIconModule,
     MatPaginatorModule,
-    AddOrderModule
+    AddOrderModule,
+    AssignOrderModule
   ],
   declarations: [
     OrdersComponent

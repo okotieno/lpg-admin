@@ -1,6 +1,6 @@
 import { Injectable } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
-import { IResponse } from "@lpg/data";
+import { IResponse, ITransporter } from "@lpg/data";
 import { map } from "rxjs";
 
 @Injectable({
@@ -18,19 +18,19 @@ export class TransportersService {
   }
 
   getTransporters({perPage, page}: { perPage: number, page: number }) {
-    return this.http.get<IResponse<any[]>>(this.url, {params: {['page_size']: perPage, page}});
+    return this.http.get<IResponse<ITransporter[]>>(this.url, {params: {['page_size']: perPage, page}});
   }
 
   deleteTransporterWithId(id: number) {
-    return this.http.delete<IResponse<any[]>>(`${this.url}/${id}`)
+    return this.http.delete<IResponse<Record<string, never>>>(`${this.url}/${id}`)
   };
 
   createTransporter(data: { depotName: string }) {
-    return this.http.post<IResponse<any[]>>(this.url, data)
+    return this.http.post<IResponse<ITransporter>>(this.url, data)
   };
 
   updateTransporter({id, ...data}: { depotName: string; id: number }) {
-    return this.http.patch<IResponse<any[]>>(`${this.url}/${id}`, data)
+    return this.http.patch<IResponse<ITransporter>>(`${this.url}/${id}`, data)
   };
 
   getRoles({ transporterId, perPage, page}: { perPage: number, page: number, transporterId: number }) {

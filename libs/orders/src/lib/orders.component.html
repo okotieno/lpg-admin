@@ -56,6 +56,9 @@
       <ng-container matColumnDef="actions">
         <th mat-header-cell *matHeaderCellDef> Actions </th>
         <td mat-cell *matCellDef="let element">
+          <button (click)="openAssignTransporterDialog(element)" mat-icon-button color="accent">
+            <mat-icon>assignment</mat-icon>
+          </button>
           <button (click)="openAddOrderDialog(element)" mat-icon-button color="primary">
             <mat-icon>edit</mat-icon>
           </button>

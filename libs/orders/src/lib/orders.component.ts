@@ -8,6 +8,7 @@ import {
 } from "../../../delete-confirmation/src/lib/delete-confirmation/delete-confirmation.component";
 import { AddOrderComponent } from "../../../add-order/src/lib/add-order.component";
 import { OrdersService } from "../../../orders-service/src/lib/orders.service";
+import { AssignOrderComponent } from "../../../assign-order/src/lib/assign-order.component";
 
 @Component({
   templateUrl: './orders.component.html',
@@ -58,7 +59,7 @@ export class OrdersComponent implements OnInit, OnDestroy {
       switchMap(() => this.orderService.deleteOrderWithId(element.orderId)),
       tap(() => this.getOrders()),
       take(1)
-    ).subscribe()
+    ).subscribe();
   }
 
   openAddOrderDialog(data?: IOrder) {
@@ -73,4 +74,9 @@ export class OrdersComponent implements OnInit, OnDestroy {
     ).subscribe()
   }
 
+  openAssignTransporterDialog(data: IOrder) {
+    this.dialog.open(AssignOrderComponent, {
+      data
+    });
+  }
 }

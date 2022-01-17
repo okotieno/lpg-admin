@@ -1,0 +1,15 @@
+<h1 mat-dialog-title>Assign Order</h1>
+<form id="assign-transporter-form" mat-dialog-content [formGroup]="form" (ngSubmit)="submit()">
+  <mat-form-field appearance="outline">
+    <mat-label>Transporter</mat-label>
+    <mat-select formControlName="transporterId" cdkFocusInitial placeholder="Please select transporter">
+      <mat-option *ngFor="let transporter of transporters$ | async" [value]="transporter.transporterId">
+        {{ transporter.transporterName }}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+</form>
+<div mat-dialog-actions>
+  <button matDialogClose="" mat-button color="primary">Cancel</button>
+  <button form="assign-transporter-form" [disabled]="form.invalid" color="primary" mat-button mat-raised-button>Confirm</button>
+</div>

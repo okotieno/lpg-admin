@@ -22,6 +22,7 @@
       "@lpg/add-order": ["libs/add-order/src/index.ts"],
       "@lpg/add-transporter": ["libs/add-transporter/src/index.ts"],
       "@lpg/add-user": ["libs/add-user/src/index.ts"],
+      "@lpg/assign-order": ["libs/assign-order/src/index.ts"],
       "@lpg/auth-guard": ["libs/auth-guard/src/index.ts"],
       "@lpg/authentication": ["libs/authentication/src/index.ts"],
       "@lpg/canister-brands": ["libs/canister-brands/src/index.ts"],
@@ -50,6 +51,9 @@
       "@lpg/loading": ["libs/loading/src/index.ts"],
       "@lpg/login": ["libs/login/src/index.ts"],
       "@lpg/message-alerts": ["libs/message-alerts/src/index.ts"],
+      "@lpg/order-assignment-service": [
+        "libs/order-assignment-service/src/index.ts"
+      ],
       "@lpg/orders": ["libs/orders/src/index.ts"],
       "@lpg/orders-service": ["libs/orders-service/src/index.ts"],
       "@lpg/otp-flow": ["libs/otp-flow/src/index.ts"],

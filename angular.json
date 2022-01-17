@@ -183,6 +183,32 @@
       },
       "tags": []
     },
+    "assign-order": {
+      "projectType": "library",
+      "root": "libs/assign-order",
+      "sourceRoot": "libs/assign-order/src",
+      "prefix": "lpg",
+      "architect": {
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/assign-order"],
+          "options": {
+            "jestConfig": "libs/assign-order/jest.config.js",
+            "passWithNoTests": true
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/assign-order/src/**/*.ts",
+              "libs/assign-order/src/**/*.html"
+            ]
+          }
+        }
+      },
+      "tags": []
+    },
     "auth-guard": {
       "root": "libs/auth-guard",
       "sourceRoot": "libs/auth-guard/src",
@@ -1106,6 +1132,29 @@
           "outputs": ["coverage/libs/message-alerts"],
           "options": {
             "jestConfig": "libs/message-alerts/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      },
+      "tags": []
+    },
+    "order-assignment-service": {
+      "root": "libs/order-assignment-service",
+      "sourceRoot": "libs/order-assignment-service/src",
+      "projectType": "library",
+      "architect": {
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "outputs": ["{options.outputFile}"],
+          "options": {
+            "lintFilePatterns": ["libs/order-assignment-service/**/*.ts"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/order-assignment-service"],
+          "options": {
+            "jestConfig": "libs/order-assignment-service/jest.config.js",
             "passWithNoTests": true
           }
         }
