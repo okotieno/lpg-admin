@@ -34,7 +34,7 @@
         <td mat-cell *matCellDef="let element"> {{element.canisterSizeName}}
           <ul>
             <li *ngFor="let q of element.orderQuantities">
-              {{ q.value }} - {{ q.canisterSizeName }} {{ element.canisterBrandName }}
+              {{ q.canisterBrandName }}: {{ q.quantity }} - {{ q.canisterSizeName }}
             </li>
           </ul>
         </td>
@@ -49,7 +49,9 @@
       <!-- Order Completion -->
       <ng-container matColumnDef="orderCompletionStatus">
         <th mat-header-cell *matHeaderCellDef> Order Completion </th>
-        <td mat-cell *matCellDef="let element"> {{element.orderCompletionStatus}} Completed</td>
+        <td mat-cell *matCellDef="let element">
+          {{element.orderCompletionStatus | percent: '1.1-2'}} Complete
+          <mat-progress-bar style="height: 8px" color="primary" mode="determinate" [value]="element.orderCompletionStatus * 100"></mat-progress-bar></td>
       </ng-container>
 
       <!-- Actions -->

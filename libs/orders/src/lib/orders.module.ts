@@ -10,6 +10,7 @@ import { MatIconModule } from "@angular/material/icon";
 import { MatPaginatorModule } from "@angular/material/paginator";
 import { AddOrderModule } from "@lpg/add-order";
 import { AssignOrderModule } from "@lpg/assign-order";
+import { MatProgressBarModule } from "@angular/material/progress-bar";
 
 @NgModule({
   imports: [
@@ -24,7 +25,8 @@ import { AssignOrderModule } from "@lpg/assign-order";
     MatIconModule,
     MatPaginatorModule,
     AddOrderModule,
-    AssignOrderModule
+    AssignOrderModule,
+    MatProgressBarModule
   ],
   declarations: [
     OrdersComponent

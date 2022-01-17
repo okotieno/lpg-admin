@@ -1138,9 +1138,9 @@
       },
       "tags": []
     },
-    "order-assignment-service": {
-      "root": "libs/order-assignment-service",
-      "sourceRoot": "libs/order-assignment-service/src",
+    "order-status-service": {
+      "root": "libs/order-status-service",
+      "sourceRoot": "libs/order-status-service/src",
       "projectType": "library",
       "architect": {
         "lint": {
@@ -1152,7 +1152,7 @@
         },
         "test": {
           "builder": "@nrwl/jest:jest",
-          "outputs": ["coverage/libs/order-assignment-service"],
+          "outputs": ["coverage/libs/order-status-service"],
           "options": {
             "jestConfig": "libs/order-assignment-service/jest.config.js",
             "passWithNoTests": true

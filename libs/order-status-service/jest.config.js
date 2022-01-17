@@ -1,5 +1,5 @@
 module.exports = {
-  displayName: 'order-assignment-service',
+  displayName: 'order-status-service',
   preset: '../../jest.preset.js',
   globals: {
     'ts-jest': {
@@ -10,5 +10,5 @@ module.exports = {
     '^.+\\.[tj]sx?$': 'ts-jest',
   },
   moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx'],
-  coverageDirectory: '../../coverage/libs/order-assignment-service',
+  coverageDirectory: '../../coverage/libs/order-status-service',
 };

@@ -51,8 +51,8 @@
       "@lpg/loading": ["libs/loading/src/index.ts"],
       "@lpg/login": ["libs/login/src/index.ts"],
       "@lpg/message-alerts": ["libs/message-alerts/src/index.ts"],
-      "@lpg/order-assignment-service": [
-        "libs/order-assignment-service/src/index.ts"
+      "@lpg/order-status-service": [
+        "libs/order-status-service/src/index.ts"
       ],
       "@lpg/orders": ["libs/orders/src/index.ts"],
       "@lpg/orders-service": ["libs/orders-service/src/index.ts"],

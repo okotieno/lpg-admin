@@ -2,10 +2,11 @@ import { ChangeDetectionStrategy, Component, EventEmitter, Inject, OnInit, Outpu
 import { FormBuilder, Validators } from "@angular/forms";
 import { MAT_DIALOG_DATA, MatDialog } from "@angular/material/dialog";
 import { ICanister } from "@lpg/data";
-import { of, tap } from "rxjs";
+import { map, tap } from "rxjs";
 import { CanistersService } from "../../../canisters-service/src/lib/canisters.service";
 import { CanisterBrandsService } from "@lpg/canister-brands-service";
 import { QrViewerComponent } from "../../../qr-viewer/src/lib/qr-viewer.component";
+import { CanisterSizesService } from "@lpg/canister-sizes-service";
 
 @Component({
   selector: 'load-add-canister',
@@ -16,26 +17,26 @@ import { QrViewerComponent } from "../../../qr-viewer/src/lib/qr-viewer.componen
 export class AddCanisterComponent implements OnInit {
   @Output() created = new EventEmitter();
   brands$ = this.canisterBrandService.brands$;
+  canisterSizes$ = this.canisterSizesService.getSizes({perPage: 100, page: 1}).pipe(
+    map(({data}) => data)
+  )
   form = this.fb.group({
     canisterBrandId: ['', [Validators.required]],
-    canisterSize: ['', [Validators.required]],
+    canisterSizeId: ['', [Validators.required]],
     canisterCode: ['', [Validators.required]],
     canisterManuf: ['', [Validators.required]],
     canisterManufDate: ['', [Validators.required]],
     canisterRFID: ['', [Validators.required]],
     canisterRecertification: ['', [Validators.required]],
   });
-  canisterSizes$ = of([
-    {canisterSizeId: '6Kg', canisterSizeName: '6 Kg Cylinders'},
-    {canisterSizeId: '13Kg', canisterSizeName: '13 Kg Cylinders'}
-  ]);
   showScanner = false;
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: ICanister,
     private dialog: MatDialog, private fb: FormBuilder,
     private canisterService: CanistersService,
-    private canisterBrandService: CanisterBrandsService
+    private canisterBrandService: CanisterBrandsService,
+    private canisterSizesService: CanisterSizesService
   ) {
   }
 

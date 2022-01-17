@@ -5,11 +5,11 @@ import { IOrder, IResponse } from "@lpg/data";
 @Injectable({
   providedIn: 'root'
 })
-export class OrderAssignmentService {
+export class OrderStatusService {
   url = 'orders';
   constructor(private http: HttpClient) {
   }
   assignOrderToTransporter ({orderId, transporterId}: {orderId: number, transporterId: number}){
-    return this.http.post<IResponse<IOrder>>(`${this.url}/${orderId}/assign`, {transporterId} )
+    return this.http.post<IResponse<IOrder>>(`${this.url}/${orderId}/status`, {transporterId} )
   }
 }

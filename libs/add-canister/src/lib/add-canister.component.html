@@ -68,9 +68,10 @@
       <div class="col-lg-4">
         <mat-form-field appearance="outline">
           <mat-label>Canister Size</mat-label>
-          <mat-select formControlName="canisterSize" placeholder="Select Canister Brand">
+          <mat-select formControlName="canisterSizeId" placeholder="Select Canister Brand">
             <mat-option *ngFor="let size of canisterSizes$ | async"
-                        [value]="size.canisterSizeId">{{ size.canisterSizeName }}</mat-option>
+                        [value]="size.canisterSizeId">{{ size.canisterSizeName }}
+            </mat-option>
           </mat-select>
         </mat-form-field>
       </div>

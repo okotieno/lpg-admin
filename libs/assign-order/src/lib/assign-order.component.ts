@@ -2,7 +2,7 @@ import { Component, EventEmitter, Inject, Output } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialog } from '@angular/material/dialog'
 import { FormBuilder, Validators } from "@angular/forms";
 import { TransportersService } from "@lpg/transporters-service";
-import { OrderAssignmentService } from "@lpg/order-assignment-service";
+import { OrderStatusService } from "@lpg/order-status-service";
 import { IOrder } from "@lpg/data";
 import { take, tap } from "rxjs";
 
@@ -22,7 +22,7 @@ export class AssignOrderComponent {
     @Inject(MAT_DIALOG_DATA) public data: IOrder,
     private fb: FormBuilder,
     private transportersService: TransportersService,
-    private orderAssignmentService: OrderAssignmentService
+    private orderAssignmentService: OrderStatusService
     ) {
   }
 
