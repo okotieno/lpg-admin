@@ -6,9 +6,10 @@ import { PageEvent } from "@angular/material/paginator";
 import {
   DeleteConfirmationComponent
 } from "../../../delete-confirmation/src/lib/delete-confirmation/delete-confirmation.component";
-import { AddOrderComponent } from "../../../add-order/src/lib/add-order.component";
-import { OrdersService } from "../../../orders-service/src/lib/orders.service";
-import { AssignOrderComponent } from "../../../assign-order/src/lib/assign-order.component";
+import { AddOrderComponent } from "@lpg/add-order";
+import { OrdersService } from "@lpg/orders-service";
+import { AssignOrderComponent } from "@lpg/assign-order";
+import { CanisterDispatchComponent } from "../../../canister-dispatch/src/lib/canister-dispatch.component";
 
 @Component({
   templateUrl: './orders.component.html',
@@ -75,8 +76,25 @@ export class OrdersComponent implements OnInit, OnDestroy {
   }
 
   openAssignTransporterDialog(data: IOrder) {
-    this.dialog.open(AssignOrderComponent, {
+    const assignOrderDialog = this.dialog.open(AssignOrderComponent, {
       data
     });
+    assignOrderDialog.componentInstance.assigned.pipe(
+      tap(() => this.getOrders()),
+      take(1)
+    ).subscribe()
+  }
+
+  openDispatchDialog(data: IOrder) {
+    const dispatchDialog = this.dialog.open(CanisterDispatchComponent, {
+      data,
+      minWidth: '40vw',
+      hasBackdrop: true,
+      disableClose: true
+    });
+    dispatchDialog.componentInstance.assigned.pipe(
+      tap(() => this.getOrders()),
+      take(1)
+    ).subscribe()
   }
 }

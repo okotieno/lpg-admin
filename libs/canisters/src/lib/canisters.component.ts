@@ -8,7 +8,6 @@ import {
 } from "../../../delete-confirmation/src/lib/delete-confirmation/delete-confirmation.component";
 import { CanistersService } from "../../../canisters-service/src/lib/canisters.service";
 import { AddCanisterComponent } from "../../../add-canister/src/lib/add-canister.component";
-import { QrViewerModule } from "@lpg/qr-viewer";
 import { QrViewerComponent } from "../../../qr-viewer/src/lib/qr-viewer.component";
 
 @Component({
@@ -76,8 +75,12 @@ export class CanistersComponent implements OnInit, OnDestroy {
     ).subscribe()
   }
 
+  openEditCanisterDialog(data: ICanister) {
+    this.openAddCanisterDialog({...data, canisterId: null})
+  }
+
   openQRDialog(data: any) {
-   this.dialog.open(QrViewerComponent, {
+    this.dialog.open(QrViewerComponent, {
       data,
       minWidth: '40vw',
       disableClose: true

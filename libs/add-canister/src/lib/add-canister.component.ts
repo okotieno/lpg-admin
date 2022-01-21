@@ -2,11 +2,14 @@ import { ChangeDetectionStrategy, Component, EventEmitter, Inject, OnInit, Outpu
 import { FormBuilder, Validators } from "@angular/forms";
 import { MAT_DIALOG_DATA, MatDialog } from "@angular/material/dialog";
 import { ICanister } from "@lpg/data";
-import { map, tap } from "rxjs";
+import { map, shareReplay, tap } from "rxjs";
 import { CanistersService } from "../../../canisters-service/src/lib/canisters.service";
 import { CanisterBrandsService } from "@lpg/canister-brands-service";
 import { QrViewerComponent } from "../../../qr-viewer/src/lib/qr-viewer.component";
 import { CanisterSizesService } from "@lpg/canister-sizes-service";
+import { DealersService } from "@lpg/dealers-service";
+import { TransportersService } from "@lpg/transporters-service";
+import { DepotsService } from "@lpg/depots-service";
 
 @Component({
   selector: 'load-add-canister',
@@ -15,6 +18,15 @@ import { CanisterSizesService } from "@lpg/canister-sizes-service";
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class AddCanisterComponent implements OnInit {
+
+  depots$ = this.depotService.depots$.pipe(shareReplay());
+  dealers$ = this.dealerService.dealers$.pipe(shareReplay());
+  transporter$ = this.transportersService.transporters$.pipe(shareReplay());
+  stationsTypes = [
+    {name: 'dealer', stations: this.dealers$},
+    {name: 'depot', stations: this.depots$},
+    {name: 'transporter', stations: this.transporter$}
+  ].map(type => ({...type, idName: `${type.name}Id`, apiLink: `${type.name}s`}));
   @Output() created = new EventEmitter();
   brands$ = this.canisterBrandService.brands$;
   canisterSizes$ = this.canisterSizesService.getSizes({perPage: 100, page: 1}).pipe(
@@ -28,15 +40,21 @@ export class AddCanisterComponent implements OnInit {
     canisterManufDate: ['', [Validators.required]],
     canisterRFID: ['', [Validators.required]],
     canisterRecertification: ['', [Validators.required]],
+    currentlyAtDepotId: ['', [Validators.required]],
+    currentlyFilled: [true, [Validators.required]]
   });
   showScanner = false;
+  stationSelection = 'depot';
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: ICanister,
     private dialog: MatDialog, private fb: FormBuilder,
     private canisterService: CanistersService,
     private canisterBrandService: CanisterBrandsService,
-    private canisterSizesService: CanisterSizesService
+    private canisterSizesService: CanisterSizesService,
+    private dealerService: DealersService,
+    private transportersService: TransportersService,
+    private depotService: DepotsService,
   ) {
   }
 
@@ -45,6 +63,7 @@ export class AddCanisterComponent implements OnInit {
     if (this.data?.canisterId) {
       data = {...data, id: this.data.canisterId}
     }
+    console.log(this.data?.canisterId ? "EDIT" : "ADD");
     const service = this.data?.canisterId ? this.canisterService.updateCanister(data) : this.canisterService.createCanister(data);
     service.pipe(
       tap(() => this.created.emit(true)),
@@ -71,5 +90,12 @@ export class AddCanisterComponent implements OnInit {
       minWidth: '40vw',
       disableClose: true
     });
+  }
+
+  stationChanged($event: string) {
+    this.stationsTypes.forEach(stationType => {
+      this.form.removeControl(`currentlyAt${stationType.name.replace(/^[a-z]/, (t) => t.toUpperCase())}Id`, {emitEvent: false});
+    });
+    this.form.addControl(`currentlyAt${$event.replace(/^[a-z]/, (t) => t.toUpperCase())}Id`, this.fb.control('', [Validators.required]));
   }
 }

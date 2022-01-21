@@ -9,9 +9,10 @@ import { MatSelectModule } from "@angular/material/select";
 import { MatCheckboxModule } from "@angular/material/checkbox";
 import { MatDialogModule } from "@angular/material/dialog";
 import { MatIconModule } from "@angular/material/icon";
+import { MatDividerModule } from "@angular/material/divider";
 
 @NgModule({
-  imports: [CommonModule, ReactiveFormsModule, MatFormFieldModule, MatInputModule, MatButtonModule, MatSelectModule, MatCheckboxModule, FormsModule, MatDialogModule, MatIconModule],
+    imports: [CommonModule, ReactiveFormsModule, MatFormFieldModule, MatInputModule, MatButtonModule, MatSelectModule, MatCheckboxModule, FormsModule, MatDialogModule, MatIconModule, MatDividerModule],
   declarations: [
     AddDepotComponent
   ],

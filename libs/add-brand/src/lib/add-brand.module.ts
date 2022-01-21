@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { AddBrandComponent } from './add-brand/add-brand.component';
+import { AddBrandComponent } from './add-brand.component';
 import { ReactiveFormsModule } from "@angular/forms";
 import { MatFormFieldModule } from "@angular/material/form-field";
 import { MatInputModule } from "@angular/material/input";
@@ -23,5 +23,8 @@ import { MatIconModule } from "@angular/material/icon";
   declarations: [
     AddBrandComponent
   ],
+  exports: [
+    AddBrandComponent
+  ]
 })
 export class AddBrandModule {}

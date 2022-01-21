@@ -1,0 +1,68 @@
+<div mat-dialog-title class="d-flex justify-content-between">
+  <h1>Dispatch Canister</h1>
+  <button type="button" class="ml-auto" mat-icon-button mat-dialog-close="">
+    <mat-icon>close</mat-icon>
+  </button>
+</div>
+<mat-divider></mat-divider>
+<mat-divider></mat-divider>
+<form id="dispatch-form" mat-dialog-content [formGroup]="form" (ngSubmit)="submit()">
+  <div class="d-flex flex-row align-items-center flex-wrap">
+    <div class="col-6">
+      Order ID : #{{ data.orderId }}
+    </div>
+    <div class="col-6">
+      <mat-slide-toggle [(ngModel)]="showScanner" [ngModelOptions]="{standalone: true}">Show Scanner</mat-slide-toggle>
+    </div>
+    <div class="p-2 scan-area d-flex align-items-center justify-content-center">
+      <mat-form-field class="no-min-width" *ngIf="!showScanner; else scanner">
+        <mat-label>Select Canisters</mat-label>
+        <mat-select multiple formControlName="canisterIds">
+          <mat-option
+            *ngFor="let canister of canisters$ | async"
+            [value]="canister.canisterId"
+            [disabled]="form.get('canisterIds')?.value?.length >= totalOrderQuantity && !form.get('canisterIds')?.value?.includes(canister?.canisterId)"
+          >
+            {{ '' + canister.canisterBrandName + ' - ' + canister.canisterSizeName }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <ng-template #scanner>
+        <span>Feature only available in app</span>
+      </ng-template>
+    </div>
+    <div class="p-1 ms-5">
+      <div class="mat-display-5">{{ this.canisterIdsControl.value.length }} of {{ totalOrderQuantity }} Scanned</div>
+      <!--      <div>{{ data | json }}</div>-->
+    </div>
+  </div>
+
+</form>
+
+
+<div mat-dialog-actions class="d-flex justify-content-between">
+  <button mat-button color="accent">Prev</button>
+  <button mat-button color="primary">Next</button>
+  <button form="dispatch-form" mat-raised-button color="primary"
+          [disabled]="form.invalid">Done
+  </button>
+</div>
+
+
+<!--<div mat-dialog-content>-->
+<!--  <form id="dispatch-form" [formGroup]="form" (ngSubmit)="submit()">-->
+<!--    <div class="d-flex flex-wrap">-->
+<!--      <div class="col-lg-7">-->
+<!--        Scan Area-->
+<!--      </div>-->
+<!--      <div class="col-lg-5">-->
+<!--        Scan Area-->
+<!--        Scan Area-->
+<!--        Scan Area-->
+<!--        Scan Area-->
+<!--        Scan Area-->
+<!--      </div>-->
+<!--    </div>-->
+<!--  </form>-->
+<!--</div>-->

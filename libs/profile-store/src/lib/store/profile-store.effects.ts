@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 
 import * as ProfileStoreActions from './profile-store.actions';
-import { AuthenticationService } from "../../../../login/src/lib/services/authentication.service";
+import { AuthenticationService } from "../../../../authentication-service/src/lib/authentication.service";
 import { map, switchMap } from "rxjs";
 import { Router } from "@angular/router";
 

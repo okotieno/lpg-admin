@@ -22,7 +22,7 @@ export class QrViewerComponent {
   get qrData() {
     return {
       'id': this.data.canisterId,
-      'size': this.data.canisterSize,
+      'size': this.data.canisterSizeId,
       'RFID': this.data.canisterRFID,
       'brand': this.data.canisterBrandName,
     }

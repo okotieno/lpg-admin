@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { FormBuilder, Validators } from "@angular/forms";
-import { AuthenticationService } from "../services/authentication.service";
+import { AuthenticationService } from "@lpg/authentication-service";
 import { Router } from "@angular/router";
 import { tap } from "rxjs";
 

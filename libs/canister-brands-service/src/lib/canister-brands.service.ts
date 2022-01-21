@@ -23,11 +23,11 @@ export class CanisterBrandsService {
     return this.http.delete<IResponse<any[]>>(`brands/${id}`)
   };
 
-  createBrand(data: { brandName: string }) {
+  createBrand(data: { canisterBrandName: string }) {
     return this.http.post<IResponse<IBrand>>('brands', data)
   };
 
-  updateBrand({ id, ...data}: { brandName: string; id: number }) {
+  updateBrand({ id, ...data}: { canisterBrandName: string; id: number }) {
     return this.http.patch<IResponse<IBrand>>(`brands/${id}`, data)
   };
 }

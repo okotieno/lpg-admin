@@ -3,7 +3,7 @@ import { DrawerFacade } from "@lpg/layout";
 import { Observable, take } from "rxjs";
 import { IUser } from "@lpg/data";
 import { ProfileStoreFacade } from "../../../../profile-store/src/lib/store/profile-store.facade";
-import { AuthenticationService } from "../../../../login/src/lib/services/authentication.service";
+import { AuthenticationService } from "../../../../authentication-service/src/lib/authentication.service";
 
 @Component({
   selector: 'lpg-header',

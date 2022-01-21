@@ -22,5 +22,8 @@ import { MatSelectModule } from "@angular/material/select";
   declarations: [
     AssignOrderComponent
   ],
+  exports: [
+    AssignOrderComponent
+  ]
 })
 export class AssignOrderModule {}

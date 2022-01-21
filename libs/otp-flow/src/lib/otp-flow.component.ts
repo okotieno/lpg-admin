@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { FormBuilder, Validators } from "@angular/forms";
 import { ActivatedRoute, Router } from "@angular/router";
-import { AuthenticationService } from "../../../login/src/lib/services/authentication.service";
+import { AuthenticationService } from "../../../authentication-service/src/lib/authentication.service";
 import { tap } from "rxjs";
 
 @Component({
@@ -25,7 +25,7 @@ export class OtpFlowComponent {
   ) {
     this.otpDetails = this.router.getCurrentNavigation()?.extras?.state
     if (!this.otpDetails?.['identifier']) {
-      this.router.navigate(['../'], {relativeTo: this.route})
+      this.router.navigate(['../'], {relativeTo: this.route}).then()
     }
   }
 

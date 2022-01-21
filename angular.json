@@ -258,6 +258,29 @@
       },
       "tags": []
     },
+    "authentication-service": {
+      "root": "libs/authentication-service",
+      "sourceRoot": "libs/authentication-service/src",
+      "projectType": "library",
+      "architect": {
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "outputs": ["{options.outputFile}"],
+          "options": {
+            "lintFilePatterns": ["libs/authentication-service/**/*.ts"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/authentication-service"],
+          "options": {
+            "jestConfig": "libs/authentication-service/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      },
+      "tags": []
+    },
     "canister-brands": {
       "projectType": "library",
       "root": "libs/canister-brands",
@@ -302,6 +325,32 @@
           "options": {
             "jestConfig": "libs/canister-brands-service/jest.config.js",
             "passWithNoTests": true
+          }
+        }
+      },
+      "tags": []
+    },
+    "canister-dispatch": {
+      "projectType": "library",
+      "root": "libs/canister-dispatch",
+      "sourceRoot": "libs/canister-dispatch/src",
+      "prefix": "lpg",
+      "architect": {
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/canister-dispatch"],
+          "options": {
+            "jestConfig": "libs/canister-dispatch/jest.config.js",
+            "passWithNoTests": true
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/canister-dispatch/src/**/*.ts",
+              "libs/canister-dispatch/src/**/*.html"
+            ]
           }
         }
       },
@@ -560,6 +609,29 @@
               "libs/delete-confirmation/src/**/*.ts",
               "libs/delete-confirmation/src/**/*.html"
             ]
+          }
+        }
+      },
+      "tags": []
+    },
+    "depot-canister-service": {
+      "root": "libs/depot-canister-service",
+      "sourceRoot": "libs/depot-canister-service/src",
+      "projectType": "library",
+      "architect": {
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "outputs": ["{options.outputFile}"],
+          "options": {
+            "lintFilePatterns": ["libs/depot-canister-service/**/*.ts"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/depot-canister-service"],
+          "options": {
+            "jestConfig": "libs/depot-canister-service/jest.config.js",
+            "passWithNoTests": true
           }
         }
       },

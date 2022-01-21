@@ -6,7 +6,7 @@ import { MatDialog } from "@angular/material/dialog";
 import {
   DeleteConfirmationComponent
 } from "../../../../delete-confirmation/src/lib/delete-confirmation/delete-confirmation.component";
-import { AddBrandComponent } from "../../../../add-brand/src/lib/add-brand/add-brand.component";
+import { AddBrandComponent } from "@lpg/add-brand";
 import { IBrand } from "@lpg/data";
 
 @Component({
@@ -16,7 +16,7 @@ import { IBrand } from "@lpg/data";
 })
 export class CanisterBrandsComponent implements OnInit, OnDestroy {
   destroyed$ = new Subject()
-  displayedColumns: string[] = ['brandId', 'brandName', 'brandCompanyName', 'actions'];
+  displayedColumns: string[] = ['canisterBrandId', 'canisterBrandName', 'canisterBrandCompanyName', 'actions'];
   dataSource$ = new BehaviorSubject<IBrand[]>([]);
   perPage = 10;
   page = 1;
@@ -51,10 +51,10 @@ export class CanisterBrandsComponent implements OnInit, OnDestroy {
 
   openDeleteDialog(element: IBrand) {
     const deleteDialog = this.dialog.open(DeleteConfirmationComponent, {
-      data: {id: element.brandId, name: element.brandName, title: 'brand'}
+      data: {id: element.canisterBrandId, name: element.canisterBrandName, title: 'brand'}
     })
     deleteDialog.componentInstance.confirmed.pipe(
-      switchMap(() => this.brandService.deleteBrandWithId(element.brandId)),
+      switchMap(() => this.brandService.deleteBrandWithId(element.canisterBrandId)),
       tap(() => this.getBrands()),
       take(1)
     ).subscribe()

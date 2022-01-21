@@ -10,6 +10,7 @@ import { MatIconModule } from "@angular/material/icon";
 import { MatDialogModule } from "@angular/material/dialog";
 import { DeleteConfirmationModule } from "@lpg/delete-confirmation";
 import { AddBrandModule } from "@lpg/add-brand";
+import { CanisterDispatchModule } from "@lpg/canister-dispatch";
 
 @NgModule({
   imports: [
@@ -25,7 +26,8 @@ import { AddBrandModule } from "@lpg/add-brand";
     MatIconModule,
     MatDialogModule,
     DeleteConfirmationModule,
-    AddBrandModule
+    AddBrandModule,
+    CanisterDispatchModule
   ],
   declarations: [
     CanisterBrandsComponent

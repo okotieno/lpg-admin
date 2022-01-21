@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpEvent, HttpHandler, HttpInterceptor, HttpRequest } from '@angular/common/http';
-import { catchError, Observable, of, throwError } from 'rxjs';
+import { catchError, Observable, throwError } from 'rxjs';
 import { ErrorFacade } from "../store/facade";
-import { AuthenticationService } from "../../../../login/src/lib/services/authentication.service";
+import { AuthenticationService } from "@lpg/authentication-service";
 
 export interface MessageInterface {
   type?: string;

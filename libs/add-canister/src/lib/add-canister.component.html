@@ -1,86 +1,141 @@
 <div mat-dialog-title class="d-flex justify-content-between align-items-center">
-  <h1 class="col-11">{{ data ? 'Edit' : 'Add' }} Canister </h1>
+  <h1 class="col-11">{{ data?.canisterId ? 'Edit' : 'Add' }} Canister </h1>
   <button type="button" class="ml-auto" mat-icon-button mat-dialog-close="">
     <mat-icon>close</mat-icon>
   </button>
 </div>
 <mat-divider></mat-divider>
 <form mat-dialog-content id="add-canister-form" [formGroup]="form" (ngSubmit)="addCanister()">
-  <div class="d-flex flex-wrap justify-content-start">
-<!--    <div class="col-lg-4">-->
-<!--      <mat-card style="width: 80%">-->
-<!--        <mat-card-content>-->
-<!--          <mat-slide-toggle [(ngModel)]="showScanner" [ngModelOptions]="{ standalone: true}" color="primary">-->
-<!--            Show Scanner-->
-<!--          </mat-slide-toggle>-->
-<!--        </mat-card-content>-->
-<!--        <mat-card-title>-->
-<!--        </mat-card-title>-->
-<!--      </mat-card>-->
-<!--    </div>-->
-    <div class="col d-flex flex-wrap align-content-around">
-<!--      <div class="col-lg-4">-->
-<!--        <mat-form-field appearance="outline">-->
-<!--          <mat-label>Canister QR</mat-label>-->
-<!--          <input formControlName="canisterQR" matInput placeholder="Enter/ Scan QR Code">-->
-<!--        </mat-form-field>-->
-<!--      </div>-->
-      <div class="col-lg-4">
-        <mat-form-field appearance="outline">
-          <mat-label>Canister Code</mat-label>
-          <input formControlName="canisterCode" matInput placeholder="Enter Canister Code">
-        </mat-form-field>
+  <fieldset>
+    <legend>General Canister Info</legend>
+    <div class="d-flex flex-wrap justify-content-start">
+      <!--    <div class="col-lg-4">-->
+      <!--      <mat-card style="width: 80%">-->
+      <!--        <mat-card-content>-->
+      <!--          <mat-slide-toggle [(ngModel)]="showScanner" [ngModelOptions]="{ standalone: true}" color="primary">-->
+      <!--            Show Scanner-->
+      <!--          </mat-slide-toggle>-->
+      <!--        </mat-card-content>-->
+      <!--        <mat-card-title>-->
+      <!--        </mat-card-title>-->
+      <!--      </mat-card>-->
+      <!--    </div>-->
+      <div class="col d-flex flex-wrap align-content-around">
+        <!--      <div class="col-lg-4">-->
+        <!--        <mat-form-field appearance="outline">-->
+        <!--          <mat-label>Canister QR</mat-label>-->
+        <!--          <input formControlName="canisterQR" matInput placeholder="Enter/ Scan QR Code">-->
+        <!--        </mat-form-field>-->
+        <!--      </div>-->
+        <div class="col-lg-4">
+          <mat-form-field appearance="outline">
+            <mat-label>Canister Code</mat-label>
+            <input formControlName="canisterCode" matInput placeholder="Enter Canister Code">
+          </mat-form-field>
+        </div>
+        <div class="col-lg-4">
+          <mat-form-field appearance="outline">
+            <mat-label>Canister Manufacturer</mat-label>
+            <input formControlName="canisterManuf" matInput placeholder="Enter Canister Manufacturer">
+          </mat-form-field>
+        </div>
+        <div class="col-lg-4">
+          <mat-form-field appearance="outline">
+            <mat-label>Canister Manufacturer Date</mat-label>
+            <input [matDatepicker]="picker" formControlName="canisterManufDate" matInput
+                   placeholder="Enter Canister Manufacturer Date">
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+          </mat-form-field>
+        </div>
+        <div class="col-lg-4">
+          <mat-form-field appearance="outline">
+            <mat-label>Canister RFID</mat-label>
+            <input formControlName="canisterRFID" matInput placeholder="Enter Canister RFID">
+          </mat-form-field>
+        </div>
+        <div class="col-lg-4">
+          <mat-form-field appearance="outline">
+            <mat-label>Canister Recertification</mat-label>
+            <input formControlName="canisterRecertification" matInput placeholder="Enter Canister Recertification">
+          </mat-form-field>
+        </div>
+        <div class="col-lg-4">
+          <mat-form-field appearance="outline">
+            <mat-label>Brand</mat-label>
+            <mat-select formControlName="canisterBrandId" placeholder="Select Canister Brand">
+              <mat-option *ngFor="let brand of brands$ | async"
+                          [value]="brand.canisterBrandId">{{ brand.canisterBrandName }}</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+        <div class="col-lg-4">
+          <mat-form-field appearance="outline">
+            <mat-label>Canister Size</mat-label>
+            <mat-select formControlName="canisterSizeId" placeholder="Select Canister Brand">
+              <mat-option *ngFor="let size of canisterSizes$ | async"
+                          [value]="size.canisterSizeId">{{ size.canisterSizeName }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
       </div>
+    </div>
+  </fieldset>
+  <fieldset>
+    <legend>Current Canister Location</legend>
+    <div class="d-flex justify-content-start align-items-center">
       <div class="col-lg-4">
         <mat-form-field appearance="outline">
-          <mat-label>Canister Manufacturer</mat-label>
-          <input formControlName="canisterManuf" matInput placeholder="Enter Canister Manufacturer">
-        </mat-form-field>
-      </div>
-      <div class="col-lg-4">
-        <mat-form-field appearance="outline">
-          <mat-label>Canister Manufacturer Date</mat-label>
-          <input [matDatepicker]="picker" formControlName="canisterManufDate" matInput placeholder="Enter Canister Manufacturer Date">
-          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-          <mat-datepicker #picker></mat-datepicker>
-        </mat-form-field>
-      </div>
-      <div class="col-lg-4">
-        <mat-form-field appearance="outline">
-          <mat-label>Canister RFID</mat-label>
-          <input formControlName="canisterRFID" matInput placeholder="Enter Canister RFID">
-        </mat-form-field>
-      </div>
-      <div class="col-lg-4">
-        <mat-form-field appearance="outline">
-          <mat-label>Canister Recertification</mat-label>
-          <input formControlName="canisterRecertification" matInput placeholder="Enter Canister Recertification">
-        </mat-form-field>
-      </div>
-      <div class="col-lg-4">
-        <mat-form-field appearance="outline">
-          <mat-label>Brand</mat-label>
-          <mat-select formControlName="canisterBrandId" placeholder="Select Canister Brand">
-            <mat-option *ngFor="let brand of brands$ | async" [value]="brand.brandId">{{ brand.brandName }}</mat-option>
+          <mat-label>Select Station Type</mat-label>
+          <mat-select (ngModelChange)="stationChanged($event)" [(ngModel)]="stationSelection"
+                      [ngModelOptions]="{standalone: true}">
+            <mat-option *ngFor="let station of stationsTypes" [value]="station.name">
+              {{ station.name | titlecase }}
+            </mat-option>
           </mat-select>
         </mat-form-field>
+
       </div>
-      <div class="col-lg-4">
+      <div class="col-lg-4" *ngIf="form.get('currentlyAtDepotId')">
         <mat-form-field appearance="outline">
-          <mat-label>Canister Size</mat-label>
-          <mat-select formControlName="canisterSizeId" placeholder="Select Canister Brand">
-            <mat-option *ngFor="let size of canisterSizes$ | async"
-                        [value]="size.canisterSizeId">{{ size.canisterSizeName }}
+          <mat-label>Select Depot</mat-label>
+          <mat-select placeholder="Please Select Depot" formControlName="currentlyAtDepotId" *ngIf="true">
+            <mat-option *ngFor="let depot of depots$ | async" [value]="depot.depotId">
+              {{ depot.depotName }}
             </mat-option>
           </mat-select>
         </mat-form-field>
       </div>
+      <div class="col-lg-4" *ngIf="form.get('currentlyAtTransporterId')">
+        <mat-form-field appearance="outline">
+          <mat-label>Select Transporter</mat-label>
+          <mat-select *ngIf="true" formControlName="currentlyAtTransporterId">
+            <mat-option *ngFor="let transporter of transporter$ | async" [value]="transporter.transporterId">
+              {{ transporter.transporterName }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <div class="col-lg-4" *ngIf="form.get('currentlyAtDealerId')">
+        <mat-form-field appearance="outline">
+          <mat-label>Select Dealer</mat-label>
+          <mat-select formControlName="currentlyAtDealerId" *ngIf="true">
+            <mat-option *ngFor="let dealer of dealers$ | async" [value]="dealer.dealerId">
+              {{ dealer.dealerName }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <div class="col-4">
+        <mat-slide-toggle formControlName="currentlyFilled"> Filled</mat-slide-toggle>
+      </div>
     </div>
-  </div>
+  </fieldset>
 </form>
 <mat-divider></mat-divider>
 <div mat-dialog-actions>
   <button mat-dialog-close="" mat-button color="primary">Cancel</button>
   <button form="add-canister-form" mat-raised-button color="primary"
-          [disabled]="form.invalid">{{ data ? 'Update' : 'Save' }}</button>
+          [disabled]="form.invalid">{{ data?.canisterId ? 'Update' : 'Save' }}</button>
 </div>

@@ -40,8 +40,8 @@
             <mat-form-field class="no-min-width" appearance="outline">
               <mat-label>Select Brand Type</mat-label>
               <mat-select formControlName="canisterBrandId">
-                <mat-option *ngFor="let brand of brands$ | async" [value]="brand.brandId">
-                  {{ brand.brandName | titlecase }}
+                <mat-option *ngFor="let brand of brands$ | async" [value]="brand.canisterBrandId">
+                  {{ brand.canisterBrandName | titlecase }}
                 </mat-option>
               </mat-select>
             </mat-form-field>

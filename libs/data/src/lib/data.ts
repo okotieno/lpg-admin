@@ -65,12 +65,12 @@ export interface IUser {
 export interface IDepot {
   depotId: number;
   depotName: string,
-  brandIds: number[];
+  canisterBrandIds: number[];
 }
 
 export interface IBrand {
-  brandId: number;
-  brandName: string;
+  canisterBrandId: number;
+  canisterBrandName: string;
   brandCompanyName: string;
 }
 
@@ -95,7 +95,8 @@ export interface IDashboardStats {
 }
 
 export interface ICanister {
-  canisterSize: string;
+  canisterSizeName: string;
+  canisterSizeId: string;
   canisterId: number;
   canisterCode: string;
   canisterManuf: string;
@@ -124,7 +125,8 @@ export interface ICanisterBatch {
 }
 
 export interface IOrder {
-
+  fromDepotId: number;
+  toDealerId: number;
   orderId: number;
   orderQuantities: {
     canisterSizeId: number;

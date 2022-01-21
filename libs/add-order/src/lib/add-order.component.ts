@@ -3,7 +3,7 @@ import { FormArray, FormBuilder, Validators } from "@angular/forms";
 import { MAT_DIALOG_DATA, MatDialog } from "@angular/material/dialog";
 import { IOrder } from "@lpg/data";
 import { map, shareReplay, tap } from "rxjs";
-import { OrdersService } from "../../../orders-service/src/lib/orders.service";
+import { OrdersService } from "@lpg/orders-service";
 import { DepotsService } from "@lpg/depots-service";
 import { DealersService } from "@lpg/dealers-service";
 import { CanisterSizesService } from "@lpg/canister-sizes-service";

@@ -4,7 +4,7 @@
     <mat-icon>close</mat-icon>
   </button>
 </div>
-
+<mat-divider></mat-divider>
 <form id="add-depot-form" mat-dialog-content [formGroup]="form" (ngSubmit)="addDepot()">
   <div>
     <div class="d-flex flex-wrap">
@@ -17,7 +17,7 @@
       <div class="col-lg-4">
         <mat-form-field appearance="outline">
           <mat-label>Brands</mat-label>
-          <mat-select multiple formControlName="brandIds"  placeholder="Select brands dealt at depot">
+          <mat-select multiple formControlName="canisterBrandIds"  placeholder="Select brands dealt at depot">
             <div class="select-all">
               <mat-checkbox [(ngModel)]="allSelected"
                             [indeterminate]="someSelected"
@@ -26,7 +26,7 @@
                             color="primary"
               >Select All</mat-checkbox>
             </div>
-            <mat-option *ngFor="let brand of brands$ | async" [value]="brand.brandId">{{ brand.brandName }}</mat-option>
+            <mat-option *ngFor="let brand of brands$ | async" [value]="brand.canisterBrandId">{{ brand.canisterBrandName }}</mat-option>
           </mat-select>
         </mat-form-field>
       </div>
@@ -52,6 +52,7 @@
   </div>
 
 </form>
+<mat-divider></mat-divider>
 <div mat-dialog-actions>
   <button form="add-depot-form" mat-raised-button color="primary" [disabled]="form.invalid">{{ data ? 'Update': 'Save' }}</button>
 </div>

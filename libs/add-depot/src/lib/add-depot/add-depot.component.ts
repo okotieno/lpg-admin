@@ -17,7 +17,7 @@ export class AddDepotComponent implements OnInit, OnDestroy {
   brands$ = new BehaviorSubject<IBrand[]>([]);
   form = this.fb.group({
     'depotName': ['', [Validators.required]],
-    'brandIds': [[], [Validators.required, Validators.minLength(1)]],
+    'canisterBrandIds': [[], [Validators.required, Validators.minLength(1)]],
     'depotLocation': ['', Validators.required],
     'depotEPRALicenceNo': ['', Validators.required],
     'depotCode': ['', Validators.required],
@@ -47,7 +47,7 @@ export class AddDepotComponent implements OnInit, OnDestroy {
       takeUntil(this.destroyed$)
     ).subscribe();
 
-    this.brandIdsControl.valueChanges.pipe(
+    this.canisterBrandIdsControl.valueChanges.pipe(
       tap(({ length }: []) => {
         if(length === this.brands$.value.length) {
           this.allSelected = true;
@@ -62,19 +62,19 @@ export class AddDepotComponent implements OnInit, OnDestroy {
 
   toggleAllSelection() {
     if (this.allSelected) {
-      this.brandIdsControl.setValue(this.brands$.value.map(({ brandId }) => brandId))
+      this.canisterBrandIdsControl.setValue(this.brands$.value.map(({ canisterBrandId }) => canisterBrandId))
     } else {
-      this.brandIdsControl.setValue([])
+      this.canisterBrandIdsControl.setValue([])
     }
   }
 
-  get brandIdsControl(): FormArray {
-    return this.form.get('brandIds') as FormArray
+  get canisterBrandIdsControl(): FormArray {
+    return this.form.get('canisterBrandIds') as FormArray
   }
 
   get someSelected() {
-    return this.brandIdsControl.value.length !== this.brands$.value.length &&
-      this.brandIdsControl.value.length !== 0
+    return this.canisterBrandIdsControl.value.length !== this.brands$.value.length &&
+      this.canisterBrandIdsControl.value.length !== 0
   }
 
   addDepot() {

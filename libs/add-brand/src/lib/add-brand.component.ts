@@ -13,8 +13,8 @@ import { IBrand } from "@lpg/data";
 export class AddBrandComponent implements OnInit {
   @Output() created = new EventEmitter();
   form = this.fb.group({
-    brandName: ['', [Validators.required]],
-    brandCompanyName: ['', [Validators.required]],
+    canisterBrandName: ['', [Validators.required]],
+    canisterBrandCompanyName: ['', [Validators.required]],
   });
 
   constructor(
@@ -24,10 +24,10 @@ export class AddBrandComponent implements OnInit {
 
   addBrand() {
     let data = this.form.value;
-    if (this.data?.brandId) {
-      data = { ...data, id: this.data.brandId }
+    if (this.data?.canisterBrandId) {
+      data = { ...data, id: this.data.canisterBrandId }
     }
-    const service = this.data?.brandId ? this.brandService.updateBrand(data) : this.brandService.createBrand(data);
+    const service = this.data?.canisterBrandId ? this.brandService.updateBrand(data) : this.brandService.createBrand(data);
     service.pipe(
       tap(() => this.created.emit(true)),
       tap(() => this.dialog.closeAll()),
