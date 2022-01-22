@@ -7,9 +7,15 @@ import { IOrder, IResponse } from "@lpg/data";
 })
 export class OrderStatusService {
   url = 'orders';
+
   constructor(private http: HttpClient) {
   }
-  assignOrderToTransporter ({orderId, transporterId}: {orderId: number, transporterId: number}){
-    return this.http.post<IResponse<IOrder>>(`${this.url}/${orderId}/status`, {transporterId} )
+
+  assignOrderToTransporter({orderId, transporterId}: { orderId: number, transporterId: number }) {
+    return this.http.post<IResponse<IOrder>>(`${this.url}/${orderId}/status`, {transporterId})
+  }
+
+  depotToDealerDispatch({orderId , ...formValue}: { orderId: number, canisters: {canisterId: number}[]}) {
+    return this.http.post<IResponse<any>>(`orders/${orderId}/dispatch`, formValue)
   }
 }

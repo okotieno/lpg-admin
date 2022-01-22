@@ -11,6 +11,7 @@ import { MatPaginatorModule } from "@angular/material/paginator";
 import { AddOrderModule } from "@lpg/add-order";
 import { AssignOrderModule } from "@lpg/assign-order";
 import { MatProgressBarModule } from "@angular/material/progress-bar";
+import { ActionConfirmationModule } from "@lpg/action-confirmation";
 
 @NgModule({
   imports: [
@@ -26,7 +27,8 @@ import { MatProgressBarModule } from "@angular/material/progress-bar";
     MatPaginatorModule,
     AddOrderModule,
     AssignOrderModule,
-    MatProgressBarModule
+    MatProgressBarModule,
+    ActionConfirmationModule
   ],
   declarations: [
     OrdersComponent

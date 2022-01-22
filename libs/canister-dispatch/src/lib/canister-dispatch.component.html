@@ -17,13 +17,13 @@
     <div class="p-2 scan-area d-flex align-items-center justify-content-center">
       <mat-form-field class="no-min-width" *ngIf="!showScanner; else scanner">
         <mat-label>Select Canisters</mat-label>
-        <mat-select multiple formControlName="canisterIds">
+        <mat-select multiple formControlName="canisters">
           <mat-option
             *ngFor="let canister of canisters$ | async"
-            [value]="canister.canisterId"
-            [disabled]="form.get('canisterIds')?.value?.length >= totalOrderQuantity && !form.get('canisterIds')?.value?.includes(canister?.canisterId)"
+            [value]="{canisterId: canister.canisterId}"
+            [disabled]="form.get('canisters')?.value?.length >= totalOrderQuantity && !included(canister.canisterId)"
           >
-            {{ '' + canister.canisterBrandName + ' - ' + canister.canisterSizeName }}
+            [#{{ canister.canisterId }}] {{ '' + canister.canisterBrandName + ' - ' + canister.canisterSizeName }}
           </mat-option>
         </mat-select>
       </mat-form-field>
@@ -33,8 +33,8 @@
       </ng-template>
     </div>
     <div class="p-1 ms-5">
-      <div class="mat-display-5">{{ this.canisterIdsControl.value.length }} of {{ totalOrderQuantity }} Scanned</div>
-      <!--      <div>{{ data | json }}</div>-->
+      <div class="mat-display-5">{{ this.canistersControl.value.length }} of {{ totalOrderQuantity }} Scanned</div>
+            <div>{{ data | json }}</div>
     </div>
   </div>
 

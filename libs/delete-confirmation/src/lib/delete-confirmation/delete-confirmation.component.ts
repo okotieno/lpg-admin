@@ -18,10 +18,6 @@ export class DeleteConfirmationComponent {
     }) {
   }
 
-  onNoClick() {
-    this.modalService.closeAll();
-  }
-
   confirmAction() {
     this.confirmed.emit(true);
     this.modalService.closeAll();

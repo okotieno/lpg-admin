@@ -15,6 +15,7 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
+      "@lpg/action-confirmation": ["libs/action-confirmation/src/index.ts"],
       "@lpg/add-brand": ["libs/add-brand/src/index.ts"],
       "@lpg/add-canister": ["libs/add-canister/src/index.ts"],
       "@lpg/add-dealer": ["libs/add-dealer/src/index.ts"],

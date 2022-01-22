@@ -9,7 +9,8 @@ import {
 import { AddOrderComponent } from "@lpg/add-order";
 import { OrdersService } from "@lpg/orders-service";
 import { AssignOrderComponent } from "@lpg/assign-order";
-import { CanisterDispatchComponent } from "../../../canister-dispatch/src/lib/canister-dispatch.component";
+import { CanisterDispatchComponent } from "@lpg/canister-dispatch";
+import { ActionConfirmationComponent } from "@lpg/action-confirmation";
 
 @Component({
   templateUrl: './orders.component.html',
@@ -96,5 +97,22 @@ export class OrdersComponent implements OnInit, OnDestroy {
       tap(() => this.getOrders()),
       take(1)
     ).subscribe()
+  }
+
+  openConfirmDialog(element: IOrder) {
+
+    const data = {
+      confirmationMessage: 'Please confirm acknowledgement of order ' + element.orderId
+    };
+    const confirmDialog = this.dialog.open(ActionConfirmationComponent, {
+      data,
+      hasBackdrop: true,
+      disableClose: true,
+    });
+    confirmDialog.componentInstance.confirmed.pipe(
+      tap(() => this.getOrders()),
+      take(1)
+    ).subscribe()
+
   }
 }

@@ -1,6 +1,32 @@
 {
   "version": 1,
   "projects": {
+    "action-confirmation": {
+      "projectType": "library",
+      "root": "libs/action-confirmation",
+      "sourceRoot": "libs/action-confirmation/src",
+      "prefix": "lib",
+      "architect": {
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/action-confirmation"],
+          "options": {
+            "jestConfig": "libs/action-confirmation/jest.config.js",
+            "passWithNoTests": true
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/action-confirmation/src/**/*.ts",
+              "libs/action-confirmation/src/**/*.html"
+            ]
+          }
+        }
+      },
+      "tags": []
+    },
     "add-brand": {
       "projectType": "library",
       "root": "libs/add-brand",
