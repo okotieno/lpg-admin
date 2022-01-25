@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, EventEmitter, Inject, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, Validators } from "@angular/forms";
-import { MAT_DIALOG_DATA } from "@angular/material/dialog";
+import { MAT_DIALOG_DATA, MatDialog } from "@angular/material/dialog";
 import { ICanister, IOrder } from "@lpg/data";
 import { DepotCanisterService } from "@lpg/depot-canister-service";
 import { BehaviorSubject, map, take, tap } from "rxjs";
@@ -25,7 +25,8 @@ export class CanisterDispatchComponent implements OnInit {
     private fb: FormBuilder,
     @Inject(MAT_DIALOG_DATA) public data: IOrder,
     private depotCanisterService: DepotCanisterService,
-    private orderStatusService: OrderStatusService
+    private orderStatusService: OrderStatusService,
+    private dialogService: MatDialog
   ) {
   }
 
@@ -39,7 +40,11 @@ export class CanisterDispatchComponent implements OnInit {
 
   submit() {
     this.orderStatusService.depotToDealerDispatch({...this.form.value, orderId: this.data.orderId})
-      .pipe(take(1))
+      .pipe(
+        take(1),
+        tap(() => this.dialogService.closeAll()),
+        tap(() => this.assigned.emit(true))
+      )
       .subscribe()
   }
 

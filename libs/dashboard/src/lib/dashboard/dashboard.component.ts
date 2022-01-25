@@ -1,7 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { StatisticsService } from "@lpg/statistics-service";
-import { DrawerFacade } from "@lpg/layout";
-import { MatIconRegistry } from "@angular/material/icon";
 
 @Component({
   selector: 'lpg-dashboard',

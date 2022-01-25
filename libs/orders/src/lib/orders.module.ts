@@ -12,6 +12,9 @@ import { AddOrderModule } from "@lpg/add-order";
 import { AssignOrderModule } from "@lpg/assign-order";
 import { MatProgressBarModule } from "@angular/material/progress-bar";
 import { ActionConfirmationModule } from "@lpg/action-confirmation";
+import { CanisterDispatchConfirmationModule } from "@lpg/canister-dispatch-confirmation";
+import { MatSelectModule } from "@angular/material/select";
+import { FormsModule } from "@angular/forms";
 
 @NgModule({
   imports: [
@@ -28,7 +31,10 @@ import { ActionConfirmationModule } from "@lpg/action-confirmation";
     AddOrderModule,
     AssignOrderModule,
     MatProgressBarModule,
-    ActionConfirmationModule
+    ActionConfirmationModule,
+    CanisterDispatchConfirmationModule,
+    MatSelectModule,
+    FormsModule
   ],
   declarations: [
     OrdersComponent

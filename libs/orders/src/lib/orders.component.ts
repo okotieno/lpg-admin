@@ -3,19 +3,39 @@ import { BehaviorSubject, Subject, switchMap, take, takeUntil, tap } from "rxjs"
 import { IOrder } from "@lpg/data";
 import { MatDialog } from "@angular/material/dialog";
 import { PageEvent } from "@angular/material/paginator";
-import {
-  DeleteConfirmationComponent
-} from "../../../delete-confirmation/src/lib/delete-confirmation/delete-confirmation.component";
+import { DeleteConfirmationComponent } from "@lpg/delete-confirmation";
 import { AddOrderComponent } from "@lpg/add-order";
 import { OrdersService } from "@lpg/orders-service";
 import { AssignOrderComponent } from "@lpg/assign-order";
 import { CanisterDispatchComponent } from "@lpg/canister-dispatch";
 import { ActionConfirmationComponent } from "@lpg/action-confirmation";
+import { OrderStatusService } from "@lpg/order-status-service";
+import { animate, state, style, transition, trigger } from '@angular/animations';
+import {
+  CanisterDispatchConfirmationComponent
+} from "../../../canister-dispatch-confirmation/src/lib/canister-dispatch-confirmation.component";
+
+type ICanisterStationDirection =
+  'depot->transporter'
+  | 'transporter->dealer'
+  | 'dealer->transporter'
+  | 'transporter->depot'
+
+type IStatusAction =
+  'acknowledge' | 'assign' | 'depot-dispatch' | 'dealer-dispatch' | 'dealer-to-transporter-receive'
+  | 'depot-to-transporter-receive' | 'dealer-receive' | 'depot-receive'
 
 @Component({
   templateUrl: './orders.component.html',
   styleUrls: ['./orders.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  animations: [
+    trigger('detailExpand', [
+      state('collapsed', style({height: '0px', minHeight: '0'})),
+      state('expanded', style({height: '*'})),
+      transition('expanded <=> collapsed', animate('225ms cubic-bezier(0.4, 0.0, 0.2, 1)')),
+    ]),
+  ],
 })
 export class OrdersComponent implements OnInit, OnDestroy {
 
@@ -24,9 +44,15 @@ export class OrdersComponent implements OnInit, OnDestroy {
   dataSource$ = new BehaviorSubject<IOrder[]>([]);
   perPage = 10;
   page = 1;
-  meta?: { total?: number } = { total: 0 };
+  meta?: { total?: number } = {total: 0};
+  expandedElement: any;
+  currentStep?: IStatusAction;
 
-  constructor(private orderService: OrdersService, private dialog: MatDialog) {
+  constructor(
+    private orderService: OrdersService,
+    private orderStatusService: OrderStatusService,
+    private dialog: MatDialog
+  ) {
   }
 
   setPage($event: PageEvent) {
@@ -86,9 +112,9 @@ export class OrdersComponent implements OnInit, OnDestroy {
     ).subscribe()
   }
 
-  openDispatchDialog(data: IOrder) {
+  openDispatchDialog(data: IOrder, from: 'depot' | 'dealer' = 'depot') {
     const dispatchDialog = this.dialog.open(CanisterDispatchComponent, {
-      data,
+      data: {...data, from},
       minWidth: '40vw',
       hasBackdrop: true,
       disableClose: true
@@ -97,6 +123,21 @@ export class OrdersComponent implements OnInit, OnDestroy {
       tap(() => this.getOrders()),
       take(1)
     ).subscribe()
+  }
+
+  openCanisterConfirmationDialog(element: IOrder, direction: ICanisterStationDirection) {
+    const confirmDialog = this.dialog.open(CanisterDispatchConfirmationComponent, {
+      data: {...element, direction},
+      minWidth: '30vw',
+      hasBackdrop: true,
+      disableClose: true,
+    });
+    confirmDialog.componentInstance.confirmed.pipe(
+      switchMap(() => this.orderStatusService.acceptOrder({orderId: element.orderId})),
+      tap(() => this.getOrders()),
+      take(1)
+    ).subscribe()
+
   }
 
   openConfirmDialog(element: IOrder) {
@@ -110,9 +151,38 @@ export class OrdersComponent implements OnInit, OnDestroy {
       disableClose: true,
     });
     confirmDialog.componentInstance.confirmed.pipe(
+      switchMap(() => this.orderStatusService.acceptOrder({orderId: element.orderId})),
       tap(() => this.getOrders()),
       take(1)
     ).subscribe()
+  }
 
+  triggerAction(element: IOrder) {
+    switch (this.currentStep) {
+      case 'assign':
+        this.openAssignTransporterDialog(element);
+        break;
+      case 'acknowledge':
+        this.openConfirmDialog(element);
+        break;
+      case 'depot-dispatch':
+        this.openDispatchDialog(element, 'depot');
+        break;
+      case 'dealer-dispatch':
+        this.openDispatchDialog(element, 'dealer');
+        break;
+      case 'dealer-to-transporter-receive':
+        this.openCanisterConfirmationDialog(element, 'dealer->transporter');
+        break;
+      case 'depot-receive':
+        this.openCanisterConfirmationDialog(element, 'transporter->depot');
+        break;
+      case 'dealer-receive':
+        this.openCanisterConfirmationDialog(element, 'transporter->dealer');
+        break;
+      case 'depot-to-transporter-receive':
+        this.openCanisterConfirmationDialog(element, 'depot->transporter');
+        break;
+    }
   }
 }

@@ -382,6 +382,32 @@
       },
       "tags": []
     },
+    "canister-dispatch-confirmation": {
+      "projectType": "library",
+      "root": "libs/canister-dispatch-confirmation",
+      "sourceRoot": "libs/canister-dispatch-confirmation/src",
+      "prefix": "lpg",
+      "architect": {
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/canister-dispatch-confirmation"],
+          "options": {
+            "jestConfig": "libs/canister-dispatch-confirmation/jest.config.js",
+            "passWithNoTests": true
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/canister-dispatch-confirmation/src/**/*.ts",
+              "libs/canister-dispatch-confirmation/src/**/*.html"
+            ]
+          }
+        }
+      },
+      "tags": []
+    },
     "canister-sizes-service": {
       "root": "libs/canister-sizes-service",
       "sourceRoot": "libs/canister-sizes-service/src",

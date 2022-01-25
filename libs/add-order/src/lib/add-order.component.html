@@ -1,5 +1,5 @@
 <div mat-dialog-title class="d-flex justify-content-between align-items-center">
-  <h1 class="col-11">{{ data ? 'Edit' : 'Order' }} Order </h1>
+  <h1 class="col-11">{{ data ? 'Edit' : 'Add' }} Order </h1>
   <button class="ms-auto" type="button" mat-icon-button mat-dialog-close="">
     <mat-icon>close</mat-icon>
   </button>
@@ -19,7 +19,7 @@
     </div>
     <div class="col-lg-4">
       <mat-form-field appearance="outline">
-        <mat-label>From</mat-label>
+        <mat-label>To</mat-label>
         <mat-select formControlName="toDealerId">
           <mat-option *ngFor="let dealer of dealers$ | async" [value]="dealer.dealerId">
             {{ dealer.dealerName }}

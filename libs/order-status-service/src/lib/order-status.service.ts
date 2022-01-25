@@ -18,4 +18,8 @@ export class OrderStatusService {
   depotToDealerDispatch({orderId , ...formValue}: { orderId: number, canisters: {canisterId: number}[]}) {
     return this.http.post<IResponse<any>>(`orders/${orderId}/dispatch`, formValue)
   }
+
+  acceptOrder({orderId}: {orderId: number}) {
+    return this.http.post<IResponse<IOrder>>(`${this.url}/${orderId}/status`, {acceptOrder: true})
+  }
 }

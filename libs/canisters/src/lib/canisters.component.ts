@@ -5,7 +5,7 @@ import { BehaviorSubject, Subject, switchMap, take, takeUntil, tap } from "rxjs"
 import { PageEvent } from "@angular/material/paginator";
 import {
   DeleteConfirmationComponent
-} from "../../../delete-confirmation/src/lib/delete-confirmation/delete-confirmation.component";
+} from "@lpg/delete-confirmation";
 import { CanistersService } from "../../../canisters-service/src/lib/canisters.service";
 import { AddCanisterComponent } from "../../../add-canister/src/lib/add-canister.component";
 import { QrViewerComponent } from "../../../qr-viewer/src/lib/qr-viewer.component";

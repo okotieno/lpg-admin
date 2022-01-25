@@ -1,1 +1,1 @@
-export * from './lib/message-alerts';
+export * from './lib/message-alerts.interceptor';

@@ -5,7 +5,7 @@ import { PageEvent } from "@angular/material/paginator";
 import { MatDialog } from "@angular/material/dialog";
 import {
   DeleteConfirmationComponent
-} from "../../../../delete-confirmation/src/lib/delete-confirmation/delete-confirmation.component";
+} from "../../../../delete-confirmation/src/lib/delete-confirmation.component";
 import { AddBrandComponent } from "@lpg/add-brand";
 import { IBrand } from "@lpg/data";
 

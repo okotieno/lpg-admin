@@ -6,7 +6,7 @@ import { PageEvent } from "@angular/material/paginator";
 import { IBrand, ITransporter } from "@lpg/data";
 import {
   DeleteConfirmationComponent
-} from "../../../../delete-confirmation/src/lib/delete-confirmation/delete-confirmation.component";
+} from "../../../../delete-confirmation/src/lib/delete-confirmation.component";
 import { AddTransporterComponent } from "../../../../add-transporter/src/lib/add-transporter/add-transporter.component";
 
 @Component({

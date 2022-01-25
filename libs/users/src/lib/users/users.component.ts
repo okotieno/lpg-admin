@@ -6,7 +6,7 @@ import { UsersService } from "@lpg/users-service";
 import { PageEvent } from "@angular/material/paginator";
 import {
   DeleteConfirmationComponent
-} from "../../../../delete-confirmation/src/lib/delete-confirmation/delete-confirmation.component";
+} from "../../../../delete-confirmation/src/lib/delete-confirmation.component";
 import { IUser } from "@lpg/data";
 
 @Component({

@@ -6,7 +6,7 @@ import { BehaviorSubject, Subject, switchMap, take, takeUntil, tap } from "rxjs"
 import { PageEvent } from "@angular/material/paginator";
 import {
   DeleteConfirmationComponent
-} from "../../../../delete-confirmation/src/lib/delete-confirmation/delete-confirmation.component";
+} from "../../../../delete-confirmation/src/lib/delete-confirmation.component";
 import { AddDepotComponent } from "../../../../add-depot/src/lib/add-depot/add-depot.component";
 import { IDepot } from "@lpg/data";
 

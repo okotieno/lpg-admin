@@ -13,11 +13,11 @@ import { JwtInterceptor } from "./interceptors/jwt.interceptor";
 import { APIInterceptor } from "./interceptors/api.interceptor";
 import { LoadingInterceptor, LoadingModule } from "@lpg/loading";
 import { ErrorsModule } from "@lpg/errors";
-import { ErrorInterceptor } from "../../../../libs/errors/src/lib/interceptors/error.interceptor";
+import { ErrorInterceptor } from "@lpg/errors";
 import { ThemeStoreModule } from "@lpg/theme-store";
 import {
   MessageAlertsInterceptor
-} from "../../../../libs/message-alerts/src/lib/message-alerts/message-alerts.interceptor";
+} from "@lpg/message-alerts";
 import { MatSnackBarModule } from "@angular/material/snack-bar";
 
 @NgModule({

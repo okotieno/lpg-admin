@@ -34,6 +34,9 @@
         "libs/canister-brands-service/src/index.ts"
       ],
       "@lpg/canister-dispatch": ["libs/canister-dispatch/src/index.ts"],
+      "@lpg/canister-dispatch-confirmation": [
+        "libs/canister-dispatch-confirmation/src/index.ts"
+      ],
       "@lpg/canister-sizes-service": [
         "libs/canister-sizes-service/src/index.ts"
       ],

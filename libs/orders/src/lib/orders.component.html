@@ -4,14 +4,14 @@
     <mat-icon>post_add</mat-icon> Add Order
   </button>
   <ng-container *ngIf="dataSource$ | async as dataSource">
-    <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+    <table mat-table [dataSource]="dataSource" class="mat-elevation-z8" multiTemplateDataRows>
 
       <!--- Note that these columns can be defined in any order.
             The actual rendered columns are set as a property on the row definition" -->
 
       <!-- Position Column -->
       <ng-container matColumnDef="orderId">
-        <th mat-header-cell *matHeaderCellDef> #ID </th>
+        <th mat-header-cell *matHeaderCellDef> #ID</th>
         <td mat-cell *matCellDef="let element"> {{element.orderId}}</td>
       </ng-container>
 
@@ -51,33 +51,142 @@
         <th mat-header-cell *matHeaderCellDef> Order Completion </th>
         <td mat-cell *matCellDef="let element">
           {{element.orderCompletionStatus | percent: '1.1-2'}} Complete
-          <mat-progress-bar style="height: 8px" color="primary" mode="determinate" [value]="element.orderCompletionStatus * 100"></mat-progress-bar></td>
+          <mat-progress-bar style="height: 8px" color="primary" mode="determinate"
+                            [value]="element.orderCompletionStatus * 100"></mat-progress-bar>
+        </td>
       </ng-container>
 
       <!-- Actions -->
       <ng-container matColumnDef="actions">
-        <th mat-header-cell *matHeaderCellDef> Actions </th>
+        <th mat-header-cell *matHeaderCellDef> Actions</th>
         <td mat-cell *matCellDef="let element">
-          <button [disabled]="element.accepted" (click)="openConfirmDialog(element)" mat-icon-button color="accent">
-            <mat-icon>task_alt</mat-icon>
-          </button>
-          <button [disabled]="element.isAssigned" (click)="openAssignTransporterDialog(element)" mat-icon-button color="accent">
-            <mat-icon>assignment</mat-icon>
-          </button>
-          <button [disabled]="!element.isAssigned" (click)="openDispatchDialog(element)" mat-icon-button color="accent">
-            <mat-icon>local_shipping</mat-icon>
-          </button>
           <button (click)="openAddOrderDialog(element)" mat-icon-button color="primary">
             <mat-icon>edit</mat-icon>
           </button>
           <button (click)="openDeleteDialog(element)" mat-icon-button color="warn">
             <mat-icon>delete</mat-icon>
           </button>
+          <button mat-icon-button
+                  (click)="expandedElement = expandedElement === element.orderId ? null : element.orderId ">
+            <mat-icon>keyboard_arrow_down</mat-icon>
+          </button>
+        </td>
+      </ng-container>
+
+      <!-- Expanded Content Column - The detail row is made up of this one column that spans across all columns -->
+      <ng-container matColumnDef="expandedDetail">
+        <td mat-cell *matCellDef="let element" [attr.colspan]="displayedColumns.length">
+          <div class="element-detail" [@detailExpand]="element.orderId === expandedElement ? 'expanded' : 'collapsed'">
+
+            <fieldset>
+              <legend class="mat-display-6">Order Status Management</legend>
+              <!--              <pre>{{ element | json }}</pre>-->
+              <div class="d-flex align-items-center pt-3 pb-3">
+                <div class="col-lg-4">
+                  <mat-form-field>
+                    <mat-label>Update Current Step</mat-label>
+                    <mat-select [(ngModel)]="currentStep">
+                      <mat-select-trigger>
+                        <ng-container [ngSwitch]="currentStep">
+                          <div *ngSwitchCase="'acknowledge'" class="d-flex align-items-center"><mat-icon class="me-2">schedule</mat-icon>Acknowledge order</div>
+                          <div *ngSwitchCase="'assign'" class="d-flex align-items-center"><mat-icon class="me-2">schedule</mat-icon>Assign Order to transporter</div>
+                          <div *ngSwitchCase="'depot-dispatch'" class="d-flex align-items-center"><mat-icon class="me-2">schedule</mat-icon>Dispatch from depot</div>
+                          <div *ngSwitchCase="'dealer-dispatch'" class="d-flex align-items-center"><mat-icon class="me-2">schedule</mat-icon>Dispatch from dealer</div>
+                          <div *ngSwitchCase="'dealer-to-transporter-receive'" class="d-flex align-items-center"><mat-icon class="me-2">schedule</mat-icon>Transporter receive(Dealer)</div>
+                          <div *ngSwitchCase="'depot-to-transporter-receive'" class="d-flex align-items-center"><mat-icon class="me-2">schedule</mat-icon>Transporter receive(Depot)</div>
+                          <div *ngSwitchCase="'dealer-receive'" class="d-flex align-items-center"><mat-icon class="me-2">schedule</mat-icon>Dealer receive</div>
+                          <div *ngSwitchCase="'depot-receive'" class="d-flex align-items-center"><mat-icon class="me-2">schedule</mat-icon>Depot Receive</div>
+                        </ng-container>
+
+                      </mat-select-trigger>
+                      <mat-option [disabled]="element.isAccepted" value="acknowledge">
+                        <mat-icon [color]="element.isAccepted ? 'accent' : undefined">
+                          {{element.isAccepted ? 'task_alt' : 'schedule'}}
+                        </mat-icon>
+                        Acknowledge Order
+                      </mat-option>
+                      <mat-option [disabled]="element.isAssigned || !element.isAccepted" value="assign">
+                        <mat-icon [color]="element.isAssigned ? 'accent' : undefined">
+                          {{element.isAssigned ? 'task_alt' : 'schedule'}}
+                        </mat-icon>
+                        Assign order to transporter
+                      </mat-option>
+                      <mat-option value="depot-dispatch">
+                        <mat-icon [color]="element.depotToTransporter ? 'accent' : undefined">
+                          {{element.isAssigned ? 'task_alt' : 'schedule'}}
+                        </mat-icon>
+                        Dispatch filled canisters from depot
+                      </mat-option>
+                      <mat-option value="dealer-dispatch">
+                        <mat-icon [color]="element.dealerToTransporter ? 'accent' : undefined">
+                          {{element.isAssigned ? 'task_alt' : 'schedule'}}
+                        </mat-icon>
+                        Dispatch empty canisters from dealer
+                      </mat-option>
+                      <mat-optgroup label="Confirmations">
+                        <mat-option value="depot-to-transporter-receive">Transporter receive(Depot)</mat-option>
+                        <mat-option value="dealer-receive">Dealer receive</mat-option>
+                        <mat-option value="dealer-to-transporter-receive">Transporter receive(Dealer)</mat-option>
+                        <mat-option value="depot-receive">Depot receive</mat-option>
+                      </mat-optgroup>
+                    </mat-select>
+                  </mat-form-field>
+                </div>
+                <div class="col-lg-4" (click)="triggerAction(element)">
+                  <button mat-raised-button color="primary">Continue</button>
+                </div>
+              </div>
+
+<!--              <div class="element-description">-->
+<!--                <button class="me-3" [disabled]="element.isAccepted" (click)="openConfirmDialog(element)"-->
+<!--                        mat-icon-button-->
+<!--                        color="accent">-->
+<!--                  <mat-icon>task_alt</mat-icon>-->
+<!--                </button>-->
+<!--                <button class="me-3" [disabled]="element.isAssigned || !element.isAccepted"-->
+<!--                        (click)="openAssignTransporterDialog(element)" mat-icon-button color="accent">-->
+<!--                  <mat-icon>assignment</mat-icon>-->
+<!--                </button>-->
+<!--                <button class="me-3" [disabled]="!element.isAssigned" (click)="openDispatchDialog(element)"-->
+<!--                        mat-icon-button-->
+<!--                        color="accent">-->
+<!--                  <mat-icon>local_shipping</mat-icon>-->
+<!--                </button>-->
+<!--                <button (click)="openDispatchDialog(element, 'dealer')" class="me-3" mat-icon-button-->
+<!--                        color="accent">-->
+<!--                  <mat-icon>published_with_changes</mat-icon>-->
+<!--                </button>-->
+<!--                <button (click)="openCanisterConfirmationDialog(element, 'depot->transporter')" class="me-3"-->
+<!--                        mat-raised-button color="accent">-->
+<!--                  <mat-icon>fact_check</mat-icon>-->
+<!--                  Confirm Depot to Transporter-->
+<!--                </button>-->
+<!--                <button (click)="openCanisterConfirmationDialog(element, 'transporter->dealer')" class="me-3"-->
+<!--                        mat-raised-button color="accent">-->
+<!--                  <mat-icon>fact_check</mat-icon>-->
+<!--                  Confirm Transporter to Dealer-->
+<!--                </button>-->
+<!--                <button (click)="openCanisterConfirmationDialog(element, 'dealer->transporter')" class="me-3"-->
+<!--                        mat-raised-button color="accent">-->
+<!--                  <mat-icon>fact_check</mat-icon>-->
+<!--                  Confirm Dealer to Transporter-->
+<!--                </button>-->
+<!--                <button (click)="openCanisterConfirmationDialog(element, 'transporter->depot')" class="me-3"-->
+<!--                        mat-raised-button color="accent">-->
+<!--                  <mat-icon>fact_check</mat-icon>-->
+<!--                  Confirm Transporter to Depot-->
+<!--                </button>-->
+<!--              </div>-->
+            </fieldset>
+
+
+          </div>
         </td>
       </ng-container>
 
       <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
       <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      <tr mat-row *matRowDef="let row; columns: ['expandedDetail']" class="detail-row"></tr>
     </table>
     <ng-container>
       <mat-paginator (page)="setPage($event)" [length]="meta?.total ?? 0" [pageSizeOptions]="[10, 20, 50, 100]"
