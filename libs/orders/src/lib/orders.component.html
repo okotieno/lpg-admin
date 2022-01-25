@@ -124,7 +124,7 @@
                         Dispatch empty canisters from dealer
                       </mat-option>
                       <mat-optgroup label="Confirmations">
-                        <mat-option value="depot-to-transporter-receive">Transporter receive(Depot)</mat-option>
+                        <mat-option [disabled]="true" value="depot-to-transporter-receive">Transporter receive(Depot)</mat-option>
                         <mat-option value="dealer-receive">Dealer receive</mat-option>
                         <mat-option value="dealer-to-transporter-receive">Transporter receive(Dealer)</mat-option>
                         <mat-option value="depot-receive">Depot receive</mat-option>
@@ -136,47 +136,6 @@
                   <button mat-raised-button color="primary">Continue</button>
                 </div>
               </div>
-
-<!--              <div class="element-description">-->
-<!--                <button class="me-3" [disabled]="element.isAccepted" (click)="openConfirmDialog(element)"-->
-<!--                        mat-icon-button-->
-<!--                        color="accent">-->
-<!--                  <mat-icon>task_alt</mat-icon>-->
-<!--                </button>-->
-<!--                <button class="me-3" [disabled]="element.isAssigned || !element.isAccepted"-->
-<!--                        (click)="openAssignTransporterDialog(element)" mat-icon-button color="accent">-->
-<!--                  <mat-icon>assignment</mat-icon>-->
-<!--                </button>-->
-<!--                <button class="me-3" [disabled]="!element.isAssigned" (click)="openDispatchDialog(element)"-->
-<!--                        mat-icon-button-->
-<!--                        color="accent">-->
-<!--                  <mat-icon>local_shipping</mat-icon>-->
-<!--                </button>-->
-<!--                <button (click)="openDispatchDialog(element, 'dealer')" class="me-3" mat-icon-button-->
-<!--                        color="accent">-->
-<!--                  <mat-icon>published_with_changes</mat-icon>-->
-<!--                </button>-->
-<!--                <button (click)="openCanisterConfirmationDialog(element, 'depot->transporter')" class="me-3"-->
-<!--                        mat-raised-button color="accent">-->
-<!--                  <mat-icon>fact_check</mat-icon>-->
-<!--                  Confirm Depot to Transporter-->
-<!--                </button>-->
-<!--                <button (click)="openCanisterConfirmationDialog(element, 'transporter->dealer')" class="me-3"-->
-<!--                        mat-raised-button color="accent">-->
-<!--                  <mat-icon>fact_check</mat-icon>-->
-<!--                  Confirm Transporter to Dealer-->
-<!--                </button>-->
-<!--                <button (click)="openCanisterConfirmationDialog(element, 'dealer->transporter')" class="me-3"-->
-<!--                        mat-raised-button color="accent">-->
-<!--                  <mat-icon>fact_check</mat-icon>-->
-<!--                  Confirm Dealer to Transporter-->
-<!--                </button>-->
-<!--                <button (click)="openCanisterConfirmationDialog(element, 'transporter->depot')" class="me-3"-->
-<!--                        mat-raised-button color="accent">-->
-<!--                  <mat-icon>fact_check</mat-icon>-->
-<!--                  Confirm Transporter to Depot-->
-<!--                </button>-->
-<!--              </div>-->
             </fieldset>
 
 

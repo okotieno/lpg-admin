@@ -22,4 +22,12 @@ export class OrderStatusService {
   acceptOrder({orderId}: {orderId: number}) {
     return this.http.post<IResponse<IOrder>>(`${this.url}/${orderId}/status`, {acceptOrder: true})
   }
+
+  confirmDispatch({orderId}: {orderId: number}) {
+    return this.http.post<IResponse<IOrder>>(`${this.url}/${orderId}/status`, {acceptOrder: true})
+  }
+
+  confirmCanisterDispatch({orderId, params}: {orderId: number, params: any}) {
+    return this.http.post<IResponse<any>>(`${this.url}/${orderId}/status`, {...params})
+  }
 }

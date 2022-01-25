@@ -1,4 +1,8 @@
-import { Component, ChangeDetectionStrategy, EventEmitter } from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, Inject } from '@angular/core';
+import { MAT_DIALOG_DATA } from "@angular/material/dialog";
+import { IOrder } from "@lpg/data";
+import { OrderStatusService } from "@lpg/order-status-service";
+import { take, tap } from "rxjs";
 
 @Component({
   selector: 'lpg-canister-dispatch-confirmation',
@@ -7,5 +11,44 @@ import { Component, ChangeDetectionStrategy, EventEmitter } from '@angular/core'
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class CanisterDispatchConfirmationComponent {
-  confirmed = new EventEmitter(true);
+
+  constructor(
+    @Inject(MAT_DIALOG_DATA) public data: { order: IOrder, direction: string },
+    private orderStatusService: OrderStatusService
+  ) {
+  }
+
+  confirmed = new EventEmitter<true>();
+  confirmationStation: { [key: string]: { title: string, param: string } } = {
+    ['depot->transporter']: {
+      title: 'Transporter Receive (Depot) Confirmation',
+      param: 'depotToTransporterOk'
+    },
+    ['transporter->dealer']: {
+      title: 'Dealer Receive Confirmation',
+      param: 'transporterToDepotOk'
+    },
+    ['dealer->transporter']: {
+      title: 'Transporter Receive (Dealer) Confirmation',
+      param: 'dealerToTransporterOk'
+    },
+    ['transporter->depot']: {
+      title: 'Depot Receive Confirmation',
+      param: 'transporterToDealerOk'
+    }
+  };
+
+  confirmAction() {
+    const params = {
+      [this.confirmationStation[this.data.direction].param]: true
+    }
+    this.orderStatusService.confirmCanisterDispatch({
+      orderId: this.data.order.orderId, params
+    }).pipe(
+      take(1),
+      tap(() => this.confirmed.emit(true))
+    ).subscribe()
+
+  };
+
 }

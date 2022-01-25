@@ -127,13 +127,12 @@ export class OrdersComponent implements OnInit, OnDestroy {
 
   openCanisterConfirmationDialog(element: IOrder, direction: ICanisterStationDirection) {
     const confirmDialog = this.dialog.open(CanisterDispatchConfirmationComponent, {
-      data: {...element, direction},
-      minWidth: '30vw',
+      data: {order: element, direction},
+      minWidth: '50vw',
       hasBackdrop: true,
       disableClose: true,
     });
     confirmDialog.componentInstance.confirmed.pipe(
-      switchMap(() => this.orderStatusService.acceptOrder({orderId: element.orderId})),
       tap(() => this.getOrders()),
       take(1)
     ).subscribe()
