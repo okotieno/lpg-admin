@@ -80,7 +80,6 @@
 
             <fieldset>
               <legend class="mat-display-6">Order Status Management</legend>
-              <!--              <pre>{{ element | json }}</pre>-->
               <div class="d-flex align-items-center pt-3 pb-3">
                 <div class="col-lg-4">
                   <mat-form-field>
@@ -111,23 +110,51 @@
                         </mat-icon>
                         Assign order to transporter
                       </mat-option>
-                      <mat-option value="depot-dispatch">
+                      <mat-option value="depot-dispatch" [disabled]="!element.isAssigned || element.depotToTransporter">
                         <mat-icon [color]="element.depotToTransporter ? 'accent' : undefined">
-                          {{element.isAssigned ? 'task_alt' : 'schedule'}}
+                          {{element.depotToTransporter ? 'task_alt' : 'schedule'}}
                         </mat-icon>
                         Dispatch filled canisters from depot
                       </mat-option>
-                      <mat-option value="dealer-dispatch">
+                      <mat-option value="dealer-dispatch" [disabled]="!element.isAssigned || element.dealerToTransporter">
                         <mat-icon [color]="element.dealerToTransporter ? 'accent' : undefined">
-                          {{element.isAssigned ? 'task_alt' : 'schedule'}}
+                          {{element.dealerToTransporter ? 'task_alt' : 'schedule'}}
                         </mat-icon>
                         Dispatch empty canisters from dealer
                       </mat-option>
                       <mat-optgroup label="Confirmations">
-                        <mat-option [disabled]="true" value="depot-to-transporter-receive">Transporter receive(Depot)</mat-option>
-                        <mat-option value="dealer-receive">Dealer receive</mat-option>
-                        <mat-option value="dealer-to-transporter-receive">Transporter receive(Dealer)</mat-option>
-                        <mat-option value="depot-receive">Depot receive</mat-option>
+                        <mat-option
+                          [disabled]="!element.depotToTransporter || element.depotToTransporterConfirmed"
+                          value="depot-to-transporter-receive">
+                          <mat-icon [color]="element.depotToTransporterConfirmed ? 'accent' : undefined">
+                            {{element.depotToTransporterConfirmed ? 'task_alt' : 'schedule'}}
+                          </mat-icon>
+                          Transporter receive(Depot)
+                        </mat-option>
+                        <mat-option
+                          [disabled]="!element.transporterToDealer || element.transporterToDealerConfirmed"
+                          value="dealer-receive">
+                          <mat-icon [color]="element.transporterToDealerConfirmed ? 'accent' : undefined">
+                            {{element.transporterToDealerConfirmed ? 'task_alt' : 'schedule'}}
+                          </mat-icon>
+                          Dealer receive
+                        </mat-option>
+                        <mat-option
+                          [disabled]="!element.dealerToTransporter || element.dealerToTransporterConfirmed"
+                          value="dealer-to-transporter-receive">
+                          <mat-icon [color]="element.dealerToTransporterConfirmed ? 'accent' : undefined">
+                            {{element.dealerToTransporterConfirmed ? 'task_alt' : 'schedule'}}
+                          </mat-icon>
+                          Transporter receive(Dealer)
+                        </mat-option>
+                        <mat-option
+                          [disabled]="!element.transporterToDepot || element.transporterToDepotConfirmed"
+                          value="depot-receive">
+                          <mat-icon [color]="element.transporterToDepotConfirmed ? 'accent' : undefined">
+                            {{element.transporterToDepotConfirmed ? 'task_alt' : 'schedule'}}
+                          </mat-icon>
+                          Depot receive
+                        </mat-option>
                       </mat-optgroup>
                     </mat-select>
                   </mat-form-field>
@@ -137,7 +164,6 @@
                 </div>
               </div>
             </fieldset>
-
 
           </div>
         </td>
