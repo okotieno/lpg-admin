@@ -132,7 +132,7 @@
                           Transporter receive(Depot)
                         </mat-option>
                         <mat-option
-                          [disabled]="!element.transporterToDealer || element.transporterToDealerConfirmed"
+                          [disabled]="!element.depotToTransporter || !element.depotToTransporterConfirmed || element.transporterToDealerConfirmed"
                           value="dealer-receive">
                           <mat-icon [color]="element.transporterToDealerConfirmed ? 'accent' : undefined">
                             {{element.transporterToDealerConfirmed ? 'task_alt' : 'schedule'}}
@@ -148,7 +148,8 @@
                           Transporter receive(Dealer)
                         </mat-option>
                         <mat-option
-                          [disabled]="!element.transporterToDepot || element.transporterToDepotConfirmed"
+                          [disabled]="!element.dealerToTransporter || !element.dealerToTransporterConfirmed || element.transporterToDepotConfirmed"
+
                           value="depot-receive">
                           <mat-icon [color]="element.transporterToDepotConfirmed ? 'accent' : undefined">
                             {{element.transporterToDepotConfirmed ? 'task_alt' : 'schedule'}}

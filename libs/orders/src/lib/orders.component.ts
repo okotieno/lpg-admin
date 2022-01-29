@@ -13,7 +13,7 @@ import { OrderStatusService } from "@lpg/order-status-service";
 import { animate, state, style, transition, trigger } from '@angular/animations';
 import {
   CanisterDispatchConfirmationComponent
-} from "../../../canister-dispatch-confirmation/src/lib/canister-dispatch-confirmation.component";
+} from "@lpg/canister-dispatch-confirmation";
 
 type ICanisterStationDirection =
   'depot->transporter'
@@ -115,7 +115,8 @@ export class OrdersComponent implements OnInit, OnDestroy {
   openDispatchDialog(data: IOrder, from: 'depot' | 'dealer' = 'depot') {
     const dispatchDialog = this.dialog.open(CanisterDispatchComponent, {
       data: {...data, from},
-      minWidth: '40vw',
+      minWidth: '80vw',
+      maxWidth: '95vw',
       hasBackdrop: true,
       disableClose: true
     });

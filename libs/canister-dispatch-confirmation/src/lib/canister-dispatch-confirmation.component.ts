@@ -26,7 +26,7 @@ export class CanisterDispatchConfirmationComponent {
     },
     ['transporter->dealer']: {
       title: 'Dealer Receive Confirmation',
-      param: 'transporterToDepotOk'
+      param: 'transporterToDealerOk'
     },
     ['dealer->transporter']: {
       title: 'Transporter Receive (Dealer) Confirmation',
@@ -34,7 +34,7 @@ export class CanisterDispatchConfirmationComponent {
     },
     ['transporter->depot']: {
       title: 'Depot Receive Confirmation',
-      param: 'transporterToDealerOk'
+      param: 'transporterToDepotOk'
     }
   };
 
